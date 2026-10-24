@@ -82,6 +82,16 @@ A negative interaction is consistent with supply responding where capacity exist
 
 Fast-growing municipalities do plan more: the top tercile of population growth has a median of 375 planned dwellings per 1,000 existing, against 309 in declining municipalities. But the pending share barely moves: **71.3%** in fast-growing places versus **75.1%** in declining ones. The pipeline is not a rural curiosity that demand would clear.
 
+### 5. A competing explanation: plan vintage
+
+There is a simpler reason why some places show a large pending stock. The SIU records the approval year of each municipality's general plan, and newer plans have had less time to be built out.
+
+Median pending share falls monotonically with plan age: **85%** where the plan is five years old or less, **66%** where it is 21–30 years old, **58%** where it is more than 30 years old. The correlation between plan age and pending share is **−0.36**.
+
+This is not a nuisance to be controlled away. It is a direct warning against reading the 3.49 million pending dwellings as obstruction: a municipality that approved a large expansion in 2022 *should* have almost all of it pending.
+
+The counter-argument is that the aggregate is dominated by older plans. It is: **74% of the pending dwellings sit under plans approved more than 15 years ago**, and even the oldest plans still have 58% pending. So plan vintage explains part of the cross-sectional variation — and is reported rather than hidden — but it does not reduce the gap to a story about recent plans that have not had time to build.
+
 ## Interpretation
 
 The Spanish planning system produces a lot of **paper housing**: land classified, sectors drawn, dwellings counted, and a large share of it never converted into buildings. The observable bottleneck in these data is not the headline stock of classified land. It is the step between permission and construction.
@@ -116,7 +126,7 @@ src/config.py          paths, indicators, province codes
 src/download_data.py   downloads + sha256 manifest
 src/build_panel.py     parses INE, maps codes, builds panel and cross-section
 src/analysis.py        descriptives, regressions, results.json
-src/figures.py         six figures
+src/figures.py         seven figures
 src/run_all.py         one command
 tests/test_pipeline.py invariants
 outputs/results.json   every number in this README
@@ -142,6 +152,7 @@ Process documentation, in the order a sceptical reader should read it:
 4. **Raw vs adjusted** — why the naive correlation is an urban–rural artefact.
 5. **Where the paper housing is** — the 15 municipalities with the largest pending stock.
 6. **Growth terciles** — planning responds, the gap does not.
+7. **Plan vintage** — newer plans have more pending capacity, which is why the gap is not automatically obstruction.
 
 ---
 

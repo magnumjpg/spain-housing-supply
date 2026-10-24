@@ -219,6 +219,33 @@ def fig_growth_terciles(results: dict) -> None:
     plt.close(fig)
 
 
+def fig_plan_vintage(results: dict) -> None:
+    v = results["plan_vintage"]
+    b = pd.DataFrame(v["bins"])
+    fig, ax = plt.subplots(figsize=(7.2, 4.0))
+    x = np.arange(len(b))
+    ax.bar(x, b["median_pending_share"], color=RUST, alpha=0.9, width=0.68)
+    for i, row in b.iterrows():
+        ax.text(i, row["median_pending_share"] + 0.015, f"{row['median_pending_share']:.0%}",
+                ha="center", fontsize=8, color="#333333")
+        ax.text(i, 0.02, f"n={int(row['n'])}", ha="center", fontsize=7, color="white")
+    ax.set_xticks(x)
+    ax.set_xticklabels(b["age_bin"])
+    ax.set_ylim(0, 1)
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda y, _: f"{y:.0%}"))
+    ax.set_xlabel("Age of the municipal general plan (years)")
+    ax.set_ylabel("Median pending share")
+    ax.set_title("Newer plans look worse, because their capacity has had less time")
+    ax.text(
+        0.98, 0.95,
+        f"r(plan age, pending share) = {v['corr_plan_age_pending_share']:.2f}",
+        transform=ax.transAxes, ha="right", va="top", fontsize=8, color="#333333",
+    )
+    fig.tight_layout()
+    fig.savefig(FIGURES / "fig7_plan_vintage.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> None:
     cs = pd.read_csv(PROC / "cross_section.csv", dtype={"code": str, "province_code": str})
     results = json.loads((OUT / "results.json").read_text(encoding="utf-8"))
@@ -228,6 +255,7 @@ def main() -> None:
     fig_added_variable(cs)
     fig_top_pending(cs)
     fig_growth_terciles(results)
+    fig_plan_vintage(results)
     print(f"Figures written to {FIGURES}")
 
 

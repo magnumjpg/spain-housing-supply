@@ -101,10 +101,22 @@ def test_sample_is_a_subset_of_the_national_aggregate(results: dict) -> None:
     assert v["sample_planned_share_of_national"] > 0.4
 
 
+def test_plan_vintage_is_documented(results: dict) -> None:
+    v = results["plan_vintage"]
+    assert v["n"] > 300
+    # Newer plans must show a higher pending share; this is the counter-
+    # explanation the README relies on, so it is tested rather than assumed.
+    assert v["corr_plan_age_pending_share"] < 0
+    for row in v["bins"]:
+        assert 0 <= row["median_pending_share"] <= 1
+        assert row["n"] > 0
+
+
 def test_results_have_required_sections(results: dict) -> None:
     required = {
         "meta", "coverage", "descriptives", "pipeline", "validation", "terciles",
-        "provinces", "regressions", "panel", "responsiveness", "robustness",
+        "provinces", "regressions", "panel", "responsiveness", "plan_vintage",
+        "robustness",
     }
     assert required.issubset(results.keys())
 

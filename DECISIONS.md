@@ -140,7 +140,25 @@ municipal datasets lose 20% of their rows without anyone noticing.
 
 ---
 
-## D13. Use `requests`, not PowerShell `Invoke-WebRequest`, for MIVAU
+## D13. Report the plan-vintage result, which weakens the headline
+
+After the pipeline finding was written up, a check on plan age showed that newer
+plans have a much higher pending share (r = −0.36; 85% pending for plans ≤5 years
+old, 58% for plans >30 years). This is a competing explanation for the gap and it
+partially undermines the "paper housing is a problem" framing.
+
+**Chosen:** put it in the README as section 5, add a figure, and state the
+counter-fact (74% of pending dwellings sit under plans older than 15 years). Do
+not bury it in a robustness table.
+
+**Alternative rejected:** controlling for plan age in the regressions and
+reporting only the adjusted gap. That would turn an honest limitation into a
+footnote, and the reader would not see that the simplest explanation for part of
+the gap is time.
+
+---
+
+## D14. Use `requests`, not PowerShell `Invoke-WebRequest`, for MIVAU
 
 MIVAU returns 403 to `Invoke-WebRequest` and to the default Python user agent.
 `requests` with a browser-like `User-Agent` works. This is documented in

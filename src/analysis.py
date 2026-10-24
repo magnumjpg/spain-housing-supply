@@ -301,6 +301,39 @@ def main() -> dict:
         })
 
     # ------------------------------------------------------------------
+    # Plan vintage: a competing explanation for the pending share
+    # ------------------------------------------------------------------
+    v = cs.dropna(subset=["plan_age", "pending_share"]).copy()
+    v["age_bin"] = pd.cut(
+        v["plan_age"], [-1, 5, 10, 15, 20, 30, 200],
+        labels=["<=5", "6-10", "11-15", "16-20", "21-30", ">30"],
+    )
+    vintage_bins = (
+        v.groupby("age_bin", observed=True)
+        .agg(
+            n=("code", "size"),
+            median_plan_age=("plan_age", "median"),
+            median_pending_share=("pending_share", "median"),
+            median_unstarted_share=("unstarted_share", "median"),
+            median_planned_per_1000_stock=("planned_per_1000_stock", "median"),
+        )
+        .reset_index()
+    )
+    vintage_bins["age_bin"] = vintage_bins["age_bin"].astype(str)
+    plan_vintage = {
+        "n": int(len(v)),
+        "corr_plan_age_pending_share": float(v["plan_age"].corr(v["pending_share"])),
+        "corr_plan_age_unstarted_share": float(v["plan_age"].corr(v["unstarted_share"])),
+        "median_plan_age": float(v["plan_age"].median()),
+        "bins": vintage_bins.round(4).to_dict(orient="records"),
+        "note": (
+            "Newer plans have a higher pending share. This is consistent with "
+            "capacity that has not had time to be built, and is a direct reason "
+            "not to read the pending stock as obstruction."
+        ),
+    }
+
+    # ------------------------------------------------------------------
     # Robustness of the two headline measures
     # ------------------------------------------------------------------
     robustness = []
@@ -366,6 +399,7 @@ def main() -> dict:
         "regressions": regressions,
         "panel": panel_out,
         "responsiveness": responsiveness,
+        "plan_vintage": plan_vintage,
         "robustness": robustness,
         "correlations": correlations,
     }
@@ -381,6 +415,7 @@ def main() -> dict:
     prov.to_csv(TABLES / "provinces.csv", index=False)
     pd.DataFrame(terciles_out).to_csv(TABLES / "growth_terciles.csv", index=False)
     pd.DataFrame([national]).to_csv(TABLES / "national_validation.csv", index=False)
+    vintage_bins.to_csv(TABLES / "plan_vintage.csv", index=False)
 
     print(f"Results written to {OUT / 'results.json'}")
     print(f"Cross-section specs: {len(regressions)}, panel specs: {len(panel_out)}, robustness: {len(robustness)}")

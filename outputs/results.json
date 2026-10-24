@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-24T22:17:30+00:00",
+    "generated_utc": "2026-10-24T22:18:39+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -1472,6 +1472,63 @@
       "r2": 0.18228689601522685
     }
   ],
+  "plan_vintage": {
+    "n": 429,
+    "corr_plan_age_pending_share": -0.3551825367970307,
+    "corr_plan_age_unstarted_share": -0.3458595991917421,
+    "median_plan_age": 23.0,
+    "bins": [
+      {
+        "age_bin": "<=5",
+        "n": 15,
+        "median_plan_age": 3.0,
+        "median_pending_share": 0.8532,
+        "median_unstarted_share": 0.4939,
+        "median_planned_per_1000_stock": 191.1097
+      },
+      {
+        "age_bin": "6-10",
+        "n": 26,
+        "median_plan_age": 9.0,
+        "median_pending_share": 0.8521,
+        "median_unstarted_share": 0.5782,
+        "median_planned_per_1000_stock": 200.0117
+      },
+      {
+        "age_bin": "11-15",
+        "n": 59,
+        "median_plan_age": 14.0,
+        "median_pending_share": 0.8259,
+        "median_unstarted_share": 0.6786,
+        "median_planned_per_1000_stock": 330.8877
+      },
+      {
+        "age_bin": "16-20",
+        "n": 82,
+        "median_plan_age": 18.0,
+        "median_pending_share": 0.7869,
+        "median_unstarted_share": 0.5588,
+        "median_planned_per_1000_stock": 384.9974
+      },
+      {
+        "age_bin": "21-30",
+        "n": 146,
+        "median_plan_age": 25.0,
+        "median_pending_share": 0.6632,
+        "median_unstarted_share": 0.3674,
+        "median_planned_per_1000_stock": 358.6703
+      },
+      {
+        "age_bin": ">30",
+        "n": 101,
+        "median_plan_age": 37.0,
+        "median_pending_share": 0.5755,
+        "median_unstarted_share": 0.3102,
+        "median_planned_per_1000_stock": 192.7025
+      }
+    ],
+    "note": "Newer plans have a higher pending share. This is consistent with capacity that has not had time to be built, and is a direct reason not to read the pending stock as obstruction."
+  },
   "robustness": [
     {
       "id": "robust_exclude_madrid_barcelona_share_nonurbanizable",

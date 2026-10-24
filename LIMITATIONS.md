@@ -78,6 +78,12 @@ The README is explicit about this. The project does **not** claim that the
 pending stock is evidence of land hoarding, speculation or obstruction. Those are
 hypotheses the data cannot test.
 
+The plan-vintage result (§5 of the README) reinforces the caution: median
+pending share falls from 85% for plans under five years old to 58% for plans
+over 30 years old. Part of the gap is simply capacity that has not had time to be
+built. 74% of the pending dwellings nevertheless sit under plans approved more
+than 15 years ago.
+
 ---
 
 ## 6. The sample is urban and not representative of Spain

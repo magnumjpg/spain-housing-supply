@@ -181,7 +181,7 @@ Did not chase either. The README says the panel is a check, not an elasticity.
 
 ## Session 8 — figures
 
-Six figures. Two rounds of review:
+Seven figures. Two rounds of review:
 
 - Round 1: fig 5 (top pending municipalities) had the "% pending" labels printed
   on top of the bars, unreadable, and no legend. Fixed by placing labels after
@@ -193,16 +193,40 @@ Six figures. Two rounds of review:
 
 Figure 4 is the important one: raw slope on the left, residualised flat
 relationship on the right. It is the visual form of the project's main caveat.
+Figure 7 was added later, after the plan-vintage check, and does the same job for
+the pipeline finding.
 
 ---
 
-## Session 9 — documentation and tests
+## Session 9 — external validation and the plan-vintage check
+
+Two additions after the first full draft.
+
+**External validation.** MIVAU publishes its own national aggregate in
+`areas_desarrollo_nac.xlsx`. Read it rather than trusting our own sum: 5,900
+municipalities, 9,600,382 planned dwellings, 7,090,504 pending (73.9%), 55.9% of
+development land not started. Our 431 municipalities are 53.8% of the national
+planned stock and 49.2% of the pending stock. The national pipeline is slightly
+more unbuilt than the urban sample, which is reassuring: the sample is not
+cherry-picked and the 5.17 million figure is a subset, not a rival estimate.
+
+**Plan vintage.** A reader could reasonably object that "pending" is trivially
+driven by plan age. Checked it: the correlation between plan age and pending
+share is −0.36, and median pending share falls from 85% (plans ≤5 years) to 58%
+(plans >30 years). So the objection has force. Added a section, a figure and a
+table. The counter-counter is that 74% of pending dwellings sit under plans older
+than 15 years, so the gap is not *only* recent plans. Both facts are now in the
+README, adjacent, instead of one being used to defeat the other.
+
+---
+
+## Session 10 — documentation and tests
 
 Wrote `DATA.md`, `METHOD.md`, `LIMITATIONS.md`, `DECISIONS.md`, `RED_TEAM.md`
 and this log. Rationale: the analysis is only as credible as the record of the
 choices behind it.
 
-Tests (11, all passing):
+Tests (13, all passing):
 
 - land shares sum to 100 (six base classes);
 - `MunPrADes` equals the sum of its two components;
@@ -214,6 +238,8 @@ Tests (11, all passing):
 - pipeline aggregates internally consistent;
 - `results.json` has all required sections;
 - every regression has finite coefficient, positive SE, p in [0,1];
+- the sample is a strict subset of MIVAU's national aggregate;
+- plan vintage is documented and its sign is as claimed;
 - README exists and contains the limitations section.
 
 ---
