@@ -2,6 +2,7 @@
 # data/raw/manifest.json. Do not commit the large files.
 data/raw/*.zip
 data/raw/*.csv
+data/raw/*.xlsx
 !data/raw/ua_municipality_codes.csv
 
 # The SIU workbooks are small and come from the ZIP; committing them makes the

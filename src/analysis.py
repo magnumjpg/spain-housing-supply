@@ -180,6 +180,7 @@ def main() -> dict:
     # ------------------------------------------------------------------
     desc_vars = [
         "rent_m2_year", "rent_month", "price_m2", "rent_to_price",
+        "rent_m2_serpavi", "serpavi_n", "serpavi_m2",
         "share_nonurbanizable", "share_development_areas",
         "planned_dwellings", "pending_dwellings", "pending_share",
         "delivery_rate", "unstarted_share", "planned_per_1000_stock",
@@ -272,6 +273,38 @@ def main() -> dict:
         regressions.append(fit_cs(cs, "log_rent_to_price", measure, URBAN, f"yield_urban_{measure}"))
     for measure in MEASURES:
         regressions.append(fit_cs(cs, "log_rent", measure, BASIC, f"rent_basic_{measure}"))
+
+    # ------------------------------------------------------------------
+    # Independent outcome source: SERPAVI (tax records, not INE)
+    # ------------------------------------------------------------------
+    sv = cs.dropna(subset=["rent_m2_serpavi", "rent_m2_year"]).copy()
+    sv_ratio = (sv["rent_m2_serpavi"] * 12) / sv["rent_m2_year"]
+    serpavi_validation = {
+        "source": "MIVAU SERPAVI 2011-2024, Municipios sheet, 2024",
+        "definition": "ALQM2_LV_M_VC_24: median monthly rent per m2 of collective residential buildings, Modelo 100 tax records",
+        "n_matched_to_cross_section": int(len(sv)),
+        "pearson_rent_level": float(sv["rent_m2_serpavi"].corr(sv["rent_m2_year"])),
+        "pearson_log_rent": float(sv["log_rent_serpavi"].corr(sv["log_rent"])),
+        "median_annualised_ratio_to_ine": float(sv_ratio.median()),
+        "p10_annualised_ratio_to_ine": float(sv_ratio.quantile(0.10)),
+        "p90_annualised_ratio_to_ine": float(sv_ratio.quantile(0.90)),
+        "median_dwellings_behind_estimate": float(sv["serpavi_n"].median()),
+        "share_municipalities_n_below_30": float((sv["serpavi_n"] < 30).mean()),
+        "excluded_autonomous_communities": ["Navarra", "País Vasco"],
+        "note": (
+            "SERPAVI is built from tax declarations (Modelo 100) and is independent "
+            "of INE table 69330. It excludes Navarra and the Basque Country because "
+            "those foral regimes do not report to the common tax source. Agreement "
+            "in levels does not make the two series the same measurement: SERPAVI "
+            "is a median of monthly rent per m2, INE is a mean annual rent per m2."
+        ),
+    }
+    serpavi_regressions = []
+    for controls, tag in ((URBAN, "urban"), (BASIC, "basic")):
+        for measure in MEASURES:
+            serpavi_regressions.append(
+                fit_cs(cs, "log_rent_serpavi", measure, controls, f"serpavi_rent_{tag}_{measure}")
+            )
 
     # ------------------------------------------------------------------
     # Panel interactions
@@ -394,6 +427,10 @@ def main() -> dict:
             "top_pending": top_pending,
         },
         "validation": national,
+        "serpavi": {
+            "validation": serpavi_validation,
+            "regressions": serpavi_regressions,
+        },
         "terciles": terciles_out,
         "provinces": provinces_out,
         "regressions": regressions,
@@ -409,6 +446,7 @@ def main() -> dict:
         encoding="utf-8",
     )
     pd.DataFrame(regressions).to_csv(TABLES / "cross_section.csv", index=False)
+    pd.DataFrame(serpavi_regressions).to_csv(TABLES / "serpavi_rent.csv", index=False)
     pd.DataFrame(panel_out).to_csv(TABLES / "panel.csv", index=False)
     pd.DataFrame(robustness).to_csv(TABLES / "robustness.csv", index=False)
     pd.DataFrame(descriptives).T.to_csv(TABLES / "descriptives.csv")

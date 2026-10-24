@@ -244,6 +244,37 @@ Tests (13, all passing):
 
 ---
 
+## Session 11 — the rent null gets a second source, and income does not
+
+**SERPAVI.** Before publishing, the weakest point was that the rent null rested on
+one series. Downloaded MIVAU's SERPAVI workbook (71 MB, six sheets), parsed only
+the 2024 municipality block, and repeated the same five specifications with its
+median monthly rent per m². All 431 municipalities have a SERPAVI rent; 406 also
+have an INE rent; the correlation is 0.991 in levels and the annualised median
+ratio is 0.959.
+
+The coefficients reproduce the INE result: non-urbanizable −4.0% (p=0.27),
+development land +1.1% (p=0.57), planned capacity +3.5% (p=0.15), pending share
+−2.4% (p=0.003), unstarted share −2.2% (p=0.031). This is the first time the
+project has an independent measurement of the outcome, not just a different
+specification of the same measurement. It makes the null harder to dismiss as an
+INE artefact. It does not touch the endogeneity problem, and the docs say so.
+
+Two parsing traps: the workbook uses one column block per year (the 2024 columns
+end in `_24`), and the `Municipios` sheet has 284 columns, so reading it whole is
+wasteful. Reading only the seven needed columns takes ~15 s.
+
+**ADRH income.** Also tried to add municipal income from INE table 30824. The
+download is a census-tract-level CSV; the file obtained here stopped mid-record
+at 219 MB. Checked the tail rather than assuming success, found the truncation,
+and dropped the control. Recorded as D16 and in LIMITATIONS §7. The honest
+position is that income remains an omitted confounder, not that it was controlled.
+
+**Tests.** 15 now: two SERPAVI-specific ones (cross-source agreement and
+reproduction of the negative coefficients) plus the previous 13.
+
+---
+
 ## What I would do differently
 
 1. **Read the metadata before the first regression.** Two sessions were spent on

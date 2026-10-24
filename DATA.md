@@ -1,6 +1,6 @@
 # DATA.md — sources, semantics and merge
 
-Every number in the project comes from the four public sources below. All are
+Every number in the project comes from the five public sources below. All are
 official, free, and downloaded by `src/download_data.py`; sha256 hashes are in
 `data/raw/manifest.json`.
 
@@ -143,7 +143,53 @@ within-municipality rent-trend robustness check.
 
 ---
 
-## 5. The municipal code crosswalk
+## 5. MIVAU — SERPAVI, 2011–2024
+
+**URL:**
+`https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx`
+
+**Publisher:** Ministerio de Vivienda y Agenda Urbana.
+**Format:** one 71 MB workbook with six sheets: `Metadatos`, `CCAA`, `Provincias`,
+`Municipios`, `Distritos`, `Secciones censales`. Only `Municipios` is parsed.
+**Concept:** *Sistema Estatal de Índices de Alquiler de Vivienda*, an exploitation
+of tax sources (*Modelo 100*) linked to cadastral data. It is **not** an INE
+operation and is independent of table 69330.
+
+### `Municipios` sheet — 8,099 municipality rows, 284 columns
+
+One column block per year (2011–2024) and per concept. The 2024 block used here:
+
+| Column | Meaning | Unit |
+|---|---|---|
+| `CUMUN` | INE municipality code (5 digits) | code |
+| `BI_ALVHEPCO_TVC_24` | Dwellings behind the estimate (collective residential buildings) | count |
+| `ALQM2_LV_M_VC_24` | **Median monthly rent per m²** | €/m²/month |
+| `ALQM2_LV_25_VC_24` / `_75_` | P25 / P75 of the same distribution | €/m²/month |
+| `ALQTBID12_M_VC_24` | Median monthly rent per dwelling | €/month |
+| `SLVM2_M_VC_24` | Median surface of the dwellings in the estimate | m² |
+
+**Coverage and comparability:**
+
+- 8,099 municipality rows, of which 2,555 publish a 2024 rent. The rest are
+  suppressed for tax secrecy or have no qualifying rental stock.
+- All **431** municipalities in the analysis cross-section have a SERPAVI rent;
+  **406** also have an INE rent in 2024.
+- The two series correlate at **0.991** in levels (0.992 in logs). Annualised,
+  the median SERPAVI/INE ratio is **0.959**; a median of monthly rents and a mean
+  of annual rents are not the same statistic, so exact equality is not expected.
+- **Navarra and the Basque Country are excluded** from the tax-source tables
+  because their foral tax regimes do not report to the common source. No
+  municipality from those communities is in the analysis sample, so this does
+  not bias the merge — but it does limit the national frame.
+- Blue cells in the published workbook are censored cells, not zeros. They are
+  read as missing.
+
+The project uses SERPAVI as an **independent outcome series** for the rent null
+(README section 2b), not as a second national estimate to be pooled with INE.
+
+---
+
+## 6. The municipal code crosswalk
 
 This is where municipal projects usually break.
 
@@ -183,9 +229,9 @@ of the cross-section. Hence 431, not 434.
 
 ---
 
-## 6. Licence and reproducibility
+## 7. Licence and reproducibility
 
-All four sources are public statistical data published by MIVAU and INE. The
+All five sources are public statistical data published by MIVAU and INE. The
 pipeline caches everything under `data/raw/` and never re-downloads unless
 `--force` is passed, so results are reproducible offline. Hashing every file
 means a silent upstream revision is detectable.

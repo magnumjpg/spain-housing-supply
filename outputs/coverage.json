@@ -5,6 +5,10 @@
   "ua_match_rate": 0.9930875576036866,
   "cross_section_n": 431,
   "rent_2024_nonmissing": 406,
+  "serpavi_municipalities": 8099,
+  "serpavi_matched": 431,
+  "serpavi_matched_n_ge_30": 431,
+  "serpavi_rent_nonmissing": 431,
   "price_2024_nonmissing": 431,
   "stock_2024_nonmissing": 403,
   "planned_dwellings_nonmissing": 430,
@@ -31,6 +35,7 @@
     "land_shares": "Percentages of municipal area. Sum to 100 excluding share_development_areas, which overlaps urban_nonconsolidated + urbanizable_delimited.",
     "mun_area_km2": "SIU MunTotSue, municipal area in km2 (checked against known municipal areas).",
     "pending_share": "pending_dwellings / planned_dwellings. A stock of plan capacity, not a delay measure.",
-    "rents": "INE Urban Indicators table 69330, annual rent in EUR/m2."
+    "rents": "INE Urban Indicators table 69330, annual rent in EUR/m2.",
+    "serpavi": "MIVAU SERPAVI 2011-2024, Municipios sheet, 2024 median monthly rent per m2 of collective residential buildings. Tax-source statistic (Modelo 100), independent of INE 69330; excludes Navarra and the Basque Country."
   }
 }

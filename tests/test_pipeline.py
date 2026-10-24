@@ -116,13 +116,30 @@ def test_results_have_required_sections(results: dict) -> None:
     required = {
         "meta", "coverage", "descriptives", "pipeline", "validation", "terciles",
         "provinces", "regressions", "panel", "responsiveness", "plan_vintage",
-        "robustness",
+        "robustness", "serpavi",
     }
     assert required.issubset(results.keys())
 
 
+def test_serpavi_is_a_genuine_cross_source_check(results: dict) -> None:
+    v = results["serpavi"]["validation"]
+    assert v["n_matched_to_cross_section"] >= 400
+    assert v["pearson_rent_level"] > 0.95
+    # SERPAVI is monthly EUR/m2, INE is annual EUR/m2. Annualised, the two should
+    # agree closely but not be identical: different mean/median and different source.
+    assert 0.85 < v["median_annualised_ratio_to_ine"] < 1.15
+    assert v["median_dwellings_behind_estimate"] > 0
+
+
+def test_serpavi_reproduces_the_rent_null(results: dict) -> None:
+    regs = {r["id"]: r for r in results["serpavi"]["regressions"]}
+    for measure in ("pending_share", "unstarted_share", "share_nonurbanizable"):
+        assert regs[f"serpavi_rent_urban_{measure}"]["coef_per_sd"] < 0
+    assert regs["serpavi_rent_urban_pending_share"]["p"] < 0.10
+
+
 def test_all_regressions_report_inference(results: dict) -> None:
-    for r in results["regressions"] + results["robustness"]:
+    for r in results["regressions"] + results["robustness"] + results["serpavi"]["regressions"]:
         assert r["n"] > 0
         assert np.isfinite(r["coef_per_sd"])
         assert np.isfinite(r["se"]) and r["se"] > 0

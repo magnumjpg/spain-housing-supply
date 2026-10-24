@@ -80,6 +80,21 @@ Three, because they triangulate:
 headline measure, because the plan year is inconsistently recorded across
 regions.
 
+### Independent outcome check: SERPAVI
+
+The same five specifications are re-estimated with `log(rent_m2_serpavi)` as the
+outcome, where `rent_m2_serpavi` is the 2024 SERPAVI median monthly rent per m²
+from *Modelo 100* tax records. This is not a robustness variant of the same data;
+it is a different measurement with a different unit and a different sample frame.
+It answers one question: **is the rent null an artefact of the INE rent series?**
+
+The specification, controls and clustering are identical, so the two sets of
+coefficients are directly comparable as "association per standard deviation".
+The comparison is reported in `results.json` under `serpavi`, not pooled with the
+INE estimates. No weighting by the number of declarations is applied; the
+smallest municipality in the sample still has 30+ declarations, so weighting
+would mostly re-weight toward Madrid and Barcelona.
+
 ---
 
 ## 3. The panel: does growth pass through into rents?

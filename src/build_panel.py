@@ -7,6 +7,8 @@ Inputs (data/raw):
     siu/clases_suelo_mun.xlsx     municipal land-class shares
     siu/areas_desarrollo_mun.xlsx development areas, planned/pending dwellings
     siu/plan_mun.xlsx             planning instruments (not used in the baseline)
+    serpavi_2011_2024.xlsx        SERPAVI municipal rents, used as an independent
+                                  outcome source for the rent null
 
 Outputs:
     data/processed/panel.csv
@@ -123,6 +125,33 @@ def load_population() -> pd.DataFrame:
     return df
 
 
+def load_serpavi() -> pd.DataFrame:
+    """SERPAVI municipal rents for 2024 (tax-source statistic).
+
+    ``ALQM2_LV_M_VC_24`` is the median monthly rent per m2 of collective
+    residential buildings; ``BI_ALVHEPCO_TVC_24`` is the number of dwellings
+    behind it.  This is an independent outcome from INE table 69330, which is
+    built from a different operation, so agreement between the two is a real
+    cross-source check rather than a restatement.
+    """
+    path = RAW / "serpavi_2011_2024.xlsx"
+    cols = {
+        "CUMUN": "code",
+        "BI_ALVHEPCO_TVC_24": "serpavi_n",
+        "ALQM2_LV_M_VC_24": "rent_m2_serpavi",
+        "ALQM2_LV_25_VC_24": "serpavi_p25",
+        "ALQM2_LV_75_VC_24": "serpavi_p75",
+        "ALQTBID12_M_VC_24": "serpavi_rent_month",
+        "SLVM2_M_VC_24": "serpavi_m2",
+    }
+    s = pd.read_excel(path, sheet_name="Municipios", usecols=list(cols), dtype={"CUMUN": str})
+    s = s.rename(columns=cols)
+    s["code"] = s["code"].str.zfill(5)
+    if s["code"].duplicated().any():
+        raise ValueError("SERPAVI municipality sheet has duplicate CUMUN codes")
+    return s
+
+
 def load_siu() -> pd.DataFrame:
     classes = pd.read_excel(SIU / "clases_suelo_mun.xlsx")
     areas = pd.read_excel(SIU / "areas_desarrollo_mun.xlsx")
@@ -195,6 +224,7 @@ def build() -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     code_map = load_ua_codes(pop)
     ua, ua_dropped = load_ua(code_map)
     siu = load_siu()
+    serpavi = load_serpavi()
 
     pop_total = (
         pop[pop["sex"] == "Total"][["code", "year", "value"]]
@@ -209,6 +239,7 @@ def build() -> tuple[pd.DataFrame, pd.DataFrame, dict]:
 
     # Cross-section: latest year with rents.
     cs = panel[panel["year"] == CS_YEAR].merge(siu, on="code", how="inner")
+    cs = cs.merge(serpavi, on="code", how="left")
 
     p15 = pop_total[pop_total["year"] == 2015][["code", "population"]].rename(
         columns={"population": "population_2015"}
@@ -232,6 +263,7 @@ def build() -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     )
     cs["rent_to_price"] = cs["rent_m2_year"] / cs["price_m2"]
     cs["log_rent"] = np.log(cs["rent_m2_year"].where(cs["rent_m2_year"] > 0))
+    cs["log_rent_serpavi"] = np.log(cs["rent_m2_serpavi"].where(cs["rent_m2_serpavi"] > 0))
     cs["log_price"] = np.log(cs["price_m2"].where(cs["price_m2"] > 0))
     cs["log_rent_to_price"] = np.log(cs["rent_to_price"].where(cs["rent_to_price"] > 0))
 
@@ -242,6 +274,10 @@ def build() -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         "ua_match_rate": float(cs["code"].nunique() / ua["code"].nunique()),
         "cross_section_n": int(len(cs)),
         "rent_2024_nonmissing": int(cs["rent_m2_year"].notna().sum()),
+        "serpavi_municipalities": int(serpavi["code"].nunique()),
+        "serpavi_matched": int(cs["rent_m2_serpavi"].notna().sum()),
+        "serpavi_matched_n_ge_30": int((cs["serpavi_n"] >= 30).sum()),
+        "serpavi_rent_nonmissing": int(cs["rent_m2_serpavi"].notna().sum()),
         "price_2024_nonmissing": int(cs["price_m2"].notna().sum()),
         "stock_2024_nonmissing": int(cs["stock_catastro"].notna().sum()),
         "planned_dwellings_nonmissing": int(cs["planned_dwellings"].notna().sum()),
@@ -257,6 +293,7 @@ def build() -> tuple[pd.DataFrame, pd.DataFrame, dict]:
             "mun_area_km2": "SIU MunTotSue, municipal area in km2 (checked against known municipal areas).",
             "pending_share": "pending_dwellings / planned_dwellings. A stock of plan capacity, not a delay measure.",
             "rents": "INE Urban Indicators table 69330, annual rent in EUR/m2.",
+            "serpavi": "MIVAU SERPAVI 2011-2024, Municipios sheet, 2024 median monthly rent per m2 of collective residential buildings. Tax-source statistic (Modelo 100), independent of INE 69330; excludes Navarra and the Basque Country.",
         },
     }
 

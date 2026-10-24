@@ -17,7 +17,7 @@ The answer, in this dataset, is no. Not because the opposite is true, but becaus
 A municipal dataset that, as far as I can tell, did not exist as a single reproducible table:
 
 - **Land classification**: the MIVAU *Sistema de Información Urbana* (SIU), 5,898 municipalities, with the share of municipal land in each class, the surface of development areas, planned dwellings, and dwellings still pending.
-- **Outcomes**: INE *Indicadores Urbanos* (table 69330), 434 municipalities, 2010–2025, with annual rent €/m², mean and median rent, house prices, housing stock, vacancy, households and household size.
+- **Outcomes**: INE *Indicadores Urbanos* (table 69330), 434 municipalities, 2010–2025, with annual rent €/m², mean and median rent, house prices, housing stock, vacancy, households and household size. A second outcome series, MIVAU **SERPAVI** (tax records, 2024), is used as an independent check on the rent result.
 - **Demand controls**: INE Padrón (table 29005), municipal population 1996–2025.
 
 The two sources are merged on the 5-digit INE municipal code. The match is 431 of 434 urban municipalities. Every number below comes from `src/run_all.py` and is stored in `outputs/results.json`.
@@ -68,6 +68,26 @@ None of the coefficients has the sign the restriction hypothesis predicts (posit
 
 The same pattern holds for prices: the signs are identical and nothing is significant (non-urbanizable −8.4%, p = 0.21; development land +5.1%, p = 0.15). The gross yield tells a different story — development land is associated with a 3.4% lower rent-to-price ratio (p = 0.04) — which is what you would expect if prices respond more strongly than rents, not if rents alone were being held up. Figure 4 shows the mechanism for rents: the raw slope is steep, and after province and urbanisation controls the binned relationship is flat.
 
+### 2b. A second, independent rent series says the same thing
+
+INE table 69330 is one measurement of rents. To check that the null is not an artefact of that series, I repeated the cross-section with **SERPAVI**, MIVAU's rent index built from *Modelo 100* income-tax declarations. It is a different operation, a different unit (median monthly rent per m² of collective residential buildings, not mean annual rent per m²), and a different sample frame.
+
+All **431** municipalities have a SERPAVI rent. **406** also have an INE rent. The two agree closely in levels — Pearson **0.991** (0.992 in logs) — and annualised, the median SERPAVI/INE ratio is **0.959** (p10–p90: 0.916–0.997), which is what a median-versus-mean comparison should look like. Agreement is a cross-source check, not a restatement: the series are not the same measurement.
+
+With the same urbanisation controls and province fixed effects, the tax-based series reproduces the INE result almost coefficient for coefficient:
+
+| Measure (per 1 SD) | SERPAVI rent | p-value | INE rent (for comparison) |
+|---|---:|---:|---:|
+| Share of non-urbanizable land | −4.0% | 0.27 | −4.6% |
+| Share of development land | +1.1% | 0.57 | +1.5% |
+| Planned dwellings per 1,000 existing | +3.5% | 0.15 | +3.9% |
+| Share of planned dwellings pending | −2.4% | 0.003 | −2.3% |
+| Share of development land not started | −2.2% | 0.031 | −2.3% |
+
+The two variables that are distinguishable from zero remain negative. The restriction hypothesis does not reappear when rents are measured from tax records.
+
+SERPAVI has its own limits: it excludes Navarra and the Basque Country (foral tax regimes), it is censored where the number of declarations is too small to publish, and its definition — collective residential buildings — drops part of the rental stock. Those limits are why it is a robustness check next to INE, not a replacement.
+
 ### 3. The panel does not rescue the hypothesis
 
 I also estimated whether population growth passes through into rents more strongly where land is restricted, with municipality fixed effects and either year or province-year fixed effects. The interaction is never positive and significant:
@@ -107,6 +127,7 @@ It also explains why the naive cross-section is so misleading. Land classificati
 - **The pending variable is a stock, not a delay.** `munnvivpnd` counts dwellings planned in development areas that have not been materialised at the date of the SIU image. It does not say when they were planned, or whether they were ever expected to be built soon.
 - **The SIU is a snapshot.** Land classification is measured around 2020–2025, while rents run to 2024. Any panel design using this measure is compromised by the fact that the "treatment" is observed after part of the outcome.
 - **The sample is urban.** 431 municipalities, not all 8,000. They are the INE urban-indicator municipalities, and they hold 15.5 million dwellings.
+- **SERPAVI is a different, narrower measurement.** It covers collective residential buildings from tax records, excludes Navarra and the Basque Country, and censors small cells. It is used as an independent check on the INE rent null, not as a second estimate to average with the first.
 - **Rent is not affordability.** I do not observe municipal household income, so I cannot compute rent-to-income. The outcome is rent per square metre.
 
 ## Reproduce
@@ -117,7 +138,9 @@ python src/run_all.py
 python -m pytest tests -q
 ```
 
-`run_all.py` downloads the raw files into `data/raw/` (about 50 MB, cached), builds the panel, estimates the models, writes `outputs/results.json`, and redraws the figures. The pipeline works offline after the first run.
+`run_all.py` downloads the raw files into `data/raw/` (about 120 MB, cached),
+builds the panel, estimates the models, writes `outputs/results.json`, and
+redraws the figures. The pipeline works offline after the first run.
 
 ## Files
 
@@ -162,4 +185,4 @@ El sistema urbanístico español permite a los municipios decidir qué suelo se 
 
 Lo que sí aparece es un problema distinto y más concreto: **5,17 millones de viviendas están planificadas en áreas de desarrollo y 3,49 millones (67,5%) no se han materializado**. El 48,8% del suelo de desarrollo ni siquiera ha iniciado la urbanización. En los municipios que más crecen, el 71,3% de la vivienda planificada sigue pendiente, frente al 75,1% en los que decrecen. El cuello de botella observable no es la cantidad de suelo clasificado, sino el paso entre el permiso y la construcción.
 
-El proyecto no afirma causalidad, no mide corrupción y no dice que la clasificación del suelo sea irrelevante. Dice que un corte transversal municipal no permite identificarlo, y que el debate público está mirando el margen equivocado.
+El proyecto no afirma causalidad, no mide corrupción y no dice que la clasificación del suelo sea irrelevante. Dice que un corte transversal municipal no permite identificarlo, y que el debate público está mirando el margen equivocado. El resultado se repite con una fuente de alquileres independiente, el SERPAVI de MIVAU construido a partir de declaraciones fiscales (correlación 0,991 con el INE; pendiente −2,4%, p=0,003).

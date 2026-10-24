@@ -99,6 +99,10 @@ def main(force: bool = False) -> int:
     for key in ("ua_69330", "ipva_59060", "dpop_29005"):
         files[key] = download(URLS[key], RAW / f"{key}.csv", force)
 
+    # SERPAVI is a 71 MB multi-sheet workbook; only the 2024 municipality sheet
+    # is used, but the whole file is kept so the provenance is a single object.
+    files["serpavi"] = download(URLS["serpavi"], RAW / "serpavi_2011_2024.xlsx", force)
+
     files["ua_codes"] = fetch_ua_codes(force)
 
     manifest = {}

@@ -62,6 +62,20 @@ share of that stock, and the rent series is smoothed.
 So even a real effect on new-build rents would be diluted towards zero. **The
 null result is partly a measurement-resolution result.**
 
+### 4b. The SERPAVI check narrows this concern but does not remove it
+
+Section 2b of the README repeats the cross-section with SERPAVI, a tax-based rent
+series that is independent of INE 69330. It reproduces the null: the same two
+coefficients are negative and the restriction measures stay insignificant. That
+makes it harder to argue that the result is an artefact of one statistical
+operation.
+
+It does not fix the resolution problem. SERPAVI is also an average/median of the
+existing rental stock, not the rent of new-build units, and it is narrower still:
+collective residential buildings, tax declarations, censored small cells, and no
+Navarra or Basque Country. Two smoothed stock measures agreeing is evidence about
+the stock margin, not about the new-build margin where the hypothesis lives.
+
 ---
 
 ## 5. `munnvivpnd` is a stock, not a delay
@@ -104,6 +118,15 @@ variation the hypothesis is about.
 Rent per square metre is not affordability. A municipality can have high rents
 and high incomes. The project cannot compute rent-to-income at municipal level
 with these sources, so it does not claim to.
+
+I tried to add municipal income as a control from INE's *Atlas de Distribución
+de Renta de los Hogares* (ADRH, table 30824). That table is published at census
+tract / district / municipality level in one very large semicolon-separated CSV.
+The download obtained here stopped mid-record at 219 MB, so the file could not be
+validated or parsed reliably and **no income control is used**. The omission is
+recorded rather than papered over: a municipal income control would absorb part
+of the urban–rural gradient, which is exactly the variation the non-urbanizable
+coefficient is picking up.
 
 ---
 

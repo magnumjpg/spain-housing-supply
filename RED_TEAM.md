@@ -22,6 +22,28 @@ available in a reproducible public form.
 
 ---
 
+## "Your null is just one rent series."
+
+**It was, and now it is two.** The first version used only INE table 69330. The
+project now repeats the same five specifications with SERPAVI, a tax-based rent
+series built from *Modelo 100* declarations. The two correlate at 0.991 in levels,
+and annualised the median ratio is 0.959 — different statistics, same places.
+
+The tax-based coefficients are essentially the INE ones: pending share −2.4%
+(p=0.003), unstarted share −2.2% (p=0.031), non-urbanizable −4.0% (p=0.27),
+development land +1.1% (p=0.57). The null is not an artefact of who produced the
+rent series.
+
+**What this does not answer:** both series measure the existing rental stock, not
+the rent of new build. Two smoothed stock measures agreeing is not evidence about
+the margin the hypothesis is really about. And SERPAVI is narrower: collective
+residential buildings only, no Navarra or Basque Country, censored small cells.
+
+**Unresolved:** a new-build rent series at municipal level, or a repeat-sales /
+new-tenancy index. Neither is available here.
+
+---
+
 ## "You added controls until the result disappeared."
 
 **Partially fair, and worth confronting directly.**

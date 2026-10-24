@@ -22,6 +22,7 @@ URLS = {
     "ua_69330": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/69330.csv",
     "ipva_59060": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/59060.csv",
     "dpop_29005": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/29005.csv",
+    "serpavi": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx",
     "ua_codes_json": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/69330?nult=1&tip=AM",
 }
 

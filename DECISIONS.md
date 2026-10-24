@@ -163,3 +163,61 @@ the gap is time.
 MIVAU returns 403 to `Invoke-WebRequest` and to the default Python user agent.
 `requests` with a browser-like `User-Agent` works. This is documented in
 `config.py` because it will bite anyone reproducing the work.
+
+---
+
+## D15. Add SERPAVI as an independent outcome, not as a second national estimate
+
+**Context.** The central claim is a null: land classification does not predict
+rents once urbanisation is held constant. A single rent series, INE 69330, is a
+thin basis for that claim. A reviewer could reasonably ask whether the null is an
+artefact of that series.
+
+**Decision.** Add SERPAVI (MIVAU's tax-source rent index, *Modelo 100*) as a
+second outcome for the same five cross-section specifications. Report the two
+series side by side, plus the cross-source correlation and the annualised ratio.
+
+**Alternatives rejected.**
+
+- *Average the two series into one outcome.* They are different statistics
+  (mean annual rent vs median monthly rent of collective buildings) with
+  different sample frames. Averaging would hide the disagreement instead of
+  showing it.
+- *Replace INE with SERPAVI.* SERPAVI excludes Navarra and the Basque Country,
+  censors small cells, and covers only collective residential buildings. It is
+  narrower, not better.
+- *Treat the high correlation as validation of the analysis.* It validates the
+  rent *measurement*, not the design. The endogeneity problem is untouched.
+
+**Consequence.** The null reproduces almost coefficient for coefficient
+(pending −2.4%, p=0.003; unstarted −2.2%, p=0.031). The docs must still say that
+both series measure the stock margin, not new-build rents.
+
+---
+
+## D16. Do not use ADRH income: the download could not be validated
+
+**Context.** Municipal household income would be a useful control, because the
+non-urbanizable share is partly a rurality proxy. INE's ADRH (table 30824) is
+the obvious source.
+
+**Decision.** Attempt the download, inspect it, and **do not use it** if it
+cannot be validated. The published CSV is a census-tract / district /
+municipality table. The file obtained here is 219,410,432 bytes and ends
+mid-record (`... Renta neta media por hoga`), with no usable row terminator; a
+municipal-only extract would require a different API query or a much larger
+download. It is not parsed, and no income control is claimed.
+
+**Alternatives rejected.**
+
+- *Parse the truncated file anyway.* A silent partial sample of municipalities
+  would be worse than no control: it would look like a complete specification.
+- *Substitute provincial income.* That is absorbed by the province fixed effects,
+  so it adds nothing to the identifying variation.
+- *Use the ADRH file's municipal rows without checking completeness.* The tail
+  check is the whole point; an unchecked 219 MB file is not evidence.
+
+**Consequence.** The README and LIMITATIONS say explicitly that income is not
+controlled. The income gradient remains a competing explanation for the
+non-urbanizable coefficient. The partial file is deleted from `data/raw/` so it
+cannot be mistaken for an input.
