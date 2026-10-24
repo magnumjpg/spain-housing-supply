@@ -20,7 +20,7 @@ A municipal dataset that, as far as I can tell, did not exist as a single reprod
 - **Outcomes**: INE *Indicadores Urbanos* (table 69330), 434 municipalities, 2010–2025, with annual rent €/m², mean and median rent, house prices, housing stock, vacancy, households and household size. A second outcome series, MIVAU **SERPAVI** (tax records, 2024), is used as an independent check on the rent result.
 - **Demand controls**: INE Padrón (table 29005), municipal population 1996–2025.
 
-The two sources are merged on the 5-digit INE municipal code. The match is 431 of 434 urban municipalities. Every number below comes from `src/run_all.py` and is stored in `outputs/results.json`.
+The sources are merged on the 5-digit INE municipal code. The SIU match is 431 of 434 urban municipalities; all 431 have a SERPAVI rent. Every number below comes from `src/run_all.py` and is stored in `outputs/results.json`.
 
 ## The headline numbers
 
