@@ -1,7 +1,8 @@
 # METHOD.md — what is estimated, and why
 
-The project has three layers: a descriptive inventory, a cross-section, and a
-short panel. They answer different questions and are not substitutes.
+The project has four layers: a descriptive inventory, a stock-over-flow absorption
+ratio, a cross-section, and a short panel. They answer different questions and are
+not substitutes.
 
 ---
 
@@ -21,6 +22,31 @@ municipality with 300 planned dwellings should not count as much as Madrid with
 243,909. Medians are reported alongside, because the distribution is skewed and
 the two answer different questions ("how much housing" vs "how typical is a
 municipality").
+
+### 1b. Years of pending supply
+
+The stock-over-flow ratio translates the pipeline into time:
+
+```
+years_to_absorb_i = pending_dwellings_i / ((stock_2025_i - stock_2023_i) / 2)
+```
+
+The denominator is the **net** annual change in the Catastro conventional-dwelling
+stock. Net additions subtract demolitions, so the ratio is an **upper bound** on
+the years of gross construction the pipeline represents. It is computed only for
+municipalities with non-missing stock in both years and positive net additions
+(359 of 431). The aggregate is `Σ pending / Σ net additions`, not the average of
+municipal ratios.
+
+The 2023–2025 window is the headline because Catastro stock coverage expands
+sharply in 2023 (119 municipalities before, 399 after). Using a longer window
+would restrict the sample to the large cities that were covered earlier and would
+confound the ratio with sample selection. The 2021–2025 window is reported on those
+115 municipalities as a robustness check: 34.8 years versus 45.7, same order of
+magnitude.
+
+This is a description, not a projection. It does not assume that demand,
+construction capacity or plans stay constant.
 
 ---
 

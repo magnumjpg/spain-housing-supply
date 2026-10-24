@@ -275,6 +275,33 @@ reproduction of the negative coefficients) plus the previous 13.
 
 ---
 
+## Session 12 — the project was reading as "unsolvable", so the framing changed
+
+The first published draft led with the rent null. That was defensible as honesty
+but wrong as a presentation of the work: it made the project sound like a failed
+test rather than a finding. The rent null is a failed identification in one
+design; the pipeline is a large, measurable fact.
+
+Added a **stock-over-flow ratio**: pending dwellings divided by the 2023–2025 net
+annual change in the Catastro dwelling stock. Across 359 municipalities, 3.17 M
+pending dwellings against 69,411 net additions per year gives **45.7 years** of
+equivalent supply; the median municipality has **48.3 years** and 76% are above
+20 years. The 2021–2025 window on 115 consistently-covered municipalities gives
+34.8 years. Both are in the README, with the caveat that net additions understate
+gross construction and that the ratio is not a forecast.
+
+Rewrote the README around that: finding first, rent test second, with a plain
+explanation of why the cross-section cannot identify the rent effect. The null has
+not moved; its place in the argument has. `figures.py` unchanged except for the
+table export (`outputs/tables/absorption.csv`).
+
+One data trap: Catastro stock coverage jumps from 119 to 399 municipalities in
+2023. A 2015–2024 window would silently restrict the sample to large cities, so
+the headline uses the short post-2023 window and the long window is a robustness
+check, not the main estimate.
+
+---
+
 ## What I would do differently
 
 1. **Read the metadata before the first regression.** Two sessions were spent on

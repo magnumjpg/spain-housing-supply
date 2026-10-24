@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-24T23:23:14+00:00",
+    "generated_utc": "2026-10-24T23:34:28+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -285,6 +285,42 @@
     "median_unstarted_share": 0.44295,
     "weighted_unstarted_share": 0.4877965734648819,
     "share_municipalities_pending_above_80": 0.35730858468677495,
+    "absorption": {
+      "main": {
+        "window": [
+          2023,
+          2025
+        ],
+        "n_municipalities": 359,
+        "pending_dwellings": 3169461.0,
+        "annual_net_additions": 69411.0,
+        "aggregate_years": 45.66222932964516,
+        "median_years": 48.271954674220964,
+        "p25_years": 20.8508488021577,
+        "p75_years": 136.34060273972602,
+        "p90_years": 294.32,
+        "share_above_20_years": 0.7604456824512534,
+        "share_above_50_years": 0.4958217270194986,
+        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock. Net additions subtract demolitions, so this is an upper bound on years of supply at the recent construction rate. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
+      },
+      "robustness": {
+        "window": [
+          2021,
+          2025
+        ],
+        "n_municipalities": 115,
+        "pending_dwellings": 1715865.0,
+        "annual_net_additions": 49308.5,
+        "aggregate_years": 34.798564142085034,
+        "median_years": 28.916483516483517,
+        "p25_years": 15.705136602726391,
+        "p75_years": 70.30784600472732,
+        "p90_years": 159.48902408777232,
+        "share_above_20_years": 0.6869565217391305,
+        "share_above_50_years": 0.391304347826087,
+        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock. Net additions subtract demolitions, so this is an upper bound on years of supply at the recent construction rate. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
+      }
+    },
     "top_pending": [
       {
         "municipality_name": "Madrid",

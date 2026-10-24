@@ -4,216 +4,216 @@
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 6641613,
     "sha256": "15af950c89394e68617e31caa8332b79e9fb46e5fcf1432dcc59feef3025cf11",
-    "downloaded_utc": "2026-10-24T23:22:40+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "ua_69330": {
     "path": "data\\raw\\ua_69330.csv",
     "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/69330.csv",
     "bytes": 14433178,
     "sha256": "c23bd4e8920045a6b5970f764a1f393493215edbeee07297393af15fc3aaef36",
-    "downloaded_utc": "2026-10-24T23:22:40+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "ipva_59060": {
     "path": "data\\raw\\ipva_59060.csv",
     "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/59060.csv",
     "bytes": 908986,
     "sha256": "c390c9cf082b9a489f230de0dbb7ca567847aae97f0e3f9b955415c9a52b7822",
-    "downloaded_utc": "2026-10-24T23:22:40+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "dpop_29005": {
     "path": "data\\raw\\dpop_29005.csv",
     "url": "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/29005.csv",
     "bytes": 27348525,
     "sha256": "8d568dbb14ba1e6cd9d5d3f7db6516842806ce3ba4bdf52938482d2adca50635",
-    "downloaded_utc": "2026-10-24T23:22:40+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "ua_codes": {
     "path": "data\\raw\\ua_municipality_codes.csv",
     "url": "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/69330?nult=1&tip=AM",
     "bytes": 8564,
     "sha256": "80e52c1ed3409269541ee3fa00dce6f9be7db7ab069c45319803cd64055d7aae",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_Metadadatos clases de suelo.xlsx": {
     "path": "data\\raw\\siu\\Metadadatos clases de suelo.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8926,
     "sha256": "f9a61fa0b53a3c33c24f7a01f7d081903bbd46580a8922a3e8ab56a3dcdb0417",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_Metadatos areas desarrollo.xlsx": {
     "path": "data\\raw\\siu\\Metadatos areas desarrollo.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 9291,
     "sha256": "25fba243c9980405e2713c6b827430a92a03a101d57dc77cb96dff701387116f",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_antplan_au.xlsx": {
     "path": "data\\raw\\siu\\antplan_au.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 13013,
     "sha256": "57a2e87db64b2aa8100b05d612d0455eae4dae2af7fb077cd18ce3dafddda00d",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_antplan_ccaa.xlsx": {
     "path": "data\\raw\\siu\\antplan_ccaa.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 10652,
     "sha256": "9a79aaaba3448940a1b26577b939ccd718ae3a332c6afecce9c80bbea5e05d16",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_antplan_nac.xlsx": {
     "path": "data\\raw\\siu\\antplan_nac.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8941,
     "sha256": "caea656c8edf25c9e459b53bac848a8a9655f7fb2014025d7a1cec84249d1c48",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_antplan_prov.xlsx": {
     "path": "data\\raw\\siu\\antplan_prov.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 13407,
     "sha256": "432a39090367cc3cf36765370a88be73342e5f1bd8251fe5b9076446c5fc8f3a",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_areas_desarrollo_au.xlsx": {
     "path": "data\\raw\\siu\\areas_desarrollo_au.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 20625,
     "sha256": "460663484f72bafd49259f176d76de30aaa9864d798c130b9a56e5cfbccaaec0",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_areas_desarrollo_ccaa.xlsx": {
     "path": "data\\raw\\siu\\areas_desarrollo_ccaa.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 11591,
     "sha256": "77fcc276fec764a81c7dc836766709c7ec222f7a780a261c08ad46654b79ef89",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_areas_desarrollo_mun.xlsx": {
     "path": "data\\raw\\siu\\areas_desarrollo_mun.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 709561,
     "sha256": "e27561b17408c0ac24d3e420468a31218469f19c55a24f0140f74c3140598d09",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_areas_desarrollo_nac.xlsx": {
     "path": "data\\raw\\siu\\areas_desarrollo_nac.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8781,
     "sha256": "72e3716587718c9922dd67252dcb9807049469f8ec7b5897855e06845e4698a6",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_areas_desarrollo_prov.xlsx": {
     "path": "data\\raw\\siu\\areas_desarrollo_prov.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 16299,
     "sha256": "35ddef81de536f776e0240ebdcf791a5349f3ecf6de9c6fe09ff5327c2c09b25",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_siose.xlsx": {
     "path": "data\\raw\\siu\\clases_siose.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8831,
     "sha256": "8587633c73bc8a7c3569b2bea3fdf2edef2dc343d120178b30e082988694eb60",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_suelo_au.xlsx": {
     "path": "data\\raw\\siu\\clases_suelo_au.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 15832,
     "sha256": "338f767e904bf007fa7aaf25a83ace749fcfcc02ae2eb3de4f78c56e433d48e8",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_suelo_ccaa.xlsx": {
     "path": "data\\raw\\siu\\clases_suelo_ccaa.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 10357,
     "sha256": "9b3267701dbe7a44f991f5c3b9f3eed4981a0d71eed66ef88a9d6bf6a66319ca",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_suelo_mun.xlsx": {
     "path": "data\\raw\\siu\\clases_suelo_mun.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 548616,
     "sha256": "a398e2a137b7b2bbb8e3483b2e304e5c178332008b7d6a238978ddfaac9746c6",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_suelo_nac.xlsx": {
     "path": "data\\raw\\siu\\clases_suelo_nac.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8645,
     "sha256": "7611c1db3cc67566dfd8b696a95a77e75fb7789cc49bba2580186a3578f31339",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_clases_suelo_prov.xlsx": {
     "path": "data\\raw\\siu\\clases_suelo_prov.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 13010,
     "sha256": "262d3bcb0f1e948b4562a895741b72042802ad1b0d2b60a76dcb150f65036ce7",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_codigos_CLC.xlsx": {
     "path": "data\\raw\\siu\\codigos_CLC.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8742,
     "sha256": "90cd7afbe27cb47bcad9b05ec7dc238cb7cb162578990afb713fc4446b85f2e1",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_codigos_CLC_completo.xlsx": {
     "path": "data\\raw\\siu\\codigos_CLC_completo.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 10076,
     "sha256": "782a7054ae79a9341fddee9cba781e8ba7992db54b8fbd2f99767a242bfc3c18",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_figplan_au.xlsx": {
     "path": "data\\raw\\siu\\figplan_au.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 12331,
     "sha256": "bd8413fbc770979e7432f3d7db4dc6310f873a9c5137540983fe18a5966e484a",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_figplan_ccaa.xlsx": {
     "path": "data\\raw\\siu\\figplan_ccaa.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 10319,
     "sha256": "7c61a3755c524938269ac0fcca29782d0c4916730193048b5d635d4a07cd5a71",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_figplan_nac.xlsx": {
     "path": "data\\raw\\siu\\figplan_nac.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 8918,
     "sha256": "9dde9c06778d7e88e13f97b2e25932a07c610c50b6bf255b88e572c3f9eb0369",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_figplan_prov.xlsx": {
     "path": "data\\raw\\siu\\figplan_prov.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 12791,
     "sha256": "5b1df2a111a5b73fd77f0e3d9fa3369da5e40536f42fad494061d3517377ab67",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_plan_mun.xlsx": {
     "path": "data\\raw\\siu\\plan_mun.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 407649,
     "sha256": "110f2e8028234c8915be2d49e00b7c9043ab1011a71d5dbd4b6ebd3d21183e9e",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "siu_tabla_sectores.xlsx": {
     "path": "data\\raw\\siu\\tabla_sectores.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip",
     "bytes": 4848162,
     "sha256": "94b96a562de86526fc14725e0bd05d88c49a4aebfd354baec26b56a2b8c8f094",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   },
   "serpavi": {
     "path": "data\\raw\\serpavi_2011_2024.xlsx",
     "url": "https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx",
     "bytes": 71155784,
     "sha256": "f00ca4d7f27d23f811b229d97e65e3854c4563f8a5f3f16afdb023e326226ce9",
-    "downloaded_utc": "2026-10-24T23:22:41+00:00"
+    "downloaded_utc": "2026-10-24T23:34:07+00:00"
   }
 }

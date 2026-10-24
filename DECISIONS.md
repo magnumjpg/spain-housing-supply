@@ -221,3 +221,33 @@ download. It is not parsed, and no income control is claimed.
 controlled. The income gradient remains a competing explanation for the
 non-urbanizable coefficient. The partial file is deleted from `data/raw/` so it
 cannot be mistaken for an input.
+
+---
+
+## D17. Report years of pending supply, not only a percentage
+
+**Context.** "67.5% of planned dwellings are pending" is accurate but hard to
+feel. A percentage does not distinguish a pipeline that is large relative to
+demand from one that is large in absolute terms but absorbable.
+
+**Decision.** Divide pending dwellings by the recent net annual change in the
+Catastro housing stock, municipality by municipality, and report the aggregate
+and median years. Use 2023–2025 for the headline because Catastro coverage
+expands from 119 to 399 municipalities in 2023; report 2021–2025 on the smaller
+consistently-covered set as a robustness check.
+
+**Alternatives rejected.**
+
+- *Divide by planned dwellings or by stock.* Both are already in the README and
+  neither is time-interpretable.
+- *Use building permits (licencias).* A better denominator, but it requires
+  another MIVAU download and a municipal crosswalk; the stock change is already
+  in the INE panel and is adequate for an order of magnitude.
+- *Average the municipal ratios.* Would let tiny municipalities dominate. The
+  headline is `Σ pending / Σ additions`; the median is reported separately.
+
+**Consequence.** The headline becomes **45.7 years** (median 48.3, p25–p75
+20.9–136.3) on 359 municipalities, with a 34.8-year robustness check on 115. The
+limitations are explicit: net rather than gross additions, a two-year window, and
+a stock that may never be built. The number is an equivalent-supply description,
+not a forecast.

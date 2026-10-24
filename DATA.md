@@ -119,6 +119,13 @@ mapped out and recorded in `outputs/coverage.json` under
 **Missingness:** 2025 rents are empty (the year is not closed). 2024 has 408
 non-missing rent values out of 434. The cross-section uses 2024.
 
+**Housing-stock coverage changes in 2023.** `stock_catastro` is available for
+about 119 municipalities in 2010–2022 and for about 399 in 2023–2025. The jump is
+a coverage expansion, not a construction boom. The absorption ratio (METHOD §1b)
+therefore uses the 2023–2025 window for the headline and 2021–2025 on the smaller
+consistently-covered set as a robustness check. Comparing stock across the 2022/2023
+boundary would mix a real change with a sample change.
+
 ---
 
 ## 3. INE — Padrón municipal, table 29005

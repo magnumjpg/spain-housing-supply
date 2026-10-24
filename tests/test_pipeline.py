@@ -146,6 +146,19 @@ def test_all_regressions_report_inference(results: dict) -> None:
         assert 0 <= r["p"] <= 1
 
 
+def test_absorption_ratio_is_large_and_bounded(results: dict) -> None:
+    a = results["pipeline"]["absorption"]["main"]
+    # The point of the metric is that the pipeline is decades, not years, of
+    # recent construction. Fail loudly if coverage collapses or the ratio does.
+    assert a["n_municipalities"] > 300
+    assert 20 < a["aggregate_years"] < 100
+    assert a["median_years"] > 20
+    assert 0 < a["p25_years"] < a["median_years"] < a["p75_years"]
+    r = results["pipeline"]["absorption"]["robustness"]
+    assert r["n_municipalities"] > 100
+    assert r["aggregate_years"] > 20
+
+
 def test_readme_exists() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     assert len(readme) > 1500

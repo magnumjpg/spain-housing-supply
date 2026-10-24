@@ -98,6 +98,23 @@ over 30 years old. Part of the gap is simply capacity that has not had time to b
 built. 74% of the pending dwellings nevertheless sit under plans approved more
 than 15 years ago.
 
+### 5b. The 45.7-year ratio is a description, not a forecast
+
+Dividing pending dwellings by recent net additions makes the pipeline legible, but
+it is not a projection. Three things push it upward and one pushes it downward:
+
+- the denominator is **net** of demolitions, so gross construction is higher and
+  the ratio is an upper bound;
+- the 2023–2025 window is short and construction was recovering from a low base;
+- part of the pending stock may never be built, which makes the ratio an
+  "equivalent supply" figure rather than a queue;
+- demand and construction capacity can grow, which would shorten the calendar
+  time.
+
+The ratio is therefore reported with its window, its n and its p25/p75, and the
+2021–2025 robustness check (34.8 years on 115 municipalities) is shown next to the
+headline (45.7 on 359). The claim is "decades, not years", not a date.
+
 ---
 
 ## 6. The sample is urban and not representative of Spain

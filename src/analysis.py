@@ -95,6 +95,49 @@ def zscore(s: pd.Series) -> pd.Series:
     return (s - s.mean()) / sd if sd and np.isfinite(sd) else s * np.nan
 
 
+def absorption_ratio(panel: pd.DataFrame, cs: pd.DataFrame, y0: int, y1: int) -> tuple[dict, pd.DataFrame]:
+    """Pending dwellings divided by recent net housing additions per year.
+
+    This is a stock-over-flow ratio, not a forecast. The denominator is the
+    change in the Catastro conventional-dwelling stock, which nets out
+    demolitions; gross completions are higher, so the ratio is an upper bound
+    on years of supply. It is computed only where the stock is observed in both
+    years. The 2023-2025 window is used for the headline because Catastro
+    coverage expands sharply in 2023; the 2021-2025 window is a robustness
+    check on the smaller consistently-covered set.
+    """
+    st = panel.pivot_table(index="code", columns="year", values="stock_catastro", aggfunc="first")
+    d = st[[y0, y1]].dropna()
+    add = (d[y1] - d[y0]) / (y1 - y0)
+    m = cs[["code", "municipality_name", "planned_dwellings", "pending_dwellings"]].merge(
+        add.rename("add_per_year"), on="code"
+    )
+    m = m[(m["add_per_year"] > 0) & (m["pending_dwellings"] > 0)].copy()
+    m["years_to_absorb"] = m["pending_dwellings"] / m["add_per_year"]
+    summary = {
+        "window": [int(y0), int(y1)],
+        "n_municipalities": int(len(m)),
+        "pending_dwellings": float(m["pending_dwellings"].sum()),
+        "annual_net_additions": float(m["add_per_year"].sum()),
+        "aggregate_years": float(m["pending_dwellings"].sum() / m["add_per_year"].sum()),
+        "median_years": float(m["years_to_absorb"].median()),
+        "p25_years": float(m["years_to_absorb"].quantile(0.25)),
+        "p75_years": float(m["years_to_absorb"].quantile(0.75)),
+        "p90_years": float(m["years_to_absorb"].quantile(0.90)),
+        "share_above_20_years": float((m["years_to_absorb"] > 20).mean()),
+        "share_above_50_years": float((m["years_to_absorb"] > 50).mean()),
+        "note": (
+            "Pending dwellings / net annual change in the Catastro conventional-dwelling "
+            "stock. Net additions subtract demolitions, so this is an upper bound on "
+            "years of supply at the recent construction rate. It is not a forecast: "
+            "demand can grow, plans can be revised, and part of the pending stock may "
+            "never be built."
+        ),
+    }
+    table = m.sort_values("years_to_absorb", ascending=False).copy()
+    return summary, table
+
+
 def fit_cs(
     df: pd.DataFrame,
     outcome: str,
@@ -218,6 +261,9 @@ def main() -> dict:
         "that the 431-municipality sample is a large subset and not a different "
         "universe. The sample is not a random draw."
     )
+
+    absorption_main, absorption_table = absorption_ratio(panel, cs, 2023, 2025)
+    absorption_rob, _ = absorption_ratio(panel, cs, 2021, 2025)
 
     top_pending = (
         cs.nlargest(10, "pending_dwellings")[
@@ -424,6 +470,7 @@ def main() -> dict:
             "median_unstarted_share": float(cs["unstarted_share"].median()),
             "weighted_unstarted_share": float(w_unstarted),
             "share_municipalities_pending_above_80": float((cs["pending_share"] > 0.8).mean()),
+            "absorption": {"main": absorption_main, "robustness": absorption_rob},
             "top_pending": top_pending,
         },
         "validation": national,
@@ -454,6 +501,7 @@ def main() -> dict:
     pd.DataFrame(terciles_out).to_csv(TABLES / "growth_terciles.csv", index=False)
     pd.DataFrame([national]).to_csv(TABLES / "national_validation.csv", index=False)
     vintage_bins.to_csv(TABLES / "plan_vintage.csv", index=False)
+    absorption_table.to_csv(TABLES / "absorption.csv", index=False)
 
     print(f"Results written to {OUT / 'results.json'}")
     print(f"Cross-section specs: {len(regressions)}, panel specs: {len(panel_out)}, robustness: {len(robustness)}")
