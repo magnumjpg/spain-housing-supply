@@ -1,0 +1,36 @@
+{
+  "siu_municipalities": 5898,
+  "ua_municipalities": 434,
+  "ua_matched_to_siu": 431,
+  "ua_match_rate": 0.9930875576036866,
+  "cross_section_n": 431,
+  "rent_2024_nonmissing": 406,
+  "price_2024_nonmissing": 431,
+  "stock_2024_nonmissing": 403,
+  "planned_dwellings_nonmissing": 430,
+  "pending_dwellings_nonmissing": 430,
+  "pending_share_nonmissing": 429,
+  "unstarted_share_nonmissing": 431,
+  "years_panel": [
+    2010,
+    2025
+  ],
+  "panel_rows": 6914,
+  "panel_municipalities": 434,
+  "ua_indicators_dropped": [
+    "Delitos contra la libertad sexual (Tasa por mil habitantes)",
+    "Precio medio de la vivienda tipo piso (Euros)",
+    "Precio medio de la vivienda tipo unifamiliar (Euros)",
+    "Precio medio por metro cuadrado de la vivienda tipo unifamiliar (Euros/m2)",
+    "Primer cuartil del alquiler mensual (Euros)",
+    "Robos y hurtos (Tasa por mil habitantes)",
+    "Tercer cuartil del alquiler mensual (Euros)",
+    "Total infracciones penales (Tasa por mil habitantes)"
+  ],
+  "notes": {
+    "land_shares": "Percentages of municipal area. Sum to 100 excluding share_development_areas, which overlaps urban_nonconsolidated + urbanizable_delimited.",
+    "mun_area_km2": "SIU MunTotSue, municipal area in km2 (checked against known municipal areas).",
+    "pending_share": "pending_dwellings / planned_dwellings. A stock of plan capacity, not a delay measure.",
+    "rents": "INE Urban Indicators table 69330, annual rent in EUR/m2."
+  }
+}

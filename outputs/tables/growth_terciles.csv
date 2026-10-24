@@ -1,0 +1,4 @@
+growth_tercile,n,population_growth,planned_per_1000_stock,pending_share,unstarted_share,rent_m2_year
+low,144,-0.0036,309.0969,0.7511,0.5171,66.8
+mid,143,0.0528,248.7003,0.6799,0.4025,90.9
+high,144,0.1141,375.3514,0.7134,0.4354,89.7

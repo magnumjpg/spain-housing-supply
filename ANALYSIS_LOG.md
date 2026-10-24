@@ -1,0 +1,242 @@
+# ANALYSIS_LOG.md — how the work actually went
+
+Not a polished narrative. A record of what was tried, what broke, and what was
+changed as a result. Written so a reader can see the process rather than only the
+output.
+
+---
+
+## Session 1 — feasibility
+
+**Goal:** find out whether a municipal land-classification dataset could be
+built from public sources at all.
+
+Checked, in order:
+
+1. SIU landing page (`mivau.gob.es/SIU`). Found the alphanumeric ZIP, 6.6 MB.
+   Downloaded with `curl` after `Invoke-WebRequest` returned 403. The 403 was not
+   a transient error; MIVAU blocks the default PowerShell user agent. Fix:
+   browser `User-Agent` on every request.
+2. Unzipped. 40 workbooks, national/province/municipality variants. The
+   municipality files are the ones that matter.
+3. INE table 69330. 160,080 rows, 434 municipalities, 23 indicators, 2010–2025.
+   Downloaded as CSV.
+4. INE IPVA (59060) and Padrón (29005) for the rent index and population.
+
+**Output of the session:** a green light, and a first list of doubts about the
+SIU semantics. The doubts turned out to be the most valuable part.
+
+---
+
+## Session 2 — semantics, or: the seven columns that do not add up
+
+First attempt: sum all seven `MunPr*` columns. Result: row sums between 100 and
+151, with a long right tail.
+
+That is the kind of thing that gets quietly normalised away. Instead I read the
+official metadata workbooks, which had been sitting in the ZIP unopened.
+
+Findings:
+
+```
+MunPrSuCon + MunPrSuNoC + MunPrSuzDe + MunPrSuzNd + MunPrSnUzb + MunPrOtr = 100
+MunPrADes = MunPrSuNoC + MunPrSuzDe
+```
+
+`MunPrADes` ("development areas") is an **aggregate of two other columns**, not a
+seventh class. Summing it double counts. Maximum discrepancy across 5,898 rows:
+0.001 percentage points — so the identity is exact, not approximate.
+
+`MunTotSue` is municipal area in km², not hectares and not "total land
+classified". Checked against known municipal areas.
+
+**Consequence:** every share in the pipeline is built from the six base classes,
+and `share_development_areas` is used as an aggregate, never added to the others.
+Two tests now assert both identities.
+
+**Lesson recorded:** the metadata file in an official ZIP is not decoration.
+
+---
+
+## Session 3 — the encoding trap
+
+Merging INE Urban Indicators to the Padrón by name failed for exactly 118
+municipalities. Not random: all of them had accented characters.
+
+Cause: the CSV is UTF-8, but the first read used `encoding="latin1"` (a habit
+from older INE files). Latin-1 turns `Alcalá` into `AlcalÃ¡`, which normalises to
+a different token key.
+
+Fix: read as UTF-8. Matching went from 316/434 to 434/434.
+
+**Second trap in the same file:** numbers are Spanish-formatted
+(`1.234.567,8`). `pd.read_csv` with default settings parses `1.234` as `1.234`.
+Rents would have been off by three orders of magnitude in some rows and plausible
+in others — the worst kind of corruption, because the output still looks like
+data. Fixed with an explicit parser, and a test asserts rents fall in a plausible
+range.
+
+---
+
+## Session 4 — the code crosswalk
+
+The Urban Indicators CSV has municipality **names but no codes**. The Tempus
+JSON API has codes but 87 of them are non-numeric (`ES069C`, `ES503C1`, …).
+
+Built the crosswalk in three layers:
+
+1. Numeric codes used directly (347 municipalities).
+2. Non-numeric codes matched by a normalised, article-insensitive token key
+   against the 2025 Padrón, accepting only keys unique within the Padrón.
+3. Two residual names mapped by hand after inspection:
+   `Castelló de la Plana → 12040`, `Palma de Mallorca → 07040`.
+
+The function raises if anything is unmapped. No silent `NaN` merge.
+
+---
+
+## Session 5 — the first regression, and the bad news
+
+Estimated the naive cross-section: log rent on the non-urbanizable share, with
+province FE.
+
+```
+non-urbanizable share: −0.099  (p < 0.001)
+development share:     +0.051  (p = 0.007)
+```
+
+Both signs are the **opposite** of the hypothesis. The temptation at this point
+is to look for a specification that flips them — log the land measure, drop
+Madrid, trim outliers, use price instead of rent.
+
+Instead: what confound would produce this? Answer: rurality. Non-urbanizable
+share is highest in rural, cheap municipalities. The relationship is an
+urban–rural gradient, not a planning effect.
+
+Added density, consolidated-urban share, population, stock and population
+growth:
+
+```
+non-urbanizable share: −0.047  (p = 0.21)
+development share:     +0.014  (p = 0.45)
+```
+
+The effect halved and lost significance. The naive result was a confound.
+
+**Decision point:** the rent hypothesis is not supported. Options were to bury it
+or to restructure the project. Chose the latter (DECISIONS.md D3–D4).
+
+---
+
+## Session 6 — reframing
+
+Went back to the SIU descriptive variables that had been downloaded but not yet
+used: `munnumviv` (planned dwellings), `munnvivpnd` (pending), `munpradsnu`
+(development land not started).
+
+Results on the 431 matched municipalities:
+
+- 5,167,809 planned dwellings; 3,490,428 pending → **67.5%**.
+- Median municipal pending share: **72.1%**.
+- Planned capacity = **33.4%** of existing stock; pending = **22.6%**.
+- **48.8%** of development land not started (area-weighted).
+- **35.7%** of municipalities have more than 80% pending.
+
+This is not a subtle statistical result. It is a large, direct measurement, and
+it survives the obvious objection ("demand will clear it") because the pending
+share in fast-growing municipalities is 71.3% versus 75.1% in declining ones.
+
+The project became about the gap. The rent analysis stayed in, as a documented
+failed identification attempt with a figure showing why the naive result is
+misleading.
+
+---
+
+## Session 7 — panel, and a result that did not survive
+
+Built the 2013–2024 panel with municipality FE and interacted the land measures
+with population growth.
+
+With year FE:
+
+```
+non-urbanizable × growth:  −0.073  (p = 0.15)
+planned capacity × growth: −0.098  (p = 0.008)
+```
+
+With province-year FE (absorbing regional shocks):
+
+```
+non-urbanizable × growth:  −0.099  (p = 0.008)
+planned capacity × growth: −0.028  (p = 0.26)
+```
+
+The planned-capacity result **disappears** once province-year shocks are absorbed.
+That is a fragile result and is reported as fragile. The non-urbanizable
+interaction moves the other way, which is also not a clean story.
+
+Did not chase either. The README says the panel is a check, not an elasticity.
+
+---
+
+## Session 8 — figures
+
+Six figures. Two rounds of review:
+
+- Round 1: fig 5 (top pending municipalities) had the "% pending" labels printed
+  on top of the bars, unreadable, and no legend. Fixed by placing labels after
+  the full bar and adding a legend.
+- Round 2: fig 2 had no correlation annotation; added `r = 0.14` so the "weak
+  responsiveness" claim is visible rather than asserted. Fig 3 legend moved off
+  the confidence intervals.
+- Grid set below data (`axes.axisbelow`) so bars are not cut by grid lines.
+
+Figure 4 is the important one: raw slope on the left, residualised flat
+relationship on the right. It is the visual form of the project's main caveat.
+
+---
+
+## Session 9 — documentation and tests
+
+Wrote `DATA.md`, `METHOD.md`, `LIMITATIONS.md`, `DECISIONS.md`, `RED_TEAM.md`
+and this log. Rationale: the analysis is only as credible as the record of the
+choices behind it.
+
+Tests (11, all passing):
+
+- land shares sum to 100 (six base classes);
+- `MunPrADes` equals the sum of its two components;
+- pending ≤ planned;
+- unique municipality-year;
+- positive rents, prices, stock, population;
+- sample size floor;
+- bounded shares;
+- pipeline aggregates internally consistent;
+- `results.json` has all required sections;
+- every regression has finite coefficient, positive SE, p in [0,1];
+- README exists and contains the limitations section.
+
+---
+
+## What I would do differently
+
+1. **Read the metadata before the first regression.** Two sessions were spent on
+   a semantic error that the metadata workbook answered in one page.
+2. **Build the code crosswalk before any merge.** Name matching should have been
+   the first thing, not the thing that broke the first merge.
+3. **State the falsification condition up front.** "If the adjusted coefficient
+   is not negative and significant, the hypothesis is not supported" would have
+   made the reframe faster and less uncomfortable.
+4. **Do not download IPVA if it is not going to be used.** It is cached and
+   documented as unused, which is fine, but it is dead weight in the manifest.
+
+---
+
+## Honest summary of the result
+
+The project set out to measure a "permission premium" and did not find one. It
+found something else that is measurable and large: a housing pipeline that is
+two-thirds unbuilt, in shrinking and growing municipalities alike. The rent null
+is reported with the same prominence as the pipeline finding, because a reader
+who only sees the positive result would be misled about what the data can
+support.

@@ -1,0 +1,18 @@
+# Raw downloads are reproducible from the URLs in src/config.py and are hashed in
+# data/raw/manifest.json. Do not commit the large files.
+data/raw/*.zip
+data/raw/*.csv
+!data/raw/ua_municipality_codes.csv
+
+# The SIU workbooks are small and come from the ZIP; committing them makes the
+# pipeline runnable offline without 50 MB of INE CSVs.
+!data/raw/siu/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.DS_Store
+Thumbs.db
