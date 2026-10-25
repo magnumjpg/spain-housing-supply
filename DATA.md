@@ -337,6 +337,13 @@ spans 2022–2025; Spain's median year is 2023, Germany's 2022. A common year wo
 drop Spain or Germany. The year is stored per city, and each ratio uses price and
 rent from the same city and year.
 
+**Mixed geography.** Eurostat publishes some cities as "greater city" aggregates
+and others on municipal boundaries. In the comparable sample, 44 of 251 are
+greater-city units (25 of the 87 Spanish cities, all 16 Portuguese, 2 German, 1
+Croatian). Madrid, Barcelona and Valencia are greater-city aggregates. The ratio
+remains internally consistent because numerator and denominator share the same
+geography, but the city medians mix two spatial definitions.
+
 **Conceptual mismatch.** The price is for buying an apartment; the rent is an
 average rent for housing, not the rent of the same apartment. The ratio is a gross
 yield in years, not a rent-to-income affordability measure.

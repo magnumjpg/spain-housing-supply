@@ -369,6 +369,13 @@ true under either reading.
 - **OECD indices are not levels.** The chapter compares 2015→latest and
   2000→latest changes, never levels. Real prices are ranked inside the
   40-country price-to-income sample, not the 47-country real-price set.
+- **Some "cities" are greater-city aggregates.** Caught while checking the Madrid,
+  Barcelona and Valencia values against the CSV: their rows are labelled
+  "(greater city)". 44 of the 251 comparable units are greater-city aggregates, 25
+  of them Spanish and all 16 Portuguese. The ratio is internally consistent (price
+  and rent from the same geography), so the values stand, but the mix is now stated
+  in `DATA.md` §6.4, `METHOD.md` §7.3 and `LIMITATIONS.md` §11.6, and recorded as
+  D24.
 
 **What the chapter found.**
 

@@ -303,6 +303,25 @@ No public source does that across countries.
 
 ---
 
+## "Your city layer mixes cities with greater-city areas."
+
+**Yes, and it is stated rather than hidden.** Eurostat publishes some units on
+municipal boundaries and some as "greater city" aggregates: 44 of 251 comparable
+cities, including Madrid, Barcelona, Valencia, 25 of 87 Spanish cities and all 16
+Portuguese ones. The ratio is internally consistent because price and rent come
+from the same geography, but the absolute city medians mix two spatial definitions.
+
+**Why not drop them.** Dropping greater-city units would remove every Portuguese
+city, Madrid, Barcelona and Valencia — most of the large Spanish cities and one of
+the six comparison countries. That is a worse sample, not a cleaner one.
+
+**Unresolved:** there is no public crosswalk that would convert the greater-city
+indicators to municipal boundaries. The `city_name` column keeps the suffix, so a
+reader who wants strict municipal comparability can filter to `not contains
+"(greater city)"` and accept a much smaller, smaller-city sample.
+
+---
+
 ## "Why not regress prices on permits across countries?"
 
 Because it would be a spurious correlation generator. Permits, prices, credit,

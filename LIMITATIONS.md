@@ -241,6 +241,13 @@ drop Spain or Germany. The year is stored per city; the ratio uses two indicator
 from the same city and year, so the mismatch is across countries, not within a
 ratio.
 
+The geography is also mixed: Eurostat reports some cities as **greater-city**
+aggregates instead of strict municipal boundaries — 44 of the 251 comparable
+cities, including Madrid, Barcelona, Valencia, 25 of the 87 Spanish cities and all
+16 Portuguese ones. Price and rent come from the same geography, so the ratio is
+internally consistent, but "city median" combines two spatial definitions and the
+absolute values are not directly comparable to a municipal-boundary series.
+
 ### 11.7. Rent units are harmonised by a heuristic, and Latvia is excluded
 
 Urban Audit rent values are not unit-harmonised, and Eurostat's label ("average

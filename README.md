@@ -164,6 +164,13 @@ Netherlands have no comparable rent series; Latvia is excluded because its four
 cities are internally inconsistent; the comparable years span 2022–2025, with
 Spain at 2023 and Germany at 2022.
 
+One caveat on the geography: Eurostat publishes some cities as **greater-city**
+aggregates rather than strict municipal boundaries. That is true of **44 of the 251**
+comparable cities, including Madrid, Barcelona and Valencia, **25 of the 87** Spanish
+cities and all 16 Portuguese ones. Each ratio uses price and rent from the same
+geography, so the ratio is internally consistent, but a "city" median here mixes two
+spatial definitions.
+
 ### What the comparison changes
 
 It narrows the claim. Spain is **not** an extreme on price growth (7th of 40, and

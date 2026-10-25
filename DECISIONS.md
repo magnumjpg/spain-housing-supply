@@ -429,3 +429,36 @@ cause prices". The ranks are reported with their n, their medians and the
 neighbouring countries, because the rank is fragile: Spain is 0.2 percentage
 points **behind** Hungary on price-to-income growth and 0.01 dwellings per 1,000
 **ahead** of Montenegro on 2021–2024 permits.
+
+---
+
+## D24. Keep greater-city aggregates in the city layer, and say so
+
+**Context.** Eurostat Urban Audit publishes some units as municipal boundaries and
+others as "greater city" aggregates. In the comparable sample, 44 of 251 are
+greater-city units, including Madrid, Barcelona, Valencia, 25 of the 87 Spanish
+cities, all 16 Portuguese cities, 2 German and 1 Croatian.
+
+**Decision.** Keep both, with the geography left as Eurostat publishes it, and
+state the mix in `DATA.md` §6.4 and `LIMITATIONS.md` §11.6.
+
+**Alternatives rejected.**
+
+- *Keep only municipal-boundary cities.* It would drop **every Portuguese city**,
+  Madrid, Barcelona and Valencia — that is, most of the sample's large Spanish
+  cities and one of the six comparison countries. The resulting "Spanish cities"
+  would be a set of small and medium municipalities.
+- *Force greater-city units onto municipal boundaries.* The underlying indicators
+  are published at the greater-city level; there is no public crosswalk that would
+  let the project rebuild municipal values without new data.
+
+**Why it is acceptable.** The ratio uses price and rent from the same geography, so
+it is internally consistent for every city. What the mix rules out is treating the
+absolute city medians as municipal-boundary values or comparing them with a
+municipal series. The country medians are also robust in direction: Germany's gap
+to Spain is 13 years, and Portugal's median is 4.3 years above Spain's despite
+being entirely greater-city units.
+
+**Cost.** A reader who wants strict municipal comparability cannot get it from this
+source. The `city_name` column preserves the "(greater city)" suffix, so the subset
+can be filtered.

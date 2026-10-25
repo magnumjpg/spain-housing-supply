@@ -272,6 +272,12 @@ country median is then ranked across the six countries. Spain's rank is therefor
 a rank among six country medians, not among 87 Spanish cities; the summary table
 stores `rank_n = 6` and `n = 87` separately.
 
+The city is whatever geography Urban Audit publishes: a municipal boundary or a
+"greater city" aggregate. Both are kept, because dropping greater-city rows would
+remove Madrid, Barcelona, Valencia and every Portuguese city. Each ratio uses price
+and rent from the same geography, so the ratio is internally consistent; the
+country medians mix the two spatial definitions, which is stated as a limitation.
+
 The city measure is a gross yield in years. It is **not** rent-to-income, and a
 low value can mean cheap housing or expensive rents.
 
