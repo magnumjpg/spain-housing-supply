@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-24T23:34:28+00:00",
+    "generated_utc": "2026-10-25T00:53:25+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -2138,5 +2138,291 @@
       "pearson_log_rent": -0.24684906167811108,
       "pearson_price": -0.15374927999005683
     }
+  },
+  "comparative": {
+    "meta": {
+      "generated_utc": "2026-10-25T10:17:31+00:00",
+      "role": "Comparative chapter inside the Spanish land project; not a separate project.",
+      "note": "All comparisons are descriptive. Cross-country associations do not identify a causal effect of regulation on prices."
+    },
+    "country_layer": {
+      "price_measures": {
+        "source": "OECD Analytical House Prices (DSD_AN_HOUSE_PRICES@DF_HOUSE_PRICES)",
+        "unit": "index, 2015 = 100",
+        "warning": "HPI_YDH, HPI_RPI and RHP are indices, not levels. The project compares changes; it does not compare price-to-income levels across countries.",
+        "years": [
+          1990,
+          2025
+        ],
+        "n_countries_price_to_income": 40,
+        "n_countries_price_to_rent": 42,
+        "n_countries_real_house_price": 40
+      },
+      "permits": {
+        "source": "Eurostat sts_cobp_a (BPRM_DW, CPA_F41001_X_410014, THS) and demo_pjan",
+        "unit": "dwellings per 1,000 inhabitants",
+        "windows": {
+          "2015_2019": [
+            2015,
+            2019
+          ],
+          "2021_2024": [
+            2021,
+            2024
+          ]
+        },
+        "last_complete_year": 2024,
+        "excluded_year": 2025,
+        "excluded_reason": "2025 is preliminary; Spain's 2025 value is exactly 200.0 thousand.",
+        "coverage_rule": "A window mean requires at least three annual observations with a matching population. Bosnia has no Eurostat population series; the UK permit series ends in 2019; Kosovo has population only to 2022.",
+        "n_countries_2015_2019": 34,
+        "n_countries_2021_2024": 33
+      },
+      "spain": {
+        "price_to_income_chg_2015_pct": 25.894388275801994,
+        "price_to_income_chg_2000_pct": 56.26449697514797,
+        "price_to_income_rank_2015": 7,
+        "price_to_income_n_2015": 40,
+        "price_to_rent_chg_2015_pct": 58.939781725343025,
+        "price_to_rent_rank_2015": 10,
+        "price_to_rent_n_2015": 42,
+        "real_house_price_chg_2015_pct": 43.034112206385004,
+        "real_house_price_rank_2015": 15,
+        "real_house_price_n_2015": 40,
+        "permits_per_1000_2015_2019": 1.3993004998353828,
+        "permits_rank_2015_2019": 31,
+        "permits_n_2015_2019": 34,
+        "permits_per_1000_2021_2024": 2.6360868852598944,
+        "permits_rank_2021_2024": 28,
+        "permits_n_2021_2024": 33,
+        "permits_peak": 16.700760834402733,
+        "permits_peak_year": 2006
+      },
+      "spain_history": {
+        "note": "Own-history peak, not a cross-country benchmark. Indices are 2015 = 100; a ratio can be above the OECD median and still below its own 2007 peak.",
+        "price_to_income_peak": 152.477447722429,
+        "price_to_income_peak_year": 2007,
+        "price_to_income_latest_vs_peak_pct": -17.43409261087514,
+        "price_to_rent_peak": 162.003112791933,
+        "price_to_rent_peak_year": 2007,
+        "price_to_rent_latest_vs_peak_pct": -1.890908769465649,
+        "real_house_price_peak": 164.108768187442,
+        "real_house_price_peak_year": 2007,
+        "real_house_price_latest_vs_peak_pct": -12.841882986401988
+      },
+      "medians": {
+        "price_to_income_chg_2015_pct": 9.278757705574991,
+        "price_to_income_chg_2000_pct": 23.660618088012274,
+        "price_to_rent_chg_2015_pct": 30.287765709993508,
+        "real_house_price_chg_2015_pct": 37.9772851350495,
+        "permits_per_1000_2015_2019": 4.115120263857133,
+        "permits_per_1000_2021_2024": 4.61976852881287
+      }
+    },
+    "city_layer": {
+      "source": "Eurostat Urban Audit urb_clivcon",
+      "indicators": {
+        "price_m2": "SA1053V (average price for buying an apartment, EUR per m2)",
+        "rent_m2": "SA1049V (average rent for housing, EUR per m2)",
+        "population": "DE3017V"
+      },
+      "unit_rule": "Country median raw rent < 20 EUR/m2 is treated as monthly and multiplied by 12; otherwise the value is annual. The two groups separate at ~8.5 and >=41 EUR/m2.",
+      "excluded_countries": {
+        "LV": "Four cities imply gross yields from 2.3% to 17.8% under a single unit; the series is internally inconsistent, not merely mislabelled."
+      },
+      "year_note": "Latest available year per city. The comparison mixes 2022-2025 because a common year would drop either Spain or Germany.",
+      "n_cities_raw": 255,
+      "n_cities_comparable": 251,
+      "n_countries_comparable": 6,
+      "excluded_cities": 4,
+      "spain": {
+        "n_cities": 87,
+        "median_price_to_rent": 16.556914393226716,
+        "p25_price_to_rent": 14.841779593834628,
+        "p75_price_to_rent": 18.590992456931936,
+        "median_year": 2023
+      },
+      "country_medians": [
+        {
+          "country": "FI",
+          "country_name": "Finland",
+          "n_cities": 9,
+          "median_price_to_rent": 13.41412947088383,
+          "p25_price_to_rent": 12.408149632598532,
+          "p75_price_to_rent": 16.290726817042607,
+          "first_year": 2024,
+          "last_year": 2024
+        },
+        {
+          "country": "LT",
+          "country_name": "Lithuania",
+          "n_cities": 5,
+          "median_price_to_rent": 15.343204653622422,
+          "p25_price_to_rent": 13.81105032822757,
+          "p75_price_to_rent": 15.984398874145558,
+          "first_year": 2025,
+          "last_year": 2025
+        },
+        {
+          "country": "ES",
+          "country_name": "Spain",
+          "n_cities": 87,
+          "median_price_to_rent": 16.556914393226716,
+          "p25_price_to_rent": 14.841779593834628,
+          "p75_price_to_rent": 18.590992456931936,
+          "first_year": 2023,
+          "last_year": 2023
+        },
+        {
+          "country": "PT",
+          "country_name": "Portugal",
+          "n_cities": 16,
+          "median_price_to_rent": 20.807881581160025,
+          "p25_price_to_rent": 19.211324563414728,
+          "p75_price_to_rent": 24.29582500113192,
+          "first_year": 2024,
+          "last_year": 2024
+        },
+        {
+          "country": "HR",
+          "country_name": "Croatia",
+          "n_cities": 7,
+          "median_price_to_rent": 21.324675324675326,
+          "p25_price_to_rent": 19.609496124031008,
+          "p75_price_to_rent": 24.09103416647558,
+          "first_year": 2022,
+          "last_year": 2024
+        },
+        {
+          "country": "DE",
+          "country_name": "Germany",
+          "n_cities": 127,
+          "median_price_to_rent": 29.47888257575757,
+          "p25_price_to_rent": 24.73736266395625,
+          "p75_price_to_rent": 34.35618492680091,
+          "first_year": 2022,
+          "last_year": 2022
+        }
+      ]
+    },
+    "synthesis": [
+      {
+        "key": "price_to_income_2015",
+        "metric": "Price-to-income, change 2015 to latest",
+        "spain": 25.894388275801994,
+        "benchmark": "OECD median",
+        "benchmark_value": 9.278757705574991,
+        "unit": "%",
+        "spain_rank": 7.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 40.0,
+        "n": 40,
+        "source": "OECD Analytical House Prices"
+      },
+      {
+        "key": "price_to_income_2000",
+        "metric": "Price-to-income, change 2000 to latest",
+        "spain": 56.26449697514797,
+        "benchmark": "OECD median",
+        "benchmark_value": 23.660618088012274,
+        "unit": "%",
+        "spain_rank": 5.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 25.0,
+        "n": 25,
+        "source": "OECD Analytical House Prices"
+      },
+      {
+        "key": "price_to_rent_2015",
+        "metric": "Price-to-rent, change 2015 to latest",
+        "spain": 58.939781725343025,
+        "benchmark": "OECD median",
+        "benchmark_value": 30.287765709993508,
+        "unit": "%",
+        "spain_rank": 10.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 42.0,
+        "n": 42,
+        "source": "OECD Analytical House Prices"
+      },
+      {
+        "key": "real_house_price_2015",
+        "metric": "Real house price, change 2015 to latest",
+        "spain": 43.034112206385004,
+        "benchmark": "OECD median (price-to-income sample)",
+        "benchmark_value": 37.9772851350495,
+        "unit": "%",
+        "spain_rank": 15.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 40.0,
+        "n": 40,
+        "source": "OECD Analytical House Prices"
+      },
+      {
+        "key": "permits_2015_2019",
+        "metric": "Building permits per 1,000 inhabitants, 2015-2019",
+        "spain": 1.3993004998353828,
+        "benchmark": "European median",
+        "benchmark_value": 4.115120263857133,
+        "unit": "per 1,000",
+        "spain_rank": 31.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 34.0,
+        "n": 34,
+        "source": "Eurostat sts_cobp_a + demo_pjan"
+      },
+      {
+        "key": "permits_2021_2024",
+        "metric": "Building permits per 1,000 inhabitants, 2021-2024",
+        "spain": 2.6360868852598944,
+        "benchmark": "European median",
+        "benchmark_value": 4.61976852881287,
+        "unit": "per 1,000",
+        "spain_rank": 28.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 33.0,
+        "n": 33,
+        "source": "Eurostat sts_cobp_a + demo_pjan"
+      },
+      {
+        "key": "city_price_to_rent",
+        "metric": "City price-to-rent, latest available (years of rent)",
+        "spain": 16.556914393226716,
+        "benchmark": "Median of 6 country medians",
+        "benchmark_value": 18.68239798719337,
+        "unit": "years",
+        "spain_rank": 4.0,
+        "rank_direction": "1 = highest",
+        "rank_n": 6.0,
+        "n": 87,
+        "source": "Eurostat Urban Audit urb_clivcon"
+      },
+      {
+        "key": "pipeline_years",
+        "metric": "Pending pipeline, years of supply at 2023-2025 net additions",
+        "spain": 45.66222932964516,
+        "benchmark": "No comparable cross-country measure",
+        "benchmark_value": null,
+        "unit": "years",
+        "spain_rank": null,
+        "rank_direction": null,
+        "rank_n": null,
+        "n": 359,
+        "source": "SIU + INE, this project"
+      },
+      {
+        "key": "pipeline_dwellings",
+        "metric": "Pending dwellings in the matched urban sample",
+        "spain": 3490428.0,
+        "benchmark": "No comparable cross-country measure",
+        "benchmark_value": null,
+        "unit": "dwellings",
+        "spain_rank": null,
+        "rank_direction": null,
+        "rank_n": null,
+        "n": 431,
+        "source": "SIU + INE, this project"
+      }
+    ]
   }
 }

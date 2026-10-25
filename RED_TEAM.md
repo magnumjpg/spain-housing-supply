@@ -167,3 +167,150 @@ who works with municipal land data.
 
 If a reader wants a positive causal headline, this is not the project. That is a
 feature.
+
+---
+
+## "You chose the countries to make Spain look bad."
+
+**No: the country sample is the full OECD price-to-income set (40 countries), the
+full European permit set that passes a coverage rule (34 and 33), and every
+comparable Urban Audit city in the six countries with rent data.** There is no
+hand-picked peer group in the headline. The bar chart shows 16 peers because 40
+bars do not fit, but the rank and the median are computed on all 40.
+
+The result is also not uniformly unflattering: Spain is **7th of 40**, not 1st,
+and its city price-to-rent is **4th of 6** — in the lower half. A cherry-picked
+sample designed to make Spain look bad would not report that.
+
+**Unresolved:** the 16-peer bar is a presentational choice. A reader who wants the
+full distribution should use `comparative_countries.csv`.
+
+---
+
+## "House price indices are not comparable across countries."
+
+**Correct, and the chapter only compares changes.** The OECD series are indices
+with different national sources and quality adjustment. Comparing 2015→latest
+changes removes the level problem but not the construction problem. The project
+says so in `LIMITATIONS.md` §11.1 and never compares price-to-income levels across
+countries.
+
+**What would fix it:** a harmonised repeat-sales or hedonic index with common
+quality controls. That does not exist for this country set.
+
+---
+
+## "Permits are not completions. You are measuring paperwork again."
+
+**Fair.** Permits lead construction and can be delayed or abandoned. The chapter
+uses them because they are the only annual, country-comparable flow measure. It
+does not call them completions, and it does not use them to estimate the Spanish
+pipeline. The Spanish pipeline is measured separately from SIU planned and pending
+dwellings.
+
+The permit gap is large enough that the objection does not rescue the comparison:
+Spain is at 2.64 per 1,000 against a median of 4.62, and at 16% of its own 2006
+permit peak. Even a large permits-to-completions wedge would leave Spain low.
+
+**Unresolved:** a harmonised completions series would be better. Eurostat's
+completions data are less complete and less comparable than permits.
+
+---
+
+## "Your city result contradicts your story. Spanish cities are cheap relative to rent."
+
+**It does, and the chapter reports it rather than hiding it.** Spain's median city
+price-to-rent is 16.56 years, 4th of 6 on a 1 = highest rank; German cities are at
+29.48. That means Spanish cities are **not** the most expensive in this sample
+relative to rent. It is consistent with a rental-market squeeze (rents high
+relative to prices) rather than a purchase-price bubble.
+
+The chapter's claims are therefore narrower than "Spain is the most expensive
+country": Spain had **high price growth** and **low permitting**, and its cities
+are **mid-to-low on price-to-rent**. Those are different margins, and the chapter
+keeps them separate.
+
+**Unresolved:** six countries is a thin city sample, the years differ, and the rent
+measure is an average for the city, not a new-tenancy rent.
+
+---
+
+## "The rent-unit rule is a hack."
+
+**It is a heuristic, and it is documented.** Eurostat labels the rent indicator
+"average annual rent per m²", but the German and Portuguese values are about 8.5
+EUR/m² — plainly monthly — while the Spanish, Finnish, Croatian and Lithuanian
+values are above 82. The label cannot be trusted, so the rule uses the magnitude:
+country median raw rents separate into a monthly group around 8.5 EUR/m² and an
+annual group at 41 EUR/m² or more, and the 20 threshold is not near any country's
+values. The rule is applied per country because reporting units are a national
+convention. Latvia is excluded because its four cities are internally inconsistent
+under any single unit.
+
+A reader who dislikes the rule can redo it: `comparative_cities.csv` carries the
+raw rent, the inferred unit and the comparability flag. The conclusion about
+Spanish cities is not driven by a marginal case; the gap to Germany is 13 years.
+
+**Unresolved:** the rule could misclassify a country whose rents cluster near 20
+EUR/m². None does in this sample.
+
+---
+
+## "You compare Spanish cities in 2023 with German cities in 2022."
+
+**Yes, and a common year is impossible without dropping Spain or Germany.** The
+Urban Audit rent and price series do not share a common latest year across the six
+countries. The year is reported for every city, and each ratio uses price and rent
+from the same city and year, so the mismatch is across countries, not inside a
+ratio.
+
+**Unresolved:** a common-year comparison would be cleaner. It would also cut the
+sample to the countries that happen to publish the same year, which is a different
+selection problem.
+
+---
+
+## "Spain is 17% below its 2007 price-to-income peak, so there is no housing problem."
+
+**That is one of the three peak comparisons, not the whole picture.** Price-to-rent
+is **1.9% below** its 2007 peak and real prices are **12.8% below**. The ratios
+disagree because their denominators moved differently. The project reports all
+three and does not treat the 2007 peak as a normative benchmark. Being below the
+peak is not the same as being affordable, and the 45.7-year pipeline is a separate
+measure.
+
+The chapter explicitly does **not** decompose price-to-income into rents and
+incomes: the OECD rent index is a national deflator, not the municipal market rent
+series used in the Spanish core.
+
+---
+
+## "You still have not dimensioned the 45.7-year pipeline."
+
+**Correct, and no cross-country measure exists.** The chapter dimensions the flow
+(permits) and the price outcome, not the stock of planned-but-unbuilt dwellings.
+That is why the synthesis table's two pipeline rows carry
+`benchmark = "No comparable cross-country measure"` rather than a fake comparison.
+
+The honest claim is: Spain permits less than most European peers and its pipeline
+is equivalent to decades of recent construction. The chapter supports the first
+half with a distribution and the second half with the Spanish data. It does not
+claim that Spain's pipeline is the largest in Europe.
+
+**Unresolved:** a harmonised cross-country measure of permitted-but-unbuilt
+dwellings would require construction and permit data linked at the project level.
+No public source does that across countries.
+
+---
+
+## "Why not regress prices on permits across countries?"
+
+Because it would be a spurious correlation generator. Permits, prices, credit,
+migration and construction capacity are jointly determined; countries differ in
+measurement; and country fixed effects would absorb the permit measure. With 33–40
+cross-sectional observations and no credible instrument, a coefficient would look
+precise and mean nothing.
+
+The chapter's job is to place Spain in a distribution, not to estimate a
+cross-country elasticity. The Spanish core already has a within-country design,
+and even that is explicitly non-causal.

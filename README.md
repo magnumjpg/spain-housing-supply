@@ -12,9 +12,11 @@ Spain's urban planning system gives municipalities the power to decide which lan
 
 **The rent test does not confirm it.** The rent section below explains exactly why, and the reason is informative rather than mysterious: a single municipal cross-section cannot separate land classification from the urban–rural gradient, and land classification is chosen by the municipality. That is a limit of this design, not evidence that planning does not matter.
 
-But the same data show something larger, more concrete and fully measurable: **3.49 million dwellings have planning permission and have not been built.** At the 2023–2025 rate of net housing additions, that pending stock is equivalent to **45.7 years of construction** in the 359 municipalities where the housing stock is observed in both years. The median municipality has **48 years** of pending supply; **76%** have more than 20 years.
+But the same data show something larger, more concrete and fully measurable: **3.49 million dwellings are planned in development areas and have not been built.** At the 2023–2025 rate of net housing additions, that pending stock is equivalent to **45.7 years of construction** in the 359 municipalities where the housing stock is observed in both years. The median municipality has **48 years** of pending supply; **76%** have more than 20 years.
 
 That is the project. The pipeline is not a rounding error or a handful of stalled projects. It is decades of housing that exists on paper and not on the ground.
+
+The supply side of the comparison points the same way: Spain permits **2.64 dwellings per 1,000 inhabitants**, against a European median of **4.62** and 28th of 33 countries. The price side is more mixed: Spanish price-to-income rose faster than most peers (7th of 40) but is still 17% below its 2007 peak. Both facts are in the comparative chapter below.
 
 ## The rent question, in one paragraph
 
@@ -22,13 +24,14 @@ Do municipalities that classify more land have lower rents? **Not in this sample
 
 ## What I built
 
-A municipal dataset that, as far as I can tell, did not exist as a single reproducible table:
+A municipal dataset that, as far as I can tell, did not exist as a single reproducible table, plus a cross-country benchmark:
 
 - **Land classification**: the MIVAU *Sistema de Información Urbana* (SIU), 5,898 municipalities, with the share of municipal land in each class, the surface of development areas, planned dwellings, and dwellings still pending.
 - **Outcomes**: INE *Indicadores Urbanos* (table 69330), 434 municipalities, 2010–2025, with annual rent €/m², mean and median rent, house prices, housing stock, vacancy, households and household size. A second outcome series, MIVAU **SERPAVI** (tax records, 2024), is used as an independent check on the rent result.
 - **Demand controls**: INE Padrón (table 29005), municipal population 1996–2025.
+- **Comparison**: OECD Analytical House Prices (40 countries), Eurostat building permits and population (34 and 33 countries), and Eurostat Urban Audit prices, rents and population (251 comparable cities in six countries). These are a separate chapter, not part of the municipal regression.
 
-The sources are merged on the 5-digit INE municipal code. The SIU match is 431 of 434 urban municipalities; all 431 have a SERPAVI rent. Every number below comes from `src/run_all.py` and is stored in `outputs/results.json`.
+The Spanish municipal sources are merged on the 5-digit INE municipal code. The SIU match is 431 of 434 urban municipalities; all 431 have a SERPAVI rent. The comparison is built separately on ISO country and Eurostat city codes. Every headline number below is in `outputs/results.json`; the full country and city tables are in `outputs/tables/`.
 
 ## The headline numbers
 
@@ -68,6 +71,112 @@ Two caveats are built into the number. The denominator is *net* additions, which
 MIVAU publishes its own national aggregate for the same source. Across **5,900 reporting municipalities** it counts **9.60 million planned dwellings and 7.09 million pending**, a pending share of **73.9%**, with **55.9%** of development land not started.
 
 The 431 municipalities analysed here account for **53.8% of that national planned capacity** and 49.2% of the pending stock. So this is not a niche sample, and it is not a different universe: the national pipeline is, if anything, slightly *more* unbuilt than the urban one. The 5.17 million figure is a subset of the 9.60 million, not a competing estimate.
+
+## Is Spain unusual? A multi-country check
+
+A pipeline measured in decades needs a distribution. The Spanish data cannot tell
+us whether 45.7 years is a lot. The comparative chapter therefore places Spain
+against other countries on the two margins that can be harmonised with public
+data: **how fast prices moved**, and **how many dwellings were permitted**.
+
+It is a descriptive chapter, not a second identification strategy. No
+cross-country measure of planned-but-unbuilt dwellings exists, so the 45.7-year
+ratio stays Spanish. The comparison dimensions the flow and the price outcome.
+Method in `METHOD.md` §7, units and coverage in `DATA.md` §6, caveats in
+`LIMITATIONS.md` §11.
+
+### Prices: high, but not an outlier
+
+| Measure (index, 2015 = 100) | Spain, 2015→2025 | OECD median | Spain's rank |
+|---|---:|---:|---:|
+| Price-to-income | **+25.9%** | +9.3% | **7th of 40** |
+| Price-to-rent | **+58.9%** | +30.3% | **10th of 42** |
+| Real house price | **+43.0%** | +38.0% | **15th of 40** |
+
+Over the longer window, Spain's price-to-income ratio is **+56.3%** since 2000,
+against a median of **+23.7%** (5th of 25 — only 25 of the 40 countries have a 2000
+observation).
+
+Spain is high, but it is not the top: Portugal (+66.7%), the Netherlands (+35.3%),
+Canada (+30.7%), Czechia (+28.5%) and the United States (+26.3%) are above it.
+Hungary (+26.1%) is 0.2 points above Spain and Switzerland (+24.8%) is 1.1 points
+below. The rank is reported with its n because it is fragile to revisions.
+
+The comparison also needs its own history, because a ratio can be above the OECD
+median and below its own peak. All three Spanish ratios peaked in **2007**:
+
+- price-to-income is **17.4% below** its 2007 peak;
+- price-to-rent is **1.9% below** its 2007 peak;
+- real house prices are **12.8% below** their 2007 peak.
+
+The three disagree because their denominators moved differently. The project
+reports them side by side and does not decompose price-to-income into rents and
+incomes: the OECD rent index is a national deflator, not the municipal market rent
+series used in the rest of this project.
+
+### Supply: low, and far below its own boom
+
+| Window | Spain, dwellings per 1,000 | European median | Spain's rank | Countries |
+|---|---:|---:|---:|---:|
+| 2015–2019 | **1.40** | 4.12 | **31st of 34** | 34 |
+| 2021–2024 | **2.64** | 4.62 | **28th of 33** | 33 |
+
+The 2024 single year is **3.69**; the 2006 peak was **16.70**. Spain now permits
+about **57%** of the current European median and about **16%** of its own 2006
+peak.
+
+The coverage is 34 and 33 countries, not the 38 that the raw Eurostat geography
+list suggests: Bosnia has no Eurostat population series, the UK permit series ends
+in 2019, and Kosovo's population ends in 2022. 2025 is excluded because Eurostat's
+2025 values are preliminary — Spain's is exactly 200.0 thousand against 179.4
+thousand in 2024.
+
+Permits are not completions. They lead construction and can be delayed or
+abandoned. The chapter uses them because they are the only annual,
+country-comparable flow measure, and it does not use them to estimate the Spanish
+pipeline.
+
+### Cities: not the most expensive relative to rent
+
+The city layer covers **251 comparable cities in six countries**, of which **87 are
+Spanish**. The measure is the average apartment purchase price divided by average
+annual rent per m²: years of gross rent, not affordability.
+
+| Country | Cities | Median price-to-rent (years) |
+|---|---:|---:|
+| Finland | 9 | 13.41 |
+| Lithuania | 5 | 15.34 |
+| **Spain** | **87** | **16.56** |
+| Portugal | 16 | 20.81 |
+| Croatia | 7 | 21.32 |
+| Germany | 127 | 29.48 |
+
+Spain's median city is **16.56 years** (p25 14.84, p75 18.59), **4th of 6** on a
+rank where 1 is the highest price-to-rent. That is the lower half. Madrid is 22.13,
+Barcelona 23.15, Valencia 17.81, Sevilla 17.44, Málaga 19.27, Palma 24.80 and
+Eivissa 28.83.
+
+This is a genuine counterweight to the Spanish story: on this measure, Spanish
+cities are **not** the most expensive in the sample. German cities are far more
+expensive relative to rent. A low price-to-rent can mean cheap housing or expensive
+rents; the chapter does not interpret it as affordability. France, Italy and the
+Netherlands have no comparable rent series; Latvia is excluded because its four
+cities are internally inconsistent; the comparable years span 2022–2025, with
+Spain at 2023 and Germany at 2022.
+
+### What the comparison changes
+
+It narrows the claim. Spain is **not** an extreme on price growth (7th of 40, and
+below its own 2007 peak on price-to-income) and **not** an extreme at city level on
+price-to-rent (4th of 6, lower half). It is **near the bottom on the supply flow**:
+2.64 dwellings per 1,000, 28th of 33, about 16% of its 2006 peak.
+
+Low building permits and a large stock of planned-but-unbuilt dwellings are
+different measurements, but they point to the same margin: converting planned
+capacity into construction. The chapter cannot prove that with a cross-country
+comparison, and it does not try. It says Spain is a high-price-growth,
+low-permitting country; the price outcome is not extreme, the supply flow is near
+the bottom of the European distribution.
 
 ## The rent test: what it can and cannot show
 
@@ -157,6 +266,9 @@ It also explains why the naive cross-section is so misleading. Land classificati
 - **The sample is urban.** 431 municipalities, not all 8,000. They are the INE urban-indicator municipalities, and they hold 15.5 million dwellings.
 - **SERPAVI is a different, narrower measurement.** It covers collective residential buildings from tax records, excludes Navarra and the Basque Country, and censors small cells. It is used as an independent check on the INE rent null, not as a second estimate to average with the first.
 - **Rent is not affordability.** I do not observe municipal household income, so I cannot compute rent-to-income. The outcome is rent per square metre.
+- **The international comparison is a benchmark, not an identification.** It reports distributions and ranks across 33–42 countries; it does not estimate a causal effect of regulation, permits or prices. The ranks are fragile to revisions, and the 2000 comparison covers only 25 countries.
+- **There is no cross-country pipeline measure.** The comparative chapter compares price changes and permit flows. It does not compare the 45.7-year pipeline across countries, because no harmonised "planned but unbuilt" series exists.
+- **City price-to-rent is a gross yield, not affordability.** It covers six countries, mixes 2022–2025, and says nothing about incomes or taxes. Spanish cities sit in the lower half of that sample; that is a real result, not a defect to be explained away.
 
 ## Reproduce
 
@@ -173,15 +285,18 @@ redraws the figures. The pipeline works offline after the first run.
 ## Files
 
 ```
-src/config.py          paths, indicators, province codes
-src/download_data.py   downloads + sha256 manifest
-src/build_panel.py     parses INE, maps codes, builds panel and cross-section
-src/analysis.py        descriptives, regressions, results.json
-src/figures.py         seven figures
-src/run_all.py         one command
-tests/test_pipeline.py invariants
-outputs/results.json   every number in this README
-outputs/figures/       figures
+src/config.py               paths, indicators, country maps
+src/download_data.py        downloads + sha256 manifest
+src/build_panel.py          parses INE, maps codes, builds panel and cross-section
+src/analysis.py             descriptives, regressions, results.json
+src/comparative.py          OECD/Eurostat comparison tables
+src/figures.py              seven Spanish figures
+src/figures_comparative.py  three comparative figures
+src/run_all.py              one command
+tests/test_pipeline.py      Spanish-core invariants
+tests/test_comparative.py   comparative-chapter invariants
+outputs/results.json        headline numbers in this README
+outputs/figures/            ten figures
 ```
 
 Process documentation, in the order a sceptical reader should read it:
@@ -190,7 +305,7 @@ Process documentation, in the order a sceptical reader should read it:
 |---|---|
 | `DATA.md` | Sources, exact variable semantics, the `MunPrADes` double-counting trap, the code crosswalk |
 | `METHOD.md` | Specifications, controls, what was tried and discarded |
-| `LIMITATIONS.md` | Ten threats, ordered by how much damage they do |
+| `LIMITATIONS.md` | Ten threats to the Spanish core, plus a separate section on the comparison |
 | `DECISIONS.md` | Every choice, including the reframing after the hypothesis failed |
 | `RED_TEAM.md` | The objections a hostile referee would raise, answered honestly |
 | `ANALYSIS_LOG.md` | Chronological record of what broke and what changed |
@@ -204,6 +319,9 @@ Process documentation, in the order a sceptical reader should read it:
 5. **Where the paper housing is** — the 15 municipalities with the largest pending stock.
 6. **Growth terciles** — planning responds, the gap does not.
 7. **Plan vintage** — newer plans have more pending capacity, which is why the gap is not automatically obstruction.
+8. **Price-to-income, Spain vs peers** — the Spanish series against five peers and the OECD median, plus the 16-peer distribution of 2015→latest changes. The footnote records that the median line covers a changing country set (25 in 2000, 40 in 2025).
+9. **Building permits** — peer dumbbell for 2015–2019 vs 2021–2024, and Spain's annual series 2005–2024 with the 2006 peak, the 2021–2024 average and the European median.
+10. **City price-to-rent** — country distributions for the six comparable countries, and Spanish cities plotted as purchase price against annual rent with 10, 16.6 and 25-year iso-lines.
 
 ---
 
@@ -212,5 +330,7 @@ Process documentation, in the order a sceptical reader should read it:
 El sistema urbanístico español permite a los municipios decidir qué suelo se puede construir. La crítica habitual es que esa discrecionalidad restringe la oferta y encarece el alquiler. El proyecto comprueba que **esa relación no aparece** una vez se compara dentro de la provincia y se controla el grado de urbanización. La correlación bruta va en sentido contrario porque el porcentaje de suelo no urbanizable es, sobre todo, una medida de ruralidad.
 
 Lo que sí aparece —y es el hallazgo principal— es un problema distinto, grande y medible: **5,17 millones de viviendas están planificadas en áreas de desarrollo y 3,49 millones (67,5%) no se han materializado**. Al ritmo de construcción neta de 2023–2025, ese stock pendiente equivale a **45,7 años de obra** en los 359 municipios con stock catastral observado; el municipio mediano tiene **48,3 años** de vivienda pendiente y el 76% supera los 20 años. El 48,8% del suelo de desarrollo ni siquiera ha iniciado la urbanización. En los municipios que más crecen, el 71,3% de la vivienda planificada sigue pendiente, frente al 75,1% en los que decrecen. El cuello de botella observable no es la cantidad de suelo clasificado, sino el paso entre el permiso y la construcción.
+
+Para saber si España es excepcional, el proyecto añade un capítulo comparado: 40 países de la OCDE en precios, 34 y 33 países europeos en licencias, y 251 ciudades de seis países en precio sobre alquiler. España sube un **25,9%** en la relación entre precio de la vivienda y renta de los hogares entre 2015 y 2025 (puesto 7 de 40; mediana 9,3%), pero está un **17,4% por debajo** de su máximo de 2007. La relación precio/alquiler sube un **58,9%** (puesto 10 de 42) y está solo un **1,9% por debajo** del máximo. En licencias, España concede **2,64 viviendas por 1.000 habitantes** frente a una mediana europea de 4,62 (puesto 28 de 33) y un **16% de su máximo de 2006**. En ciudades, la mediana española es de **16,6 años de alquiler bruto** (puesto 4 de 6; Alemania 29,5): no es la más cara en relación con el alquiler dentro del grupo. La comparación es descriptiva: mide flujos y precios, no el stock de vivienda pendiente, para el que no existe una serie internacional homogénea.
 
 El proyecto no afirma causalidad, no mide corrupción y no dice que la clasificación del suelo sea irrelevante. Dice que un corte transversal municipal no permite identificarlo, y que el debate público está mirando el margen equivocado. El resultado se repite con una fuente de alquileres independiente, el SERPAVI de MIVAU construido a partir de declaraciones fiscales (correlación 0,991 con el INE; pendiente −2,4%, p=0,003).

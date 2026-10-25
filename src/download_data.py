@@ -105,6 +105,17 @@ def main(force: bool = False) -> int:
 
     files["ua_codes"] = fetch_ua_codes(force)
 
+    # Comparative chapter. The Eurostat queries are filtered at the API so the
+    # cached files stay small; the filters are part of the URL in config.py.
+    comparative_files = {
+        "oecd_house_prices": "oecd_house_prices.csv",
+        "eurostat_permits": "eurostat_permits.json",
+        "eurostat_population": "eurostat_population.json",
+        "eurostat_urban_audit": "eurostat_urban_audit.json",
+    }
+    for key, filename in comparative_files.items():
+        files[key] = download(URLS[key], RAW / filename, force)
+
     manifest = {}
     if MANIFEST.exists():
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))

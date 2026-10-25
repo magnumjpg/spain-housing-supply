@@ -1,0 +1,256 @@
+city_code,city_name,city_name_clean,greater_city,country,country_name,year,price_m2,rent_m2_raw,rent_unit,rent_m2_annual,price_to_rent,population,comparable
+DE060C,Plauen,Plauen,False,DE,Germany,2022,825.0,5.9,monthly,70.80000000000001,11.652542372881355,,True
+DE122C,Zwickau,Zwickau,False,DE,Germany,2022,1009.81,6.4,monthly,76.80000000000001,13.148567708333331,,True
+DE079C,Dessau-Roßlau,Dessau-Roßlau,False,DE,Germany,2022,1229.33,6.6,monthly,79.19999999999999,15.521843434343436,78100.0,True
+DE113C,Gera,Gera,False,DE,Germany,2022,1325.03,6.4,monthly,76.80000000000001,17.252994791666662,,True
+DE084C,Chemnitz,Chemnitz,False,DE,Germany,2022,1393.48,6.6,monthly,79.19999999999999,17.59444444444445,239500.0,True
+DE114C,Salzgitter,Salzgitter,False,DE,Germany,2022,1502.05,7.1,monthly,85.19999999999999,17.629694835680752,102800.0,True
+DE071C,Görlitz,Görlitz,False,DE,Germany,2022,1266.07,5.9,monthly,70.80000000000001,17.88234463276836,,True
+DE093C,Herne,Herne,False,DE,Germany,2022,1570.81,7.1,monthly,85.19999999999999,18.43673708920188,,True
+DE080C,Duisburg,Duisburg,False,DE,Germany,2022,1641.87,7.3,monthly,87.6,18.742808219178084,487200.0,True
+DE045C,Wilhelmshaven,Wilhelmshaven,False,DE,Germany,2022,1610.86,7.1,monthly,85.19999999999999,18.90680751173709,73700.0,True
+DE118C,Siegen,Siegen,False,DE,Germany,2022,1873.03,8.2,monthly,98.39999999999999,19.034857723577236,101900.0,True
+DE090C,Hagen,Hagen,False,DE,Germany,2022,1632.37,6.9,monthly,82.80000000000001,19.714613526570044,,True
+DE105C,Bremerhaven,Bremerhaven,False,DE,Germany,2022,1697.68,7.1,monthly,85.19999999999999,19.925821596244134,,True
+DE082C,Gelsenkirchen,Gelsenkirchen,False,DE,Germany,2022,1660.5,6.8,monthly,81.6,20.349264705882355,,True
+DE042C,Iserlohn,Iserlohn,False,DE,Germany,2022,1787.33,7.3,monthly,87.6,20.403310502283105,,True
+DE061C,Neubrandenburg,Neubrandenburg,False,DE,Germany,2022,1667.97,6.8,monthly,81.6,20.440808823529412,,True
+DE124C,Wuppertal,Wuppertal,False,DE,Germany,2022,1829.37,7.3,monthly,87.6,20.883219178082193,,True
+DE117C,Cottbus,Cottbus,False,DE,Germany,2022,1823.42,7.2,monthly,86.4,21.104398148148146,,True
+DE047C,Tübingen,Tübingen,False,DE,Germany,2022,3355.72,12.5,monthly,150.0,22.371466666666667,91900.0,True
+DE087C,Krefeld,Krefeld,False,DE,Germany,2022,2205.73,8.2,monthly,98.39999999999999,22.415955284552847,,True
+DE034C,Mönchengladbach,Mönchengladbach,False,DE,Germany,2022,2117.84,7.8,monthly,93.6,22.62649572649573,,True
+DE018C,Magdeburg,Magdeburg,False,DE,Germany,2022,1955.16,7.2,monthly,86.4,22.629166666666666,235600.0,True
+DE021C,Mülheim a.d.Ruhr,Mülheim a.d.Ruhr,False,DE,Germany,2022,2284.37,8.3,monthly,99.60000000000001,22.93544176706827,168900.0,True
+DE037C,Saarbrücken,Saarbrücken,False,DE,Germany,2022,1940.95,7.0,monthly,84.0,23.10654761904762,174700.0,True
+DE057C,Celle,Celle,False,DE,Germany,2022,2132.78,7.6,monthly,91.19999999999999,23.38574561403509,,True
+DE015C,Bochum,Bochum,False,DE,Germany,2022,2196.61,7.8,monthly,93.6,23.46805555555556,,True
+DE108C,Remscheid,Remscheid,False,DE,Germany,2022,2077.17,7.3,monthly,87.6,23.711986301369866,,True
+DE106C,Bottrop,Bottrop,False,DE,Germany,2022,2220.12,7.7,monthly,92.4,24.027272727272724,,True
+DE048C,Villingen-Schwenningen,Villingen-Schwenningen,False,DE,Germany,2022,2542.68,8.7,monthly,104.39999999999999,24.355172413793102,,True
+DE006C,Essen,Essen,False,DE,Germany,2022,2372.21,8.1,monthly,97.19999999999999,24.405452674897123,572900.0,True
+DE017C,Halle an der Saale,Halle an der Saale,False,DE,Germany,2022,2132.81,7.2,monthly,86.4,24.685300925925922,237100.0,True
+DE092C,Hamm,Hamm,False,DE,Germany,2022,2104.38,7.1,monthly,85.19999999999999,24.699295774647894,,True
+DE111C,Pforzheim,Pforzheim,False,DE,Germany,2022,2883.86,9.7,monthly,116.39999999999999,24.77542955326461,,True
+DE010C,Dortmund,Dortmund,False,DE,Germany,2022,2352.82,7.9,monthly,94.80000000000001,24.818776371308015,,True
+DE041C,Kaiserslautern,Kaiserslautern,False,DE,Germany,2022,2214.25,7.4,monthly,88.80000000000001,24.935247747747745,,True
+DE103C,Recklinghausen,Recklinghausen,False,DE,Germany,2022,2070.46,6.9,monthly,82.80000000000001,25.005555555555553,110300.0,True
+DE088C,Oberhausen,Oberhausen,False,DE,Germany,2022,2196.93,7.3,monthly,87.6,25.079109589041096,,True
+DE121C,Witten,Witten,False,DE,Germany,2022,2167.87,7.2,monthly,86.4,25.09108796296296,,True
+DE120C,Hildesheim,Hildesheim,False,DE,Germany,2022,2246.55,7.4,monthly,88.80000000000001,25.298986486486484,97200.0,True
+DE052C,Neumünster,Neumünster,False,DE,Germany,2022,2158.08,7.1,monthly,85.19999999999999,25.329577464788734,76900.0,True
+DE076C,Wetzlar,Wetzlar,False,DE,Germany,2022,2468.21,8.0,monthly,96.0,25.710520833333334,,True
+DE022C,Moers,Moers,False,DE,Germany,2022,2430.33,7.8,monthly,93.6,25.965064102564103,104700.0,True
+DE028C,Weimar,Weimar,False,DE,Germany,2022,2512.95,8.0,monthly,96.0,26.1765625,61200.0,True
+DE091C,Kassel,Kassel,False,DE,Germany,2022,2495.68,7.9,monthly,94.80000000000001,26.325738396624466,196800.0,True
+DE094C,Solingen,Solingen,False,DE,Germany,2022,2623.69,8.3,monthly,99.60000000000001,26.342269076305218,156100.0,True
+DE049C,Flensburg,Flensburg,False,DE,Germany,2022,2752.7,8.7,monthly,104.39999999999999,26.366858237547895,,True
+DE126C,Düren,Düren,False,DE,Germany,2022,2243.02,7.0,monthly,84.0,26.70261904761905,,True
+DE016C,Bielefeld,Bielefeld,False,DE,Germany,2022,2649.33,8.2,monthly,98.39999999999999,26.92408536585366,328500.0,True
+DE119C,Bergisch Gladbach,Bergisch Gladbach,False,DE,Germany,2022,3169.6,9.7,monthly,116.39999999999999,27.23024054982818,110000.0,True
+DE099C,Neuss,Neuss,False,DE,Germany,2022,3090.32,9.1,monthly,109.19999999999999,28.299633699633706,,True
+DE096C,Ludwigshafen am Rhein,Ludwigshafen am Rhein,False,DE,Germany,2022,2998.68,8.8,monthly,105.60000000000001,28.396590909090904,171200.0,True
+DE044C,Hanau,Hanau,False,DE,Germany,2022,3113.6,9.1,monthly,109.19999999999999,28.512820512820515,,True
+DE104C,Wolfsburg,Wolfsburg,False,DE,Germany,2022,2918.93,8.5,monthly,102.0,28.616960784313722,,True
+DE020C,Göttingen,Göttingen,False,DE,Germany,2022,3127.75,9.1,monthly,109.19999999999999,28.64239926739927,,True
+DE029C,Schwerin,Schwerin,False,DE,Germany,2022,2547.56,7.4,monthly,88.80000000000001,28.688738738738735,,True
+DE050C,Marburg,Marburg,False,DE,Germany,2022,3314.82,9.6,monthly,115.19999999999999,28.77447916666667,,True
+DE085C,Braunschweig,Braunschweig,False,DE,Germany,2022,2903.9,8.4,monthly,100.80000000000001,28.808531746031743,,True
+DE086C,Aachen,Aachen,False,DE,Germany,2022,3194.11,9.2,monthly,110.39999999999999,28.93215579710145,,True
+DE078C,Passau,Passau,False,DE,Germany,2022,2960.16,8.5,monthly,102.0,29.021176470588234,,True
+DE009C,Dresden,Dresden,False,DE,Germany,2022,2941.21,8.4,monthly,100.80000000000001,29.178670634920632,541400.0,True
+DE081C,Mannheim,Mannheim,False,DE,Germany,2022,3407.74,9.7,monthly,116.39999999999999,29.276116838487972,311100.0,True
+DE067C,Frankenthal (Pfalz),Frankenthal (Pfalz),False,DE,Germany,2022,2601.0,7.4,monthly,88.80000000000001,29.290540540540537,37600.0,True
+DE097C,Leverkusen,Leverkusen,False,DE,Germany,2022,2993.5,8.5,monthly,102.0,29.348039215686274,,True
+DE012C,Bremen,Bremen,False,DE,Germany,2022,3112.97,8.8,monthly,105.60000000000001,29.47888257575757,553600.0,True
+DE043C,Esslingen am Neckar (greater city),Esslingen am Neckar,True,DE,Germany,2022,4084.93,11.5,monthly,138.0,29.600942028985507,91900.0,True
+DE127C,Bocholt,Bocholt,False,DE,Germany,2022,2735.98,7.7,monthly,92.4,29.610173160173158,,True
+DE098C,Oldenburg (Oldenburg),Oldenburg (Oldenburg),False,DE,Germany,2022,3305.01,9.1,monthly,109.19999999999999,30.265659340659347,168100.0,True
+DE039C,Koblenz,Koblenz,False,DE,Germany,2022,2879.13,7.9,monthly,94.80000000000001,30.37056962025316,110600.0,True
+DE115C,Reutlingen,Reutlingen,False,DE,Germany,2022,3816.22,10.4,monthly,124.80000000000001,30.578685897435893,114600.0,True
+DE032C,Bonn,Bonn,False,DE,Germany,2022,3686.16,10.0,monthly,120.0,30.718,,True
+DE101C,Paderborn,Paderborn,False,DE,Germany,2022,2801.62,7.5,monthly,90.0,31.12911111111111,,True
+DE125C,Jena,Jena,False,DE,Germany,2022,3204.3,8.5,monthly,102.0,31.414705882352944,105300.0,True
+DE072C,Sankt Augustin,Sankt Augustin,False,DE,Germany,2022,3204.96,8.5,monthly,102.0,31.421176470588236,,True
+DE054C,Gießen,Gießen,False,DE,Germany,2022,3432.96,9.1,monthly,109.19999999999999,31.43736263736264,,True
+DE095C,Osnabrück,Osnabrück,False,DE,Germany,2022,3193.3,8.4,monthly,100.80000000000001,31.67956349206349,157600.0,True
+DE070C,Offenburg,Offenburg,False,DE,Germany,2022,3155.35,8.3,monthly,99.60000000000001,31.680220883534133,,True
+DE055C,Lüneburg,Lüneburg,False,DE,Germany,2022,3721.85,9.7,monthly,116.39999999999999,31.97465635738832,,True
+DE062C,Fulda,Fulda,False,DE,Germany,2022,3040.34,7.9,monthly,94.80000000000001,32.0710970464135,,True
+DE046C,Ludwigsburg (greater city),Ludwigsburg,True,DE,Germany,2022,4325.58,11.2,monthly,134.39999999999998,32.184375,,True
+DE056C,Bayreuth,Bayreuth,False,DE,Germany,2022,3239.91,8.3,monthly,99.60000000000001,32.52921686746988,,True
+DE013C,Hannover,Hannover,False,DE,Germany,2022,3601.81,9.1,monthly,109.19999999999999,32.98360805860806,522200.0,True
+DE024C,Trier,Trier,False,DE,Germany,2022,3405.24,8.6,monthly,103.19999999999999,32.996511627906976,,True
+DE053C,Brandenburg an der Havel,Brandenburg an der Havel,False,DE,Germany,2022,2735.15,6.9,monthly,82.80000000000001,33.03321256038647,71700.0,True
+DE073C,Neu-Ulm,Neu-Ulm,False,DE,Germany,2022,3687.97,9.3,monthly,111.60000000000001,33.04632616487455,,True
+DE074C,Schweinfurt,Schweinfurt,False,DE,Germany,2022,2944.75,7.4,monthly,88.80000000000001,33.16159909909909,,True
+DE107C,Heilbronn,Heilbronn,False,DE,Germany,2022,3826.11,9.6,monthly,115.19999999999999,33.21276041666667,,True
+DE004C,Köln,Köln,False,DE,Germany,2022,4446.71,11.0,monthly,132.0,33.68719696969697,,True
+DE027C,Frankfurt (Oder),Frankfurt (Oder),False,DE,Germany,2022,2674.79,6.6,monthly,79.19999999999999,33.77260101010101,,True
+DE033C,Karlsruhe,Karlsruhe,False,DE,Germany,2022,4066.61,10.0,monthly,120.0,33.888416666666664,,True
+DE100C,Heidelberg,Heidelberg,False,DE,Germany,2022,4777.84,11.7,monthly,140.39999999999998,34.03019943019944,158200.0,True
+DE019C,Wiesbaden,Wiesbaden,False,DE,Germany,2022,4424.56,10.8,monthly,129.60000000000002,34.14012345679012,276400.0,True
+DE077C,Speyer,Speyer,False,DE,Germany,2022,3401.2,8.3,monthly,99.60000000000001,34.14859437751004,,True
+DE030C,Erfurt,Erfurt,False,DE,Germany,2022,3329.47,8.1,monthly,97.19999999999999,34.253806584362145,205900.0,True
+DE008C,Leipzig,Leipzig,False,DE,Germany,2022,3166.07,7.7,monthly,92.4,34.26482683982684,,True
+DE109C,Offenbach am Main,Offenbach am Main,False,DE,Germany,2022,4359.18,10.6,monthly,127.19999999999999,34.27028301886793,,True
+DE007C,Stuttgart,Stuttgart,False,DE,Germany,2022,4918.33,11.9,monthly,142.8,34.44208683473389,621900.0,True
+DE102C,Würzburg,Würzburg,False,DE,Germany,2022,4128.37,9.9,monthly,118.80000000000001,34.75058922558922,,True
+DE059C,Bamberg,Bamberg,False,DE,Germany,2022,3677.88,8.8,monthly,105.60000000000001,34.82840909090909,,True
+DE035C,Mainz,Mainz,False,DE,Germany,2022,4630.18,11.0,monthly,132.0,35.07712121212121,207700.0,True
+DE110C,Ulm,Ulm,False,DE,Germany,2022,4023.71,9.5,monthly,114.0,35.295701754385966,119000.0,True
+DE036C,Kiel,Kiel,False,DE,Germany,2022,3825.71,9.0,monthly,108.0,35.42324074074074,240000.0,True
+DE083C,Münster,Münster,False,DE,Germany,2022,4176.97,9.8,monthly,117.60000000000001,35.51845238095238,,True
+DE065C,Sindelfingen,Sindelfingen,False,DE,Germany,2022,4246.88,9.9,monthly,118.80000000000001,35.74814814814815,,True
+DE123C,Erlangen,Erlangen,False,DE,Germany,2022,4464.67,10.3,monthly,123.60000000000001,36.12192556634304,108000.0,True
+DE014C,Nürnberg,Nürnberg,False,DE,Germany,2022,4189.84,9.5,monthly,114.0,36.75298245614035,508100.0,True
+DE058C,Aschaffenburg,Aschaffenburg,False,DE,Germany,2022,4036.83,9.0,monthly,108.0,37.378055555555555,,True
+DE023C,Darmstadt,Darmstadt,False,DE,Germany,2022,4737.16,10.5,monthly,126.0,37.59650793650793,,True
+DE069C,Friedrichshafen,Friedrichshafen,False,DE,Germany,2022,4346.65,9.6,monthly,115.19999999999999,37.73133680555556,,True
+DE112C,Ingolstadt,Ingolstadt,False,DE,Germany,2022,4734.04,10.4,monthly,124.80000000000001,37.933012820512815,133900.0,True
+DE063C,Kempten (Allgäu),Kempten (Allgäu),False,DE,Germany,2022,3978.89,8.7,monthly,104.39999999999999,38.11197318007663,,True
+DE025C,Freiburg im Breisgau,Freiburg im Breisgau,False,DE,Germany,2022,5401.57,11.8,monthly,141.60000000000002,38.146680790960446,,True
+DE011C,Düsseldorf,Düsseldorf,False,DE,Germany,2022,5014.47,10.9,monthly,130.8,38.33692660550459,,True
+DE026C,Regensburg,Regensburg,False,DE,Germany,2022,5123.77,11.0,monthly,132.0,38.8164393939394,,True
+DE031C,Augsburg,Augsburg,False,DE,Germany,2022,4851.25,10.4,monthly,124.80000000000001,38.87219551282051,294900.0,True
+DE075C,Greifswald,Greifswald,False,DE,Germany,2022,4052.75,8.6,monthly,103.19999999999999,39.270833333333336,,True
+DE051C,Konstanz,Konstanz,False,DE,Germany,2022,5186.2,11.0,monthly,132.0,39.28939393939394,84700.0,True
+DE116C,Fürth,Fürth,False,DE,Germany,2022,4105.26,8.5,monthly,102.0,40.24764705882353,128400.0,True
+DE040C,Rostock,Rostock,False,DE,Germany,2022,3982.76,7.9,monthly,94.80000000000001,42.01223628691983,,True
+DE089C,Lübeck,Lübeck,False,DE,Germany,2022,4674.0,8.8,monthly,105.60000000000001,44.26136363636363,211000.0,True
+DE064C,Landshut,Landshut,False,DE,Germany,2022,4804.9,9.0,monthly,108.0,44.489814814814814,,True
+DE038C,Potsdam,Potsdam,False,DE,Germany,2022,5256.3,9.5,monthly,114.0,46.107894736842105,,True
+DE005C,Frankfurt am Main,Frankfurt am Main,False,DE,Germany,2022,6477.16,11.7,monthly,140.39999999999998,46.13361823361824,,True
+DE002C,Hamburg,Hamburg,False,DE,Germany,2022,6122.37,11.0,monthly,132.0,46.38159090909091,1828700.0,True
+DE066C,Rosenheim,Rosenheim,False,DE,Germany,2022,5622.4,10.1,monthly,121.19999999999999,46.38943894389439,63000.0,True
+DE001C,Berlin,Berlin,False,DE,Germany,2022,5225.29,9.3,monthly,111.60000000000001,46.82159498207885,,True
+DE068C,Stralsund,Stralsund,False,DE,Germany,2022,4179.7,7.1,monthly,85.19999999999999,49.05751173708921,,True
+DE003C,München,München,False,DE,Germany,2022,9427.65,14.8,monthly,177.60000000000002,53.083614864864856,1450300.0,True
+ES056C,Elda (greater city),Elda,True,ES,Spain,2023,599.0,51.79,annual,51.79,11.565939370534853,86486.0,True
+ES092C,Mérida,Mérida,False,ES,Spain,2023,700.0,59.92,annual,59.92,11.682242990654204,59206.0,True
+ES083C,Alcoy/Alcoi,Alcoy/Alcoi,False,ES,Spain,2023,626.0,52.93,annual,52.93,11.826941243151332,58953.0,True
+ES051C,"Línea de la Concepción, La","Línea de la Concepción, La",False,ES,Spain,2023,1120.0,92.99,annual,92.99,12.044305839337564,63538.0,True
+ES035C,Talavera de la Reina,Talavera de la Reina,False,ES,Spain,2023,756.0,61.0,annual,61.0,12.39344262295082,82826.0,True
+ES079C,Algeciras,Algeciras,False,ES,Spain,2023,1040.0,83.21,annual,83.21,12.49849777670953,122296.0,True
+ES090C,Linares,Linares,False,ES,Spain,2023,640.0,50.42,annual,50.42,12.693375644585482,54054.0,True
+ES043C,Ciudad Real,Ciudad Real,False,ES,Spain,2023,903.0,68.9,annual,68.9,13.105950653120463,74374.0,True
+ES082C,Alcalá de Guadaíra,Alcalá de Guadaíra,False,ES,Spain,2023,994.0,74.89,annual,74.89,13.272800106823341,75748.0,True
+ES057C,Santa Lucía de Tirajana,Santa Lucía de Tirajana,False,ES,Spain,2023,1091.0,80.49,annual,80.49,13.554478817244378,75517.0,True
+ES034C,Avilés (greater city),Avilés,True,ES,Spain,2023,973.0,70.43,annual,70.43,13.815135595626861,75165.0,True
+ES016C,Toledo,Toledo,False,ES,Spain,2023,1225.0,88.04,annual,88.04,13.914129940935938,84285.0,True
+ES070C,Huelva,Huelva,False,ES,Spain,2023,1157.0,82.53,annual,82.53,14.019144553495698,141833.0,True
+ES046C,Ponferrada,Ponferrada,False,ES,Spain,2023,737.0,52.15,annual,52.15,14.132310642377757,62750.0,True
+ES013C,Oviedo,Oviedo,False,ES,Spain,2023,1291.0,90.62,annual,90.62,14.246303244316927,215733.0,True
+ES026C,Reus,Reus,False,ES,Spain,2023,1122.0,78.58,annual,78.58,14.278442351743447,106804.0,True
+ES037C,Ferrol (greater city),Ferrol,True,ES,Spain,2023,772.0,53.83,annual,53.83,14.341445290730077,63068.0,True
+ES031C,Cáceres,Cáceres,False,ES,Spain,2023,922.0,64.19,annual,64.19,14.363608038635302,95572.0,True
+ES039C,Ceuta,Ceuta,False,ES,Spain,2023,1655.0,114.49,annual,114.49,14.455410952921653,79542.0,True
+ES062C,Jerez de la Frontera,Jerez de la Frontera,False,ES,Spain,2023,1098.0,75.25,annual,75.25,14.591362126245848,212786.0,True
+ES073C,Tarragona (greater city),Tarragona,True,ES,Spain,2023,1339.0,90.88,annual,90.88,14.733714788732396,136465.0,True
+ES060C,Elche/Elx,Elche/Elx,False,ES,Spain,2023,951.0,64.5,annual,64.5,14.744186046511627,236141.0,True
+ES041C,Guadalajara,Guadalajara,False,ES,Spain,2023,1306.0,87.42,annual,87.42,14.93937314115763,87697.0,True
+ES078C,Dos Hermanas,Dos Hermanas,False,ES,Spain,2023,1287.0,85.8,annual,85.8,15.0,138195.0,True
+ES075C,Lleida,Lleida,False,ES,Spain,2023,1186.0,78.62,annual,78.62,15.085220045789875,139544.0,True
+ES095C,Valdemoro,Valdemoro,False,ES,Spain,2023,1592.0,104.75,annual,104.75,15.198090692124104,80824.0,True
+ES074C,Jaén,Jaén,False,ES,Spain,2023,1107.0,71.92,annual,71.92,15.39210233592881,111154.0,True
+ES055C,Arrecife,Arrecife,False,ES,Spain,2023,1265.0,82.17,annual,82.17,15.39491298527443,63813.0,True
+ES036C,Palencia,Palencia,False,ES,Spain,2023,1050.0,67.87,annual,67.87,15.470752909974951,75171.0,True
+ES065C,Almería (greater city),Almería,True,ES,Spain,2023,1247.0,79.8,annual,79.8,15.6265664160401,198832.0,True
+ES017C,Badajoz,Badajoz,False,ES,Spain,2023,1078.0,68.7,annual,68.7,15.69141193595342,150053.0,True
+ES049C,Sanlúcar de Barrameda,Sanlúcar de Barrameda,False,ES,Spain,2023,1222.0,77.5,annual,77.5,15.76774193548387,69193.0,True
+ES047C,Zamora,Zamora,False,ES,Spain,2023,948.0,60.0,annual,60.0,15.8,58998.0,True
+ES042C,Manresa (greater city),Manresa,True,ES,Spain,2023,1203.0,76.09,annual,76.09,15.810224733867788,77862.0,True
+ES007C,Murcia,Murcia,False,ES,Spain,2023,1245.0,78.62,annual,78.62,15.835665225133553,462691.0,True
+ES029C,San Fernando,San Fernando,False,ES,Spain,2023,1270.0,79.86,annual,79.86,15.90282995241673,93545.0,True
+ES027C,Telde,Telde,False,ES,Spain,2023,1327.0,82.67,annual,82.67,16.05177210596347,102101.0,True
+ES064C,Alcalá de Henares,Alcalá de Henares,False,ES,Spain,2023,1786.0,111.22,annual,111.22,16.058262902355693,195981.0,True
+ES009C,Valladolid (greater city),Valladolid,True,ES,Spain,2023,1307.0,81.27,annual,81.27,16.082195151962594,294264.0,True
+ES091C,Lorca,Lorca,False,ES,Spain,2023,976.0,60.17,annual,60.17,16.22070799401695,96535.0,True
+ES093C,Sagunto (greater city),Sagunto,True,ES,Spain,2023,1136.0,69.94,annual,69.94,16.24249356591364,69631.0,True
+ES024C,Santa Cruz de Tenerife (greater city),Santa Cruz de Tenerife,True,ES,Spain,2023,1531.0,93.15,annual,93.15,16.435856146001072,363195.0,True
+ES066C,Burgos,Burgos,False,ES,Spain,2023,1405.0,85.32,annual,85.32,16.46741678387248,172037.0,True
+ES045C,Melilla,Melilla,False,ES,Spain,2023,1760.0,106.3,annual,106.3,16.556914393226716,82878.0,True
+ES087C,Collado Villalba,Collado Villalba,False,ES,Spain,2023,1878.0,113.18,annual,113.18,16.59303763915886,65572.0,True
+ES005C,Zaragoza,Zaragoza,False,ES,Spain,2023,1526.0,91.6,annual,91.6,16.65938864628821,676287.0,True
+ES020C,Córdoba,Córdoba,False,ES,Spain,2023,1413.0,84.51,annual,84.51,16.719914802981894,317187.0,True
+ES021C,Alicante/Alacant (greater city),Alicante/Alacant,True,ES,Spain,2023,1447.0,85.53,annual,85.53,16.918040453641996,346780.0,True
+ES069C,Castellón de la Plana/Castelló de la Plana,Castellón de la Plana/Castelló de la Plana,False,ES,Spain,2023,1066.0,62.78,annual,62.78,16.979929913985345,174439.0,True
+ES040C,Gandia (greater city),Gandia,True,ES,Spain,2023,1083.0,62.64,annual,62.64,17.28927203065134,77385.0,True
+ES004C,Sevilla,Sevilla,False,ES,Spain,2023,1892.0,108.5,annual,108.5,17.43778801843318,874354.0,True
+ES068C,Albacete,Albacete,False,ES,Spain,2023,1273.0,72.33,annual,72.33,17.599889395824693,171274.0,True
+ES059C,Granada (greater city),Granada,True,ES,Spain,2023,1400.0,79.08,annual,79.08,17.70359129994942,404808.0,True
+ES030C,Girona (greater city),Girona,True,ES,Spain,2023,1922.0,108.5,annual,108.5,17.714285714285715,101827.0,True
+ES096C,Puerto de la Cruz (greater city),Puerto de la Cruz,True,ES,Spain,2023,1977.0,111.2,annual,111.2,17.778776978417266,68159.0,True
+ES003C,Valencia (greater city),Valencia,True,ES,Spain,2023,1615.0,90.67,annual,90.67,17.811845152751737,1424638.0,True
+ES097C,Igualada (greater city),Igualada,True,ES,Spain,2023,1354.0,75.8,annual,75.8,17.86279683377309,64019.0,True
+ES054C,Granollers (greater city),Granollers,True,ES,Spain,2023,1847.0,102.57,annual,102.57,18.007214585161353,61956.0,True
+ES008C,"Palmas de Gran Canaria, Las","Palmas de Gran Canaria, Las",False,ES,Spain,2023,1822.0,100.47,annual,100.47,18.134766596994126,374445.0,True
+ES018C,Logroño,Logroño,False,ES,Spain,2023,1361.0,74.64,annual,74.64,18.234190782422292,148918.0,True
+ES023C,Gijón,Gijón,False,ES,Spain,2023,1594.0,87.34,annual,87.34,18.250515227845202,266300.0,True
+ES061C,Cartagena,Cartagena,False,ES,Spain,2023,1161.0,63.49,annual,63.49,18.28634430618995,214931.0,True
+ES081C,Torrejón de Ardoz,Torrejón de Ardoz,False,ES,Spain,2023,1931.0,104.82,annual,104.82,18.42205685937798,136871.0,True
+ES072C,León (greater city),León,True,ES,Spain,2023,1247.0,67.22,annual,67.22,18.551026480214222,120667.0,True
+ES052C,Torremolinos (greater city),Torremolinos,True,ES,Spain,2023,2320.0,124.92,annual,124.92,18.571886007044508,69886.0,True
+ES067C,Salamanca (greater city),Salamanca,True,ES,Spain,2023,1430.0,76.84,annual,76.84,18.610098906819363,142132.0,True
+ES032C,Torrevieja,Torrevieja,False,ES,Spain,2023,1497.0,80.03,annual,80.03,18.70548544295889,89146.0,True
+ES033C,"Puerto de Santa María, El","Puerto de Santa María, El",False,ES,Spain,2023,1689.0,90.11,annual,90.11,18.743757629563866,89502.0,True
+ES076C,Ourense (greater city),Ourense,True,ES,Spain,2023,1201.0,63.07,annual,63.07,19.042333914697956,102996.0,True
+ES086C,Chiclana de la Frontera,Chiclana de la Frontera,False,ES,Spain,2023,1526.0,79.74,annual,79.74,19.137195886631552,88021.0,True
+ES077C,Mataró,Mataró,False,ES,Spain,2023,2058.0,106.84,annual,106.84,19.262448521153125,127493.0,True
+ES006C,Málaga,Málaga,False,ES,Spain,2023,2182.0,113.21,annual,113.21,19.273915731825813,579654.0,True
+ES058C,Mollet del Vallès (greater city),Mollet del Vallès,True,ES,Spain,2023,1969.0,99.82,annual,99.82,19.725505910639153,51228.0,True
+ES015C,Santander,Santander,False,ES,Spain,2023,2009.0,99.78,annual,99.78,20.134295449989978,170430.0,True
+ES071C,Cádiz,Cádiz,False,ES,Spain,2023,2328.0,110.44,annual,110.44,21.079319087287214,111333.0,True
+ES044C,Benidorm,Benidorm,False,ES,Spain,2023,2181.0,102.8,annual,102.8,21.215953307392997,70525.0,True
+ES022C,Vigo,Vigo,False,ES,Spain,2023,1940.0,91.23,annual,91.23,21.2649347802258,291436.0,True
+ES038C,Pontevedra,Pontevedra,False,ES,Spain,2023,1606.0,73.43,annual,73.43,21.871169821598798,82083.0,True
+ES048C,Fuengirola,Fuengirola,False,ES,Spain,2023,2462.0,111.97,annual,111.97,21.98803250870769,83854.0,True
+ES001C,Madrid (greater city),Madrid,True,ES,Spain,2023,3558.0,160.81,annual,160.81,22.12548970835147,5047892.0,True
+ES050C,Vilanova i la Geltrú,Vilanova i la Geltrú,False,ES,Spain,2023,2272.0,102.58,annual,102.58,22.148566972119323,65588.0,True
+ES028C,Lugo,Lugo,False,ES,Spain,2023,1257.0,54.74,annual,54.74,22.96309828279138,97364.0,True
+ES002C,Barcelona (greater city),Barcelona,True,ES,Spain,2023,3404.0,147.02,annual,147.02,23.153312474493266,3682735.0,True
+ES011C,Santiago de Compostela,Santiago de Compostela,False,ES,Spain,2023,1996.0,85.54,annual,85.54,23.33411269581482,97343.0,True
+ES025C,A Coruña (greater city),A Coruña,True,ES,Spain,2023,2012.0,85.28,annual,85.28,23.592870544090054,244234.0,True
+ES010C,Palma de Mallorca,Palma de Mallorca,False,ES,Spain,2023,2971.0,119.8,annual,119.8,24.79966611018364,418960.0,True
+ES089C,Eivissa,Eivissa,False,ES,Spain,2023,4382.0,151.99,annual,151.99,28.83084413448253,50858.0,True
+FI007C,Lahti/Lahtis,Lahti/Lahtis,False,FI,Finland,2024,1627.0,168.3,annual,168.3,9.667260843731432,118367.0,True
+FI009C,Jyväskylä,Jyväskylä,False,FI,Finland,2024,2112.0,176.87,annual,176.87,11.940973596426753,144879.0,True
+FI008C,Kuopio,Kuopio,False,FI,Finland,2024,2229.0,179.64,annual,179.64,12.408149632598532,121410.0,True
+FI006C,Vantaa/Vanda,Vantaa/Vanda,False,FI,Finland,2024,2683.0,213.96,annual,213.96,12.53972705178538,240955.0,True
+FI004C,Oulu/Uleåborg,Oulu/Uleåborg,False,FI,Finland,2024,2269.0,169.15,annual,169.15,13.41412947088383,211031.0,True
+FI003C,Turku/Åbo,Turku/Åbo,False,FI,Finland,2024,2816.0,187.91,annual,187.91,14.985897504124315,195801.0,True
+FI002C,Tampere/Tammerfors,Tampere/Tammerfors,False,FI,Finland,2024,3185.0,195.51,annual,195.51,16.290726817042607,248975.0,True
+FI005C,Espoo/Esbo,Espoo/Esbo,False,FI,Finland,2024,4034.0,215.88,annual,215.88,18.686307207707987,307563.0,True
+FI001C,Helsinki/Helsingfors,Helsinki/Helsingfors,False,FI,Finland,2024,5300.0,237.66,annual,237.66,22.300765799882186,654854.0,True
+HR001C,Zagreb,Zagreb,False,HR,Croatia,2024,2830.0,180.0,annual,180.0,15.722222222222221,751999.0,True
+HR004C,Osijek,Osijek,False,HR,Croatia,2024,2150.0,120.0,annual,120.0,17.916666666666668,91980.0,True
+HR002C,Rijeka,Rijeka,False,HR,Croatia,2024,2748.0,129.0,annual,129.0,21.302325581395348,101651.0,True
+HR007C,Zadar,Zadar,False,HR,Croatia,2024,3284.0,154.0,annual,154.0,21.324675324675326,68831.0,True
+HR005C,Split (greater city),Split,True,HR,Croatia,2024,4460.0,196.0,annual,196.0,22.755102040816325,178909.0,True
+HR006C,Pula/Pola,Pula/Pola,False,HR,Croatia,2022,2263.0,89.0,annual,89.0,25.426966292134832,50869.0,True
+HR003C,Slavonski Brod,Slavonski Brod,False,HR,Croatia,2022,1500.0,52.08,annual,52.08,28.801843317972352,48339.0,True
+LT003C,Panevėžys,Panevėžys,False,LT,Lithuania,2025,1170.36,91.4,annual,91.4,12.804814004376366,,True
+LT006C,Šiauliai,Šiauliai,False,LT,Lithuania,2025,1262.33,91.4,annual,91.4,13.81105032822757,,True
+LT005C,Klaipėda,Klaipėda,False,LT,Lithuania,2025,1740.84,113.46,annual,113.46,15.343204653622422,,True
+LT002C,Kaunas,Kaunas,False,LT,Lithuania,2025,1987.66,124.35,annual,124.35,15.984398874145558,,True
+LT001C,Vilnius,Vilnius,False,LT,Lithuania,2025,2846.01,155.09,annual,155.09,18.350699593784256,,True
+LV004C,Daugavpils,Daugavpils,False,LV,Latvia,2023,303.74,54.03,inconsistent,54.03,5.62169165278549,77848.0,False
+LV001C,Rīga,Rīga,False,LV,Latvia,2023,1361.11,69.24,inconsistent,69.24,19.657856730213748,599670.0,False
+LV003C,Jelgava,Jelgava,False,LV,Latvia,2022,771.2,28.76,inconsistent,28.76,26.815020862308764,53672.0,False
+LV002C,Liepāja,Liepāja,False,LV,Latvia,2022,617.73,14.11,inconsistent,14.11,43.779588944011344,66280.0,False
+PT006C,Setúbal (greater city),Setúbal,True,PT,Portugal,2024,2039.95,9.87,monthly,118.44,17.223488686254644,,True
+PT016C,Vila Franca de Xira (greater city),Vila Franca de Xira,True,PT,Portugal,2024,2140.12,9.97,monthly,119.64000000000001,17.887997325309257,,True
+PT014C,Sintra (greater city),Sintra,True,PT,Portugal,2024,2234.33,10.3,monthly,123.60000000000001,18.077103559870547,,True
+PT003C,Braga (greater city),Braga,True,PT,Portugal,2024,1816.33,7.93,monthly,95.16,19.087116435477093,,True
+PT002C,Porto (greater city),Porto,True,PT,Portugal,2024,2541.36,11.0,monthly,132.0,19.252727272727274,,True
+PT015C,Guimarães (greater city),Guimarães,True,PT,Portugal,2024,1547.67,6.29,monthly,75.48,20.504372019077902,,True
+PT001C,Lisboa (greater city),Lisboa,True,PT,Portugal,2024,3480.88,14.0,monthly,168.0,20.71952380952381,,True
+PT013C,Póvoa de Varzim (greater city),Póvoa de Varzim,True,PT,Portugal,2024,2083.21,8.35,monthly,100.19999999999999,20.79051896207585,,True
+PT012C,Paredes (greater city),Paredes,True,PT,Portugal,2024,1364.47,5.46,monthly,65.52,20.825244200244203,,True
+PT011C,Viana do Castelo (greater city),Viana do Castelo,True,PT,Portugal,2024,1886.39,7.15,monthly,85.80000000000001,21.985897435897435,,True
+PT010C,Viseu (greater city),Viseu,True,PT,Portugal,2024,1710.37,6.09,monthly,73.08,23.40407772304324,,True
+PT005C,Coimbra (greater city),Coimbra,True,PT,Portugal,2024,2198.05,7.66,monthly,91.92,23.91264142732811,,True
+PT009C,Faro (greater city),Faro,True,PT,Portugal,2024,2641.23,8.65,monthly,103.80000000000001,25.44537572254335,,True
+PT008C,Aveiro (greater city),Aveiro,True,PT,Portugal,2024,2660.37,8.58,monthly,102.96000000000001,25.83886946386946,,True
+PT004C,Funchal (greater city),Funchal,True,PT,Portugal,2024,3662.95,11.34,monthly,136.07999999999998,26.917621987066433,,True
+PT007C,Ponta Delgada (greater city),Ponta Delgada,True,PT,Portugal,2024,2254.12,6.48,monthly,77.76,28.98816872427983,,True

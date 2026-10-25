@@ -10,7 +10,14 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-STEPS = ["download_data.py", "build_panel.py", "analysis.py", "figures.py"]
+STEPS = [
+    "download_data.py",
+    "build_panel.py",
+    "analysis.py",
+    "comparative.py",
+    "figures.py",
+    "figures_comparative.py",
+]
 
 
 def main() -> int:

@@ -198,3 +198,99 @@ That is not "land classification does not matter". It is:
 The project therefore moves the claim to what the data can carry: **a large,
 measurable gap between planned and built housing, which is not explained by
 demand growth.**
+
+---
+
+## 7. The comparative chapter: benchmarking, not identification
+
+The chapter answers "is Spain unusual?" with distributions, medians and ranks. It
+does not estimate a cross-country effect, for a simple reason: permits, prices,
+credit, migration and construction capacity are jointly determined, and with 33–40
+cross-country observations there is no credible exclusion restriction. A regression
+of prices on permits would produce a precise-looking coefficient with no causal
+meaning. Country fixed effects would absorb the permit measure entirely. The
+chapter therefore stops at description.
+
+### 7.1. Country prices
+
+For country *c* and measure *m* (price-to-income, price-to-rent, real prices):
+
+```
+change_2015_c = (I_c,latest / I_c,2015 - 1) × 100
+change_2000_c = (I_c,latest / I_c,2000 - 1) × 100
+```
+
+`I` is the OECD index with base 2015 = 100. The latest year is country-specific
+(2025 for most). The median is taken over the countries with a non-missing change;
+the rank is descending (1 = highest change) and is computed **inside the same
+sample as the median**.
+
+The own-history peak is separate:
+
+```
+latest_vs_peak_c = (I_c,latest / max_t I_c,t - 1) × 100
+```
+
+This is not a cross-country benchmark. It exists because a country can be above the
+OECD median and still below its own peak, and the reader needs both facts. The peak
+year is stored, so the 2007 anchor can be checked.
+
+Real house prices are ranked inside the 40-country price-to-income sample, not the
+47-country real-price-only set. This keeps the four price rows on one country
+universe; the 47-country set is a superset that includes partner economies.
+
+### 7.2. Country supply
+
+```
+permits_per_1000_c,t = permits_ths_c,t × 1,000,000 / population_c,t
+window_mean_c,w = mean(permits_per_1000_c,t for t in window w)
+```
+
+A country-year is used only when both the permit count and the population are
+observed. A window mean requires at least three annual observations. The windows
+are 2015–2019 and 2021–2024; 2025 is excluded because it is preliminary.
+
+The denominator is population, not households or the dwelling stock, because
+annual household counts are not on the same country panel. This is a deliberate
+compromise and is listed as a limitation.
+
+### 7.3. City price-to-rent
+
+For city *i* in country *c*, latest year *t*:
+
+```
+price_to_rent_i = price_m2_i,t / rent_m2_annual_i,t
+```
+
+`rent_m2_annual` is the Urban Audit rent after the country-level unit rule:
+multiply by 12 if the country median raw rent is below 20 EUR/m², otherwise leave
+as annual. Latvia is excluded because its four cities are internally inconsistent
+under any single unit.
+
+The country median is the median of city ratios, not a ratio of medians. The
+country median is then ranked across the six countries. Spain's rank is therefore
+a rank among six country medians, not among 87 Spanish cities; the summary table
+stores `rank_n = 6` and `n = 87` separately.
+
+The city measure is a gross yield in years. It is **not** rent-to-income, and a
+low value can mean cheap housing or expensive rents.
+
+### 7.4. The synthesis table
+
+`comparative_summary.csv` has nine rows: six country metrics, one city metric, and
+two rows that bridge back to the Spanish pipeline (pending years and pending
+dwellings). The two pipeline rows carry `benchmark = "No comparable cross-country
+measure"` and a null rank, because no harmonised cross-country pipeline measure was
+found. They are in the table to connect the chapter to the core, not to claim a
+comparison.
+
+### 7.5. What was deliberately not done
+
+| Design | Why not |
+|---|---|
+| Cross-country regression of prices on permits | No credible identification; joint determination; country FE would absorb the measure |
+| Comparison of price-to-income **levels** | OECD publishes indices, not levels; national definitions differ |
+| City price-to-income | Urban Audit income stops in 2019/2020; numerator and denominator would be five years apart |
+| Combining OECD price-to-rent with municipal rents | The OECD rent index is a national deflator, not the market rent series; dividing the two indices would be a false decomposition |
+| Comparing the 45.7-year pipeline across countries | No harmonised "planned but unbuilt" measure exists |
+| A regulation index | Different concept, different year, invites a causal reading the design cannot support |

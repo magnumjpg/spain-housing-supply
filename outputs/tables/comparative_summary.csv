@@ -1,0 +1,10 @@
+key,metric,spain,benchmark,benchmark_value,unit,spain_rank,rank_direction,rank_n,n,source
+price_to_income_2015,"Price-to-income, change 2015 to latest",25.894388275801994,OECD median,9.278757705574991,%,7.0,1 = highest,40.0,40,OECD Analytical House Prices
+price_to_income_2000,"Price-to-income, change 2000 to latest",56.26449697514797,OECD median,23.660618088012274,%,5.0,1 = highest,25.0,25,OECD Analytical House Prices
+price_to_rent_2015,"Price-to-rent, change 2015 to latest",58.939781725343025,OECD median,30.287765709993508,%,10.0,1 = highest,42.0,42,OECD Analytical House Prices
+real_house_price_2015,"Real house price, change 2015 to latest",43.034112206385004,OECD median (price-to-income sample),37.9772851350495,%,15.0,1 = highest,40.0,40,OECD Analytical House Prices
+permits_2015_2019,"Building permits per 1,000 inhabitants, 2015-2019",1.3993004998353828,European median,4.115120263857133,"per 1,000",31.0,1 = highest,34.0,34,Eurostat sts_cobp_a + demo_pjan
+permits_2021_2024,"Building permits per 1,000 inhabitants, 2021-2024",2.6360868852598944,European median,4.61976852881287,"per 1,000",28.0,1 = highest,33.0,33,Eurostat sts_cobp_a + demo_pjan
+city_price_to_rent,"City price-to-rent, latest available (years of rent)",16.556914393226716,Median of 6 country medians,18.68239798719337,years,4.0,1 = highest,6.0,87,Eurostat Urban Audit urb_clivcon
+pipeline_years,"Pending pipeline, years of supply at 2023-2025 net additions",45.66222932964516,No comparable cross-country measure,,years,,,,359,"SIU + INE, this project"
+pipeline_dwellings,Pending dwellings in the matched urban sample,3490428.0,No comparable cross-country measure,,dwellings,,,,431,"SIU + INE, this project"

@@ -185,3 +185,106 @@ In order of value:
    flow and give the pipeline a time dimension.
 
 None of these is a robustness check. They are different data.
+
+---
+
+## 11. The comparative chapter is descriptive, and its units are only partly harmonised
+
+Items 1–10 limit the Spanish core. This section limits the international chapter,
+which is a benchmarking exercise, not an identification strategy.
+
+### 11.1. Country price series are indices with different construction
+
+The OECD harmonises the series, but the underlying house-price indices are built
+from different national sources, with different quality adjustment, different
+geographic coverage and different treatment of new versus existing dwellings.
+Comparing **changes** is defensible; comparing **levels** is not, which is why the
+project never does it. A country whose index covers only major cities can show a
+different change from one whose index covers the whole country.
+
+### 11.2. The price samples are not the same size
+
+Price-to-income covers 40 countries, price-to-rent 42, real prices 47 (40 inside
+the price-to-income sample). The 2000-to-latest comparison covers only 25, because
+15 post-2000 EU members have no 2000 observation. Every rank is reported with its
+own `n`; a rank of 7 of 40 is not comparable to a rank of 5 of 25 as if the
+denominators were the same.
+
+### 11.3. Permits are not completions, and the denominator is crude
+
+A permit is a leading indicator. It can be hoarded, delayed, revised or abandoned,
+and it does not measure the dwelling that is ultimately built. The ratio is per
+1,000 inhabitants, not per household or per existing dwelling, because annual
+household counts are not on the same country panel. Countries with declining
+population can look better per capita while building less than they need.
+
+### 11.4. Permit coverage is 34 and 33 countries, not the full European sample
+
+Bosnia has permits but no Eurostat population series, so no per-capita value. The
+UK permit series ends in 2019, so it is absent from the 2021–2024 window. Kosovo's
+population ends in 2022, so it fails the three-observation rule. The chapter
+reports the coverage it has, not the coverage the source list implies.
+
+### 11.5. 2025 permits are excluded
+
+Eurostat's 2025 values are preliminary. Spain's 2025 value is exactly 200.0
+thousand, against 179.4 thousand in 2024 — a round flash number, not a completed
+year. Including it would mix a preliminary estimate with four final years. The
+latest complete year is 2024, and 2024 is reported separately as a single year.
+
+### 11.6. The city layer covers six countries, and mixes years
+
+France, Italy and the Netherlands have no comparable Urban Audit rent series, so
+the city comparison is six countries, not Europe. Spain's latest city year is
+2023, Germany's 2022, Portugal's 2024 and Lithuania's 2025. A common year would
+drop Spain or Germany. The year is stored per city; the ratio uses two indicators
+from the same city and year, so the mismatch is across countries, not within a
+ratio.
+
+### 11.7. Rent units are harmonised by a heuristic, and Latvia is excluded
+
+Urban Audit rent values are not unit-harmonised, and Eurostat's label ("average
+annual rent per m²") is not reliable across countries: Germany and Portugal report
+values of about 8.5 EUR/m², which are plainly monthly, while Spain, Finland,
+Croatia and Lithuania report annual values above 82. The label cannot be used as
+the rule. The project treats a country as monthly if its median raw rent is below
+20 EUR/m², and annual otherwise. The country medians separate cleanly (8.50 and
+8.46 monthly; 82.53, 187.91, 129.00 and 113.46 annual), but the rule is a
+heuristic, not metadata. Latvia's four cities imply gross yields from 2.3% to
+17.8% under a single unit, so Latvia is excluded from the comparable sample. The
+raw rent, the unit and the `comparable` flag are in `comparative_cities.csv` so a
+reader can redo the rule.
+
+### 11.8. Price-to-rent is a yield, not affordability
+
+The city measure divides purchase price by gross annual rent. It says nothing
+about incomes, taxes, maintenance, vacancy or financing costs. A low price-to-rent
+can mean cheap housing or expensive rents; the project does not interpret it as
+affordability. It is used because city income is stale, not because it is the
+better concept.
+
+### 11.9. The ranks are fragile
+
+Spain is 7th of 40 on price-to-income growth, but only **0.2 percentage points**
+behind Hungary and about **1.1 points** ahead of Switzerland. It is 28th of 33
+on 2021–2024 permits, but only **0.01 dwellings per 1,000** ahead of Montenegro and
+0.05 ahead of Latvia. A routine source revision could move Spain several places.
+The rank is a communication device, not a precise estimate; the median and the
+neighbouring countries are reported next to it for that reason.
+
+### 11.10. The chapter does not compare the pipeline
+
+There is no harmonised cross-country measure of "planned but not built" dwellings.
+The 45.7-year ratio is Spanish, built from SIU planned and pending dwellings. The
+chapter compares the **flow** (permits) and the **price outcome**, not the stock of
+unbuilt permissions. A reader should not read "Spain permits 2.64 per 1,000" as
+"Spain has the largest unbuilt pipeline in Europe"; the second claim is not
+measured here.
+
+### 11.11. No cross-country causal estimate, by design
+
+Permits, prices, credit, migration and incomes are jointly determined. A
+cross-country regression of prices on permits would be a correlation with no
+credible exclusion restriction, and country fixed effects would absorb the permit
+measure. The chapter therefore reports distributions and ranks and makes no causal
+claim. This is a deliberate limit, not an omission.

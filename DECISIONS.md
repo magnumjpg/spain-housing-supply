@@ -251,3 +251,181 @@ consistently-covered set as a robustness check.
 limitations are explicit: net rather than gross additions, a two-year window, and
 a stock that may never be built. The number is an equivalent-supply description,
 not a forecast.
+
+---
+
+## D18. The international comparison is a chapter inside 01, not a fourth project
+
+**Context.** After the Spanish pipeline was established, the obvious next question
+was whether Spain is unusual. That could be built as a separate cross-country
+project.
+
+**Decision.** Build it as a **chapter inside `01_housing_land_power`**, sharing
+its README, tests and `results.json`. The portfolio stays at three projects, one
+per CV face.
+
+**Alternatives rejected.**
+
+- *A fourth project "Spain vs Europe".* It would repeat the same question in a
+  thinner design, create a second housing project competing with the first, and
+  break the "no flagship, one project per CV face" rule. It would also imply that
+  the comparison stands on its own, when its only purpose is to dimension the
+  Spanish result.
+- *A separate repository that 01 links to.* Same duplication with more maintenance
+  and two sets of documentation that can drift.
+
+**Consequence.** The chapter is scoped by the Spanish question: it compares the
+two margins that can be harmonised (price changes and permit flows), not
+everything that could be compared. The 45.7-year pipeline remains Spain-only
+because no cross-country equivalent exists.
+
+---
+
+## D19. Multi-country and Spain-centred, not Spain vs the United States
+
+**Context.** The first feasibility sketch was a Spain–US comparison, with US
+metropolitan areas as the city layer. The user's requirement was explicit: widen
+the comparison to more countries, and do not turn the project into a US project.
+
+**Decision.** Use the full OECD country sample (40 countries with price-to-income,
+42 with price-to-rent), the full European permit sample (34 and 33 countries), and
+a six-country city sample. The United States is one observation in the OECD
+distribution, not the organising axis.
+
+**Why.** A bilateral comparison makes Spain look like an outlier by construction:
+the reader cannot tell whether the difference is Spain, the comparator, or the
+pair. A distribution gives Spain a rank and a median, and shows that several
+countries are above it. It also avoids importing US-specific institutions
+(property tax, zoning, mortgage market) into a Spanish land question.
+
+**Cost.** The city layer shrinks to six countries because Eurostat Urban Audit
+rent data are missing for France, Italy and the Netherlands. The US ACS city
+prototype was built only to test feasibility and does not drive the chapter.
+
+---
+
+## D20. Three layers with different units; compare changes, never levels
+
+**Context.** "Compare Spain with other countries" can mean levels, changes or
+institutions. Only one of those is defensible with these data.
+
+**Decision.** Three layers:
+
+1. **Country prices** — OECD indices, 2015 = 100. Compare 2015→latest and
+   2000→latest changes only.
+2. **Country supply** — Eurostat building permits per 1,000 inhabitants, window
+   means for 2015–2019 and 2021–2024.
+3. **City price-to-rent** — Urban Audit purchase price divided by annual rent per
+   m², in years of gross rent.
+
+**Why not levels.** The OECD publishes indices, not price-to-income levels. Even
+if levels were available, cross-country levels embed different definitions of
+income, housing quality, taxation and imputed rent. Comparing index changes is
+still imperfect, but it removes the level problem and matches what the source
+actually measures.
+
+**Why permits per 1,000 and not per household.** Household counts are not
+available on the same annual country panel; population is. Per capita is a
+cruder denominator, but it is consistently measured and adequate for an order-of-
+magnitude comparison. A per-dwelling or per-household version would be better and
+is listed as a limitation.
+
+---
+
+## D21. The city layer uses price-to-rent, not price-to-income
+
+**Context.** The natural city measure is price-to-income. Eurostat Urban Audit has
+city income, but the series stops in 2019/2020. Using it would compare 2023
+Spanish house prices with 2019 Spanish incomes, and 2022 German prices with 2020
+German incomes — a different vintage problem in every country.
+
+**Decision.** Use **price-to-rent**: average apartment purchase price divided by
+average annual rent per m², both from the same city and year. Report it as years
+of gross rent.
+
+**Alternatives rejected.**
+
+- *City price-to-income with stale income.* Rejected: the numerator and
+  denominator would be five years apart, and the gap differs by country.
+- *Drop the city layer.* Rejected: it is the only subnational comparison, and it
+  produces a genuinely surprising result that belongs in the chapter.
+- *Use national income as a proxy.* Rejected: it would turn a city measure into a
+  country measure with city prices, and city income dispersion is the point.
+
+**Cost.** Price-to-rent is a yield, not affordability. A low ratio can mean cheap
+housing or expensive rents. The README says this explicitly and does not convert
+the ratio into an affordability claim.
+
+---
+
+## D22. Harmonise city rent units per country; exclude Latvia
+
+**Context.** Urban Audit rent values are not unit-harmonised. Eurostat's label says
+"average annual rent per m²" for every country, but the German and Portuguese
+values (about 8.5 EUR/m²) are plainly monthly, while the Spanish, Finnish, Croatian
+and Lithuanian values are annual. Taking the label at face value would make German
+cities look 12 times cheaper relative to rent.
+
+**Decision.** Compute the **country median raw rent**. If it is below 20 EUR/m²,
+treat the country as monthly and multiply by 12; otherwise treat it as annual.
+Then check within-country consistency. Exclude Latvia, whose four cities imply
+gross yields from 2.3% to 17.8% under a single unit.
+
+**Why a country-level rule.** Rent units are a reporting convention, not a
+city-level choice. A per-city rule would fit the data rather than the metadata and
+would let the ratio determine its own units. The country medians separate cleanly:
+Germany 8.50 and Portugal 8.46 on the monthly side; Spain 82.53, Finland 187.91,
+Croatia 129.00 and Lithuania 113.46 on the annual side. The 20 threshold sits in
+an empty interval between 8.5 and 41.4.
+
+**Alternatives rejected.**
+
+- *Infer the unit from the implied yield.* Circular: the yield is the output.
+- *Use the metadata label.* It says annual for every country, which is
+  contradicted by the German and Portuguese magnitudes.
+- *Drop all rent-based comparison.* Loses the only city layer and the most
+  interesting counterweight in the chapter.
+
+**Consequence.** 251 of 255 cities are comparable; Latvia's four are flagged and
+excluded from medians and figures. The rule could misclassify a country whose
+rents cluster near 20 EUR/m²; none currently does, and the raw medians are stored
+in `comparative_cities.csv` so the rule can be audited.
+
+---
+
+## D23. Descriptive benchmarking, not causal identification; ranks inside samples; 2025 permits excluded
+
+**Context.** With 33–42 countries, it is tempting to regress prices on permits and
+report a cross-country "regulation effect". That regression would be uninterpretable:
+permits and prices are jointly determined by demand, credit, migration, income and
+construction capacity, and the countries differ in measurement.
+
+**Decision.** The chapter reports **distributions, medians and ranks**, not
+coefficients. Three rules protect the comparison:
+
+1. **Ranks are computed inside the sample the metric is compared on.** Real house
+   prices are ranked within the 40-country price-to-income sample, not the
+   47-country real-price-only set. The 2000 comparison reports n = 25, not 40.
+2. **The rank direction is explicit.** Every row of `comparative_summary.csv`
+   carries `rank_direction = "1 = highest"` and a `rank_n` denominator. The city
+   row is ranked among six country medians, not among 87 Spanish cities.
+3. **2025 permits are excluded.** Spain's 2025 value is exactly 200.0 thousand
+   against 179.4 thousand in 2024; a preliminary round number would contaminate
+   the 2021–2024 window.
+
+**Alternatives rejected.**
+
+- *A cross-country regression with country fixed effects.* There is no panel
+  dimension that would identify a regulation effect; country FE would absorb the
+  permit measure.
+- *A "regulation index" from OECD/World Bank indicators.* Different concept,
+  different year, and it would invite a causal reading the design cannot support.
+- *Keep 2025 because it is the latest.* The value is preliminary and visibly
+  rounded; using it would trade honesty for recency.
+
+**Consequence.** The chapter's claims are of the form "Spain is 7th of 40 on this
+change" and "Spain permits 2.64 per 1,000 against a median of 4.62", never "permits
+cause prices". The ranks are reported with their n, their medians and the
+neighbouring countries, because the rank is fragile: Spain is 0.2 percentage
+points **behind** Hungary on price-to-income growth and 0.01 dwellings per 1,000
+**ahead** of Montenegro on 2021–2024 permits.
