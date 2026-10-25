@@ -1,5 +1,9 @@
 # Permission Without Construction
 
+[![CI](https://github.com/magnumjpg/spain-housing-supply/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/spain-housing-supply/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-official%20public%20sources-informational)](DATA.md)
+
+[Resumen en español](#resumen-en-español) · [Método](METHOD.md) · [Limitaciones](LIMITATIONS.md) · [Decisiones](DECISIONS.md)
+
 **Land classification, unbuilt plan capacity, and rental costs in Spain**
 
 *The working title was "The Permission Premium". The data did not support a premium. They supported a gap.*
