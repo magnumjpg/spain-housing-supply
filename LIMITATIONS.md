@@ -101,19 +101,29 @@ than 15 years ago.
 ### 5b. The 45.7-year ratio is a description, not a forecast
 
 Dividing pending dwellings by recent net additions makes the pipeline legible, but
-it is not a projection. Three things push it upward and one pushes it downward:
+it is not a projection and it is not a bound. Two sample choices push the
+aggregate in opposite directions:
 
 - the denominator is **net** of demolitions, so gross construction is higher and
-  the ratio is an upper bound;
-- the 2023–2025 window is short and construction was recovering from a low base;
+  this raises the ratio;
+- the positive-flow filter drops 37 municipalities, 24 of them shrinking. That
+  raises the summed denominator and removes **217,377** pending dwellings from the
+  numerator, so it lowers the ratio;
+- the 2023–2025 window is short and construction was recovering from a low base,
+  which can move the ratio either way;
 - part of the pending stock may never be built, which makes the ratio an
   "equivalent supply" figure rather than a queue;
 - demand and construction capacity can grow, which would shorten the calendar
   time.
 
-The ratio is therefore reported with its window, its n and its p25/p75, and the
-2021–2025 robustness check (34.8 years on 115 municipalities) is shown next to the
-headline (45.7 on 359). The claim is "decades, not years", not a date.
+Because the first two biases oppose each other, the all-stock-observed aggregate
+(**52.2 years** on 396 municipalities) is higher than the positive-flow headline
+(**45.7 years** on 359), not lower. The ratio is therefore reported with its
+window, its n, its sample definition and its p25/p75, and the 2021–2025 robustness
+check (34.8 years on 115 municipalities) is shown next to the headline. The
+municipal distribution is heavily right-skewed: the median is **48.3 years**, but
+p75 is **136.3** and p90 is **294.3**, so 48.3 is not a typical value in the sense
+of a central mass. The claim is "decades, not years", not a date.
 
 ---
 

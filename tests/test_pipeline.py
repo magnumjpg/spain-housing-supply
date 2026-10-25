@@ -14,31 +14,41 @@ RAW = ROOT / "data" / "raw"
 SIU = RAW / "siu"
 PROC = ROOT / "data" / "processed"
 OUT = ROOT / "outputs"
+TABLES = OUT / "tables"
+
+
+def _require(path: Path) -> Path:
+    """Skip cleanly when an optional raw or generated file is absent."""
+    if not path.exists():
+        pytest.skip(f"missing input: {path.relative_to(ROOT)}")
+    return path
 
 
 @pytest.fixture(scope="module")
 def classes() -> pd.DataFrame:
-    return pd.read_excel(SIU / "clases_suelo_mun.xlsx")
+    return pd.read_excel(_require(SIU / "clases_suelo_mun.xlsx"))
 
 
 @pytest.fixture(scope="module")
 def areas() -> pd.DataFrame:
-    return pd.read_excel(SIU / "areas_desarrollo_mun.xlsx")
+    return pd.read_excel(_require(SIU / "areas_desarrollo_mun.xlsx"))
 
 
 @pytest.fixture(scope="module")
 def panel() -> pd.DataFrame:
-    return pd.read_csv(PROC / "panel.csv", dtype={"code": str})
+    return pd.read_csv(_require(PROC / "panel.csv"), dtype={"code": str})
 
 
 @pytest.fixture(scope="module")
 def cross_section() -> pd.DataFrame:
-    return pd.read_csv(PROC / "cross_section.csv", dtype={"code": str, "province_code": str})
+    return pd.read_csv(
+        _require(PROC / "cross_section.csv"), dtype={"code": str, "province_code": str}
+    )
 
 
 @pytest.fixture(scope="module")
 def results() -> dict:
-    return json.loads((OUT / "results.json").read_text(encoding="utf-8"))
+    return json.loads(_require(OUT / "results.json").read_text(encoding="utf-8"))
 
 
 def test_land_shares_sum_to_100(classes: pd.DataFrame) -> None:
@@ -146,17 +156,106 @@ def test_all_regressions_report_inference(results: dict) -> None:
         assert 0 <= r["p"] <= 1
 
 
-def test_absorption_ratio_is_large_and_bounded(results: dict) -> None:
+def test_absorption_ratio_is_large_and_right_skewed(results: dict) -> None:
     a = results["pipeline"]["absorption"]["main"]
+    pos = a["positive_flow_sample"]
     # The point of the metric is that the pipeline is decades, not years, of
     # recent construction. Fail loudly if coverage collapses or the ratio does.
-    assert a["n_municipalities"] > 300
-    assert 20 < a["aggregate_years"] < 100
-    assert a["median_years"] > 20
-    assert 0 < a["p25_years"] < a["median_years"] < a["p75_years"]
+    assert pos["n_municipalities"] > 300
+    assert 20 < pos["aggregate_years"] < 100
+    assert pos["median_years"] > 20
+    assert 0 < pos["p25_years"] < pos["median_years"] < pos["p75_years"]
+    assert pos["p90_years"] > pos["p75_years"]
     r = results["pipeline"]["absorption"]["robustness"]
     assert r["n_municipalities"] > 100
     assert r["aggregate_years"] > 20
+
+
+def test_absorption_reports_both_samples_and_the_excluded_group(results: dict) -> None:
+    a = results["pipeline"]["absorption"]["main"]
+    assert a["headline_sample"] == "positive_flow_sample"
+    pos = a["positive_flow_sample"]
+    all_stock = a["all_stock_observed_sample"]
+
+    # The conflation this test exists to prevent: 3.49 M is the matched sample,
+    # 3.17 M is the positive-flow ratio sample, and 3.39 M is all-stock observed.
+    assert pos["n_municipalities"] == 359
+    assert all_stock["n_municipalities"] == 396
+    assert pos["n_municipalities"] != all_stock["n_municipalities"]
+
+    for sample in (pos, all_stock):
+        for key in (
+            "n_municipalities", "pending_dwellings", "annual_net_additions",
+            "aggregate_years", "median_years", "p25_years", "p75_years",
+            "p90_years", "share_above_20_years", "share_above_50_years",
+        ):
+            assert key in sample, key
+        # Both aggregates must equal pending / additions to within 0.05 years.
+        assert sample["aggregate_years"] == pytest.approx(
+            sample["pending_dwellings"] / sample["annual_net_additions"], abs=0.05
+        )
+
+    assert pos["aggregate_years"] == pytest.approx(45.66, abs=0.05)
+    assert all_stock["aggregate_years"] == pytest.approx(52.22, abs=0.05)
+    assert all_stock["aggregate_years"] > pos["aggregate_years"]
+
+    # Backwards-compatible aliases used by comparative.py and the README table.
+    assert a["n_municipalities"] == pos["n_municipalities"]
+    assert a["aggregate_years"] == pytest.approx(pos["aggregate_years"])
+
+    excluded = a["excluded_by_positive_flow_filter"]
+    assert excluded["n_municipalities"] == 37
+    assert excluded["n_municipalities"] == (
+        all_stock["n_municipalities"] - pos["n_municipalities"]
+    )
+    assert excluded["pending_dwellings"] == pytest.approx(
+        all_stock["pending_dwellings"] - pos["pending_dwellings"], abs=1.0
+    )
+    assert excluded["pending_dwellings"] == pytest.approx(217_377, abs=1.0)
+    assert excluded["n_shrinking"] == 24
+    assert excluded["n_zero_pending"] == 12
+    assert excluded["n_zero_change"] == 1
+    assert excluded["n_missing_pending"] == 1
+
+    # The old note called this an upper bound. It is not one, and the docs
+    # repeat the note's logic, so guard the wording at the source.
+    assert "upper bound" not in a["note"].lower()
+
+
+def test_absorption_2021_2025_also_has_both_samples(results: dict) -> None:
+    r = results["pipeline"]["absorption"]["robustness"]
+    for key in ("positive_flow_sample", "all_stock_observed_sample",
+                "excluded_by_positive_flow_filter"):
+        assert key in r
+    for sample in (r["positive_flow_sample"], r["all_stock_observed_sample"]):
+        assert "n_municipalities" in sample
+        assert "aggregate_years" in sample
+        assert sample["aggregate_years"] == pytest.approx(
+            sample["pending_dwellings"] / sample["annual_net_additions"], abs=0.05
+        )
+    assert r["positive_flow_sample"]["n_municipalities"] == 115
+    assert r["all_stock_observed_sample"]["n_municipalities"] == 119
+
+
+def test_price_regressions_report_their_own_n(results: dict) -> None:
+    price = [r for r in results["regressions"] if r["id"].startswith("price_urban_")]
+    assert len(price) == 5
+    for r in price:
+        assert 300 < r["n"] <= 431
+    # The merged cross-section is 431, but no price regression uses all of it.
+    assert any(r["n"] < 431 for r in price)
+
+
+def test_cross_section_table_carries_n() -> None:
+    path = TABLES / "cross_section.csv"
+    if not path.exists():
+        pytest.skip("missing generated table: outputs/tables/cross_section.csv")
+    t = pd.read_csv(path)
+    assert "n" in t.columns
+    price = t[t["id"].str.startswith("price_urban_")]
+    assert len(price) == 5
+    assert price["n"].between(300, 431).all()
+    assert (price["n"] < 431).any()
 
 
 def test_readme_exists() -> None:

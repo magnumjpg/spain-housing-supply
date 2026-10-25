@@ -58,9 +58,10 @@ robustness table, or make the project about what the data actually show.
 **Chosen:** make the project about the gap between planned and materialised
 housing, and report the rent null prominently as a finding about identification.
 
-**Why:** the gap is large (3.49 million dwellings, 67.5% of planned capacity),
-measured directly, and not explained by demand growth. It is a real result. The
-rent null is also a real result, and more useful to a reader than a fake positive.
+**Why:** the gap is large (3.49 million dwellings in the 431-municipality matched
+sample, 67.5% of planned capacity), measured directly, and not explained by demand
+growth. It is a real result. The rent null is also a real result, and more useful
+to a reader than a fake positive.
 
 ---
 
@@ -247,10 +248,14 @@ consistently-covered set as a robustness check.
   headline is `Σ pending / Σ additions`; the median is reported separately.
 
 **Consequence.** The headline becomes **45.7 years** (median 48.3, p25–p75
-20.9–136.3) on 359 municipalities, with a 34.8-year robustness check on 115. The
-limitations are explicit: net rather than gross additions, a two-year window, and
-a stock that may never be built. The number is an equivalent-supply description,
-not a forecast.
+20.9–136.3, p90 294.3) on 359 municipalities with positive net additions, with a
+34.8-year robustness check on 115. The limitations are explicit: net rather than
+gross additions, a two-year window, and a stock that may never be built. The
+number is an equivalent-supply description, not a forecast. Because the
+positive-flow filter and net additions push in opposite directions, the ratio is
+not a bound: all 396 municipalities with stock observed in both years give
+**52.2 years**. Both variants and the 37 excluded municipalities (217,377 pending
+dwellings) are now stored in `results.json`.
 
 ---
 
@@ -499,3 +504,36 @@ on 40 countries and **+10.6% on the 36 that reach 2025**; Spain is 7th in both.
 **Consequence.** The README table header says "2015→latest", the per-country
 endpoint is in `comparative_countries.csv`, and the 2025-only median is a stored
 number, not a footnote computed by hand.
+
+---
+
+## D26. Correct the absorption bound and report the price coefficients completely (2026-10-25)
+
+**Context.** An audit of the presentation found two claims that the pipeline did
+not support.
+
+1. The absorption ratio was described as an "upper bound". Netting demolitions
+   raises the ratio, but the positive-flow filter also raises the summed
+   denominator and removes pending dwellings in shrinking municipalities from the
+   numerator, which lowers it. The two biases oppose each other, so the ratio is
+   not a bound. The all-stock-observed aggregate is **52.2 years**, higher than
+   the 45.7-year positive-flow headline, which settles the direction empirically.
+2. The README said prices showed "nothing is significant" while citing only two
+   of five coefficients. In fact none is significant at 5%, but planned capacity
+   is positive at **+6.6% per SD (p = 0.067)**, the only measure below 10%.
+
+**Decision.** Return both absorption samples, each with n, pending total, annual
+additions, aggregate years and the full distribution, plus the excluded-group
+decomposition. Keep `aggregate_years` and `n_municipalities` at the top level of
+`absorption.main` as aliases for the positive-flow sample so `comparative.py`
+keeps working; the nested `positive_flow_sample` and `all_stock_observed_sample`
+are the canonical objects. Remove "upper bound" from the code note and every
+document, and label 45.7 as a central estimate of a right-skewed distribution
+(median 48.3, p75 136.3, p90 294.3). Report all five price coefficients, with n,
+and state the 5%/10% significance rule explicitly.
+
+**Correction of a factual distinction.** 3.49 million is the pending stock in the
+431-municipality matched sample, not a national total: the national aggregate is
+7.09 million. The 45.7-year ratio uses the 3.17 million pending dwellings in its
+359-municipality sample. The README, METHOD, LIMITATIONS and Spanish summary now
+keep those three numbers separate.

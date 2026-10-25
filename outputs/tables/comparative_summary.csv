@@ -6,5 +6,5 @@ real_house_price_2015,"Real house price, change 2015 to latest",43.0341122063850
 permits_2015_2019,"Building permits per 1,000 inhabitants, 2015-2019",1.3993004998353828,European median,4.115120263857133,"per 1,000",31.0,1 = highest,34.0,34,Eurostat sts_cobp_a + demo_pjan
 permits_2021_2024,"Building permits per 1,000 inhabitants, 2021-2024",2.6360868852598944,European median,4.61976852881287,"per 1,000",28.0,1 = highest,33.0,33,Eurostat sts_cobp_a + demo_pjan
 city_price_to_rent,"City price-to-rent, latest available (years of rent)",16.556914393226716,Median of 6 country medians,18.68239798719337,years,4.0,1 = highest,6.0,87,Eurostat Urban Audit urb_clivcon
-pipeline_years,"Pending pipeline, years of supply at 2023-2025 net additions",45.66222932964516,No comparable cross-country measure,,years,,,,359,"SIU + INE, this project"
+pipeline_years,"Pending pipeline, years of supply at 2023-2025 net additions (positive-flow sample)",45.66222932964516,No comparable cross-country measure,,years,,,,359,"SIU + INE, this project"
 pipeline_dwellings,Pending dwellings in the matched urban sample,3490428.0,No comparable cross-country measure,,dwellings,,,,431,"SIU + INE, this project"

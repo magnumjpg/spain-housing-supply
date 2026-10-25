@@ -18,29 +18,36 @@ OUT = ROOT / "outputs"
 TABLES = OUT / "tables"
 
 
+def _require(path: Path) -> Path:
+    """Skip cleanly when a generated comparative file is absent."""
+    if not path.exists():
+        pytest.skip(f"missing generated input: {path.relative_to(ROOT)}")
+    return path
+
+
 @pytest.fixture(scope="module")
 def countries() -> pd.DataFrame:
-    return pd.read_csv(TABLES / "comparative_countries.csv")
+    return pd.read_csv(_require(TABLES / "comparative_countries.csv"))
 
 
 @pytest.fixture(scope="module")
 def cities() -> pd.DataFrame:
-    return pd.read_csv(TABLES / "comparative_cities.csv")
+    return pd.read_csv(_require(TABLES / "comparative_cities.csv"))
 
 
 @pytest.fixture(scope="module")
 def city_countries() -> pd.DataFrame:
-    return pd.read_csv(TABLES / "comparative_city_countries.csv")
+    return pd.read_csv(_require(TABLES / "comparative_city_countries.csv"))
 
 
 @pytest.fixture(scope="module")
 def summary() -> pd.DataFrame:
-    return pd.read_csv(TABLES / "comparative_summary.csv")
+    return pd.read_csv(_require(TABLES / "comparative_summary.csv"))
 
 
 @pytest.fixture(scope="module")
 def results() -> dict:
-    return json.loads((OUT / "results.json").read_text(encoding="utf-8"))
+    return json.loads(_require(OUT / "results.json").read_text(encoding="utf-8"))
 
 
 def test_oecd_aggregate_codes_are_not_countries(countries: pd.DataFrame) -> None:

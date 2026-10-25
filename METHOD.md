@@ -32,21 +32,38 @@ years_to_absorb_i = pending_dwellings_i / ((stock_2025_i - stock_2023_i) / 2)
 ```
 
 The denominator is the **net** annual change in the Catastro conventional-dwelling
-stock. Net additions subtract demolitions, so the ratio is an **upper bound** on
-the years of gross construction the pipeline represents. It is computed only for
-municipalities with non-missing stock in both years and positive net additions
-(359 of 431). The aggregate is `Σ pending / Σ net additions`, not the average of
-municipal ratios.
+stock. Two sample choices push the aggregate in opposite directions, so it is
+neither an upper nor a lower bound. Net additions subtract demolitions, which
+understates gross construction and raises the ratio. Restricting to
+municipalities with positive net additions raises the summed denominator and
+removes pending dwellings in shrinking municipalities from the numerator, which
+lowers the ratio. Both variants are therefore reported:
 
-The 2023–2025 window is the headline because Catastro stock coverage expands
-sharply in 2023 (119 municipalities before, 399 after). Using a longer window
-would restrict the sample to the large cities that were covered earlier and would
-confound the ratio with sample selection. The 2021–2025 window is reported on those
-115 municipalities as a robustness check: 34.8 years versus 45.7, same order of
-magnitude.
+- `positive_flow_sample`: 359 municipalities, 3,169,461 pending dwellings,
+  69,411 net additions per year, **45.7 years** aggregate; median 48.3, p25 20.9,
+  p75 136.3, p90 294.3; 76.0% above 20 years and 49.6% above 50.
+- `all_stock_observed_sample`: 396 municipalities with stock observed in both
+  years, 3,386,838 pending dwellings, 64,861.5 net additions per year,
+  **52.2 years** aggregate.
+
+The 37 municipalities excluded by the positive-flow filter hold 217,377 pending
+dwellings: 24 shrank (216,586 pending; one of them has zero pending), 11 more
+have zero pending, one has zero net change (791 pending) and one has no SIU
+pending value. The excluded group is stored under
+`excluded_by_positive_flow_filter`.
+
+The aggregate is `Σ pending / Σ net additions`, not the average of municipal
+ratios. The 2023–2025 window is the headline because Catastro stock coverage
+expands sharply in 2023 (119 municipalities before, 399 after). Using a longer
+window would restrict the sample to the large cities that were covered earlier
+and would confound the ratio with sample selection. The 2021–2025 window is
+reported on those 115 municipalities as a robustness check: 34.8 years versus
+45.7, same order of magnitude. Its all-stock variant is 35.3 years.
 
 This is a description, not a projection. It does not assume that demand,
-construction capacity or plans stay constant.
+construction capacity or plans stay constant. The municipal distribution is
+heavily right-skewed, so the median (48.3) is not "typical" in the sense of a
+central mass: p75 is 136.3 and p90 is 294.3.
 
 ---
 
@@ -313,3 +330,20 @@ comparison.
 | Combining OECD price-to-rent with municipal rents | The OECD rent index is a national deflator, not the market rent series; dividing the two indices would be a false decomposition |
 | Comparing the 45.7-year pipeline across countries | No harmonised "planned but unbuilt" measure exists |
 | A regulation index | Different concept, different year, invites a causal reading the design cannot support |
+
+---
+
+## 8. Literature and positioning
+
+The project borrows its question from the regulation-and-supply literature but
+does not borrow its identification. That literature mostly measures permits,
+regulation indices or terrain constraints; this project measures a municipal
+planned-but-unbuilt pipeline in Spain and is descriptive, not causal.
+
+- **Gyourko & Molloy (2015), "Regulation and Housing Supply", Handbook of Regional and Urban Economics.** Surveys how regulation is measured and why supply responds; here the object is a planned-but-unbuilt stock, not an index.
+- **Glaeser & Ward (2009), "The Causes and Consequences of Land Use Regulation: Evidence from Greater Boston", Journal of Urban Economics.** Shows regulation is politically chosen and locally heterogeneous; the cross-section here is endogenous and is reported as association.
+- **Ihlanfeldt (2007), "The Effect of Land Use Regulation on Housing and Land Prices", Journal of Urban Economics.** Links regulation to rents and prices; this project tests both and finds no stable positive association.
+- **Mayer & Somerville (2000), "Land Use Regulation and New Construction", Regional Science and Urban Economics.** Treats regulation as a constraint on construction flows; this project starts from the flow and asks why planned capacity is not converted.
+- **Saiz (2010), "The Geographic Determinants of Housing Supply", Quarterly Journal of Economics.** Uses terrain to identify supply constraints in US metros; this project has no instrument and does not claim a supply elasticity.
+- **Hilber & Vermeulen (2016), "The Impact of Supply Constraints on House Prices in England", Economic Journal.** Finds supply constraints raise prices where demand grows; the panel interaction is suggestive but fragile to regional shocks.
+- **OECD (2021), "Brick by Brick: Building Better Housing Policies", OECD Publishing.** Cross-country policy benchmarking; it informs the comparative chapter, which does not compare pipeline stocks across countries.

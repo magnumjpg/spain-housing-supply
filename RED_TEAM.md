@@ -61,12 +61,13 @@ real defence.
 
 ---
 
-## "With 431 municipalities and 52 clusters you cannot distinguish 0 from −0.05."
+## "With about 400 municipalities and 52 clusters you cannot distinguish 0 from −0.05."
 
 **Correct.** The confidence interval on non-urbanizable share is roughly
 [−0.12, +0.03]. The project does not claim the coefficient is zero. It claims the
 predicted negative effect is not detectable, and the point estimate is small and
-of the wrong sign.
+of the wrong sign. The regressions use 400–403 of the 431 matched municipalities,
+because some outcomes and controls are missing.
 
 The two coefficients that are significant (pending share, unstarted share) are
 reported but not treated as discoveries: they are 2 of 20 specifications and
@@ -144,7 +145,7 @@ only through land supply) is strong and probably violated by amenities.
 
 ## "The panel interaction is fragile."
 
-**Yes.** Non-urbanizable × growth is −0.10 with year FE and −0.17 with
+**Yes.** Non-urbanizable × growth is −0.09 with year FE and −0.165 with
 province-year FE; planned capacity × growth is −0.10 with year FE but −0.03
 (p = 0.24) with province-year FE. The result depends on how regional shocks are
 absorbed, which is a warning sign, and the README says so.
@@ -159,11 +160,11 @@ cross-section, not because it identifies a supply elasticity.
 **The strongest objection, and the one the project tries hardest to answer.**
 
 The defence: the project has a large, directly measured, non-obvious descriptive
-finding (3.49 million unbuilt planned dwellings, 48.8% of development land not
-started, and a gap that demand growth does not close) *plus* a well-documented
-failed identification attempt. The failed attempt is informative because the
-naive result is so strong and so misleading, and showing why is useful to anyone
-who works with municipal land data.
+finding (3.49 million unbuilt planned dwellings in the 431-municipality matched
+sample, 48.8% of development land not started, and a gap that demand growth does
+not close) *plus* a well-documented failed identification attempt. The failed
+attempt is informative because the naive result is so strong and so misleading,
+and showing why is useful to anyone who works with municipal land data.
 
 If a reader wants a positive causal headline, this is not the project. That is a
 feature.

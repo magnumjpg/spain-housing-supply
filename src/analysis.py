@@ -95,46 +95,120 @@ def zscore(s: pd.Series) -> pd.Series:
     return (s - s.mean()) / sd if sd and np.isfinite(sd) else s * np.nan
 
 
+def _absorption_sample(m: pd.DataFrame) -> dict:
+    """Aggregate and distribution for one absorption sample.
+
+    `years_to_absorb` is undefined where net additions are exactly zero; those
+    rows are excluded from the quantiles but kept in the aggregate, which is a
+    ratio of sums. Negative net additions produce negative ratios and are kept:
+    dropping them is precisely the sample choice that the all-stock variant
+    is there to expose.
+    """
+    finite = m["years_to_absorb"].replace([np.inf, -np.inf], np.nan).dropna()
+    pending = float(np.nansum(m["pending_dwellings"].to_numpy(dtype=float)))
+    additions = float(np.nansum(m["add_per_year"].to_numpy(dtype=float)))
+    summary = {
+        "n_municipalities": int(len(m)),
+        "n_pending_observed": int(m["pending_dwellings"].notna().sum()),
+        "pending_dwellings": pending,
+        "annual_net_additions": additions,
+        "aggregate_years": float(pending / additions) if additions else None,
+        "n_finite_years": int(len(finite)),
+        "median_years": float(finite.median()) if len(finite) else None,
+        "p25_years": float(finite.quantile(0.25)) if len(finite) else None,
+        "p75_years": float(finite.quantile(0.75)) if len(finite) else None,
+        "p90_years": float(finite.quantile(0.90)) if len(finite) else None,
+        "share_above_20_years": float((finite > 20).mean()) if len(finite) else None,
+        "share_above_50_years": float((finite > 50).mean()) if len(finite) else None,
+        "share_negative_years": float((finite < 0).mean()) if len(finite) else None,
+    }
+    return summary
+
+
 def absorption_ratio(panel: pd.DataFrame, cs: pd.DataFrame, y0: int, y1: int) -> tuple[dict, pd.DataFrame]:
     """Pending dwellings divided by recent net housing additions per year.
 
-    This is a stock-over-flow ratio, not a forecast. The denominator is the
-    change in the Catastro conventional-dwelling stock, which nets out
-    demolitions; gross completions are higher, so the ratio is an upper bound
-    on years of supply. It is computed only where the stock is observed in both
-    years. The 2023-2025 window is used for the headline because Catastro
-    coverage expands sharply in 2023; the 2021-2025 window is a robustness
-    check on the smaller consistently-covered set.
+    This is a stock-over-flow ratio, not a forecast. Two sample choices push the
+    aggregate in opposite directions, so it is neither an upper nor a lower
+    bound. Netting demolitions raises the ratio because the denominator is net
+    rather than gross construction. Restricting to municipalities with positive
+    net additions raises the summed denominator (shrinking municipalities are
+    removed) and removes their pending dwellings from the numerator, which
+    lowers the ratio. Both samples are reported, together with the excluded
+    group. The 2023-2025 window is the headline because Catastro coverage
+    expands sharply in 2023; the 2021-2025 window is a robustness check on the
+    smaller consistently-covered set.
     """
     st = panel.pivot_table(index="code", columns="year", values="stock_catastro", aggfunc="first")
     d = st[[y0, y1]].dropna()
     add = (d[y1] - d[y0]) / (y1 - y0)
-    m = cs[["code", "municipality_name", "planned_dwellings", "pending_dwellings"]].merge(
-        add.rename("add_per_year"), on="code"
+    m = cs[
+        ["code", "municipality_name", "province", "planned_dwellings", "pending_dwellings"]
+    ].merge(add.rename("add_per_year"), on="code")
+    m["years_to_absorb"] = m["pending_dwellings"] / m["add_per_year"].where(
+        m["add_per_year"] != 0
     )
-    m = m[(m["add_per_year"] > 0) & (m["pending_dwellings"] > 0)].copy()
-    m["years_to_absorb"] = m["pending_dwellings"] / m["add_per_year"]
-    summary = {
-        "window": [int(y0), int(y1)],
-        "n_municipalities": int(len(m)),
-        "pending_dwellings": float(m["pending_dwellings"].sum()),
-        "annual_net_additions": float(m["add_per_year"].sum()),
-        "aggregate_years": float(m["pending_dwellings"].sum() / m["add_per_year"].sum()),
-        "median_years": float(m["years_to_absorb"].median()),
-        "p25_years": float(m["years_to_absorb"].quantile(0.25)),
-        "p75_years": float(m["years_to_absorb"].quantile(0.75)),
-        "p90_years": float(m["years_to_absorb"].quantile(0.90)),
-        "share_above_20_years": float((m["years_to_absorb"] > 20).mean()),
-        "share_above_50_years": float((m["years_to_absorb"] > 50).mean()),
-        "note": (
-            "Pending dwellings / net annual change in the Catastro conventional-dwelling "
-            "stock. Net additions subtract demolitions, so this is an upper bound on "
-            "years of supply at the recent construction rate. It is not a forecast: "
-            "demand can grow, plans can be revised, and part of the pending stock may "
-            "never be built."
+
+    all_sample = _absorption_sample(m)
+    positive_mask = (m["add_per_year"] > 0) & (m["pending_dwellings"] > 0)
+    positive_flow = _absorption_sample(m[positive_mask])
+    excluded = m[~positive_mask]
+
+    shrinking = excluded[excluded["add_per_year"] < 0]
+    zero_change = excluded[excluded["add_per_year"] == 0]
+    excluded_summary = {
+        "n_municipalities": int(len(excluded)),
+        "pending_dwellings": float(
+            np.nansum(excluded["pending_dwellings"].to_numpy(dtype=float))
+        ),
+        "n_shrinking": int(len(shrinking)),
+        "pending_in_shrinking": float(
+            np.nansum(shrinking["pending_dwellings"].to_numpy(dtype=float))
+        ),
+        "n_shrinking_with_zero_pending": int(
+            (shrinking["pending_dwellings"] == 0).sum()
+        ),
+        "n_zero_change": int(len(zero_change)),
+        "pending_in_zero_change": float(
+            np.nansum(zero_change["pending_dwellings"].to_numpy(dtype=float))
+        ),
+        "n_zero_pending": int((excluded["pending_dwellings"] == 0).sum()),
+        "n_missing_pending": int(excluded["pending_dwellings"].isna().sum()),
+        "largest_pending": (
+            excluded.dropna(subset=["pending_dwellings"])
+            .nlargest(5, "pending_dwellings")[
+                ["municipality_name", "province", "pending_dwellings", "add_per_year"]
+            ]
+            .to_dict(orient="records")
         ),
     }
-    table = m.sort_values("years_to_absorb", ascending=False).copy()
+
+    # Backwards-compatible aliases for the headline variant: comparative.py and
+    # the README table read `main["aggregate_years"]` and `main["n_municipalities"]`.
+    summary = dict(positive_flow)
+    summary.update({
+        "window": [int(y0), int(y1)],
+        "headline_sample": "positive_flow_sample",
+        "positive_flow_sample": positive_flow,
+        "all_stock_observed_sample": all_sample,
+        "excluded_by_positive_flow_filter": excluded_summary,
+        "note": (
+            f"Pending dwellings / net annual change in the Catastro "
+            f"conventional-dwelling stock, {y0}-{y1}. The headline is a central "
+            "estimate from a heavily right-skewed municipal distribution, not an "
+            "upper or lower bound: netting demolitions raises the ratio, while "
+            "restricting to positive-flow municipalities raises the summed "
+            "denominator and removes pending dwellings in shrinking municipalities, "
+            "which lowers it. The all-stock-observed variant is the sample-sensitivity "
+            "check. It is not a forecast: demand can grow, plans can be revised, and "
+            "part of the pending stock may never be built."
+        ),
+    })
+    table = m[positive_mask].sort_values("years_to_absorb", ascending=False).copy()
+    table = table[
+        ["code", "municipality_name", "planned_dwellings", "pending_dwellings",
+         "add_per_year", "years_to_absorb"]
+    ]
     return summary, table
 
 

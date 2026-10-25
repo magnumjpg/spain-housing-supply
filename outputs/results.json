@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-25T10:43:57+00:00",
+    "generated_utc": "2026-10-25T14:37:07+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -287,38 +287,186 @@
     "share_municipalities_pending_above_80": 0.35730858468677495,
     "absorption": {
       "main": {
-        "window": [
-          2023,
-          2025
-        ],
         "n_municipalities": 359,
+        "n_pending_observed": 359,
         "pending_dwellings": 3169461.0,
         "annual_net_additions": 69411.0,
         "aggregate_years": 45.66222932964516,
+        "n_finite_years": 359,
         "median_years": 48.271954674220964,
         "p25_years": 20.8508488021577,
         "p75_years": 136.34060273972602,
         "p90_years": 294.32,
         "share_above_20_years": 0.7604456824512534,
         "share_above_50_years": 0.4958217270194986,
-        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock. Net additions subtract demolitions, so this is an upper bound on years of supply at the recent construction rate. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
-      },
-      "robustness": {
+        "share_negative_years": 0.0,
         "window": [
-          2021,
+          2023,
           2025
         ],
+        "headline_sample": "positive_flow_sample",
+        "positive_flow_sample": {
+          "n_municipalities": 359,
+          "n_pending_observed": 359,
+          "pending_dwellings": 3169461.0,
+          "annual_net_additions": 69411.0,
+          "aggregate_years": 45.66222932964516,
+          "n_finite_years": 359,
+          "median_years": 48.271954674220964,
+          "p25_years": 20.8508488021577,
+          "p75_years": 136.34060273972602,
+          "p90_years": 294.32,
+          "share_above_20_years": 0.7604456824512534,
+          "share_above_50_years": 0.4958217270194986,
+          "share_negative_years": 0.0
+        },
+        "all_stock_observed_sample": {
+          "n_municipalities": 396,
+          "n_pending_observed": 395,
+          "pending_dwellings": 3386838.0,
+          "annual_net_additions": 64861.5,
+          "aggregate_years": 52.21646122892625,
+          "n_finite_years": 394,
+          "median_years": 41.75467279275597,
+          "p25_years": 14.513015873015872,
+          "p75_years": 124.16520688613713,
+          "p90_years": 272.4954545454544,
+          "share_above_20_years": 0.6928934010152284,
+          "share_above_50_years": 0.4517766497461929,
+          "share_negative_years": 0.0583756345177665
+        },
+        "excluded_by_positive_flow_filter": {
+          "n_municipalities": 37,
+          "pending_dwellings": 217377.0,
+          "n_shrinking": 24,
+          "pending_in_shrinking": 216586.0,
+          "n_shrinking_with_zero_pending": 1,
+          "n_zero_change": 1,
+          "pending_in_zero_change": 791.0,
+          "n_zero_pending": 12,
+          "n_missing_pending": 1,
+          "largest_pending": [
+            {
+              "municipality_name": "Molina de Segura",
+              "province": "Murcia",
+              "pending_dwellings": 66603.0,
+              "add_per_year": -1246.0
+            },
+            {
+              "municipality_name": "Ejido, El",
+              "province": "Almería",
+              "pending_dwellings": 49535.0,
+              "add_per_year": -722.5
+            },
+            {
+              "municipality_name": "Segovia",
+              "province": "Segovia",
+              "pending_dwellings": 20294.0,
+              "add_per_year": -57.5
+            },
+            {
+              "municipality_name": "Palencia",
+              "province": "Palencia",
+              "pending_dwellings": 15331.0,
+              "add_per_year": -293.5
+            },
+            {
+              "municipality_name": "Campello, el",
+              "province": "Alicante",
+              "pending_dwellings": 11786.0,
+              "add_per_year": -55.5
+            }
+          ]
+        },
+        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock, 2023-2025. The headline is a central estimate from a heavily right-skewed municipal distribution, not an upper or lower bound: netting demolitions raises the ratio, while restricting to positive-flow municipalities raises the summed denominator and removes pending dwellings in shrinking municipalities, which lowers it. The all-stock-observed variant is the sample-sensitivity check. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
+      },
+      "robustness": {
         "n_municipalities": 115,
+        "n_pending_observed": 115,
         "pending_dwellings": 1715865.0,
         "annual_net_additions": 49308.5,
         "aggregate_years": 34.798564142085034,
+        "n_finite_years": 115,
         "median_years": 28.916483516483517,
         "p25_years": 15.705136602726391,
         "p75_years": 70.30784600472732,
         "p90_years": 159.48902408777232,
         "share_above_20_years": 0.6869565217391305,
         "share_above_50_years": 0.391304347826087,
-        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock. Net additions subtract demolitions, so this is an upper bound on years of supply at the recent construction rate. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
+        "share_negative_years": 0.0,
+        "window": [
+          2021,
+          2025
+        ],
+        "headline_sample": "positive_flow_sample",
+        "positive_flow_sample": {
+          "n_municipalities": 115,
+          "n_pending_observed": 115,
+          "pending_dwellings": 1715865.0,
+          "annual_net_additions": 49308.5,
+          "aggregate_years": 34.798564142085034,
+          "n_finite_years": 115,
+          "median_years": 28.916483516483517,
+          "p25_years": 15.705136602726391,
+          "p75_years": 70.30784600472732,
+          "p90_years": 159.48902408777232,
+          "share_above_20_years": 0.6869565217391305,
+          "share_above_50_years": 0.391304347826087,
+          "share_negative_years": 0.0
+        },
+        "all_stock_observed_sample": {
+          "n_municipalities": 119,
+          "n_pending_observed": 119,
+          "pending_dwellings": 1734916.0,
+          "annual_net_additions": 49151.5,
+          "aggregate_years": 35.29731544306888,
+          "n_finite_years": 119,
+          "median_years": 28.399447131997235,
+          "p25_years": 11.898636590451993,
+          "p75_years": 69.3537544049878,
+          "p90_years": 157.4158591208182,
+          "share_above_20_years": 0.6638655462184874,
+          "share_above_50_years": 0.37815126050420167,
+          "share_negative_years": 0.025210084033613446
+        },
+        "excluded_by_positive_flow_filter": {
+          "n_municipalities": 4,
+          "pending_dwellings": 19051.0,
+          "n_shrinking": 3,
+          "pending_in_shrinking": 19051.0,
+          "n_shrinking_with_zero_pending": 0,
+          "n_zero_change": 0,
+          "pending_in_zero_change": 0.0,
+          "n_zero_pending": 1,
+          "n_missing_pending": 0,
+          "largest_pending": [
+            {
+              "municipality_name": "Palencia",
+              "province": "Palencia",
+              "pending_dwellings": 15331.0,
+              "add_per_year": -89.5
+            },
+            {
+              "municipality_name": "Torrelavega",
+              "province": "Cantabria",
+              "pending_dwellings": 2990.0,
+              "add_per_year": -6.25
+            },
+            {
+              "municipality_name": "Girona",
+              "province": "Girona",
+              "pending_dwellings": 730.0,
+              "add_per_year": -162.5
+            },
+            {
+              "municipality_name": "Viladecans",
+              "province": "Barcelona",
+              "pending_dwellings": 0.0,
+              "add_per_year": 101.25
+            }
+          ]
+        },
+        "note": "Pending dwellings / net annual change in the Catastro conventional-dwelling stock, 2021-2025. The headline is a central estimate from a heavily right-skewed municipal distribution, not an upper or lower bound: netting demolitions raises the ratio, while restricting to positive-flow municipalities raises the summed denominator and removes pending dwellings in shrinking municipalities, which lowers it. The all-stock-observed variant is the sample-sensitivity check. It is not a forecast: demand can grow, plans can be revised, and part of the pending stock may never be built."
       }
     },
     "top_pending": [
@@ -2141,7 +2289,7 @@
   },
   "comparative": {
     "meta": {
-      "generated_utc": "2026-10-25T10:43:58+00:00",
+      "generated_utc": "2026-10-25T14:37:09+00:00",
       "role": "Comparative chapter inside the Spanish land project; not a separate project.",
       "note": "All comparisons are descriptive. Cross-country associations do not identify a causal effect of regulation on prices."
     },
@@ -2479,7 +2627,7 @@
       },
       {
         "key": "pipeline_years",
-        "metric": "Pending pipeline, years of supply at 2023-2025 net additions",
+        "metric": "Pending pipeline, years of supply at 2023-2025 net additions (positive-flow sample)",
         "spain": 45.66222932964516,
         "benchmark": "No comparable cross-country measure",
         "benchmark_value": null,

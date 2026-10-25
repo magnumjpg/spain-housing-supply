@@ -124,8 +124,10 @@ non-missing rent values out of 434. The cross-section uses 2024.
 about 119 municipalities in 2010–2022 and for about 399 in 2023–2025. The jump is
 a coverage expansion, not a construction boom. The absorption ratio (METHOD §1b)
 therefore uses the 2023–2025 window for the headline and 2021–2025 on the smaller
-consistently-covered set as a robustness check. Comparing stock across the 2022/2023
-boundary would mix a real change with a sample change.
+consistently-covered set as a robustness check; it reports both the positive-flow
+sample (359) and all municipalities with stock observed in both years (396).
+Comparing stock across the 2022/2023 boundary would mix a real change with a
+sample change.
 
 ---
 

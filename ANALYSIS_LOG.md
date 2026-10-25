@@ -300,6 +300,17 @@ One data trap: Catastro stock coverage jumps from 119 to 399 municipalities in
 the headline uses the short post-2023 window and the long window is a robustness
 check, not the main estimate.
 
+**Correction (2026-10-25).** This entry originally called the ratio a bound and
+did not separate the three totals. Net additions push the ratio up, but the
+positive-flow filter raises the summed denominator and removes shrinking
+municipalities from the numerator, so the two biases oppose and the ratio is not
+a bound. The positive-flow sample (359 municipalities) holds 3.17 M pending
+dwellings and gives 45.7 years; the all-stock-observed sample (396) holds 3.39 M
+and gives 52.2 years. The 3.49 M total is the 431-municipality matched sample,
+not a national total. The current code returns both samples and the 37 excluded
+municipalities (217,377 pending dwellings) so the earlier reading can be audited
+rather than quietly overwritten.
+
 ---
 
 ## Session 13 — the comparative chapter, and three bugs that only appeared when writing it down

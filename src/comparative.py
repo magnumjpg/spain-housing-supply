@@ -517,7 +517,7 @@ def summary_table(countries: pd.DataFrame, city_countries: pd.DataFrame) -> pd.D
         if absorption:
             rows.append({
                 "key": "pipeline_years",
-                "metric": "Pending pipeline, years of supply at 2023-2025 net additions",
+                "metric": "Pending pipeline, years of supply at 2023-2025 net additions (positive-flow sample)",
                 "spain": float(absorption["aggregate_years"]),
                 "benchmark": "No comparable cross-country measure",
                 "benchmark_value": np.nan,
