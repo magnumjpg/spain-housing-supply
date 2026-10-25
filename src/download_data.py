@@ -119,23 +119,36 @@ def main(force: bool = False) -> int:
     manifest = {}
     if MANIFEST.exists():
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    for key, path in files.items():
+
+    def record(key: str, path: Path, url: str) -> None:
+        """Write one manifest entry, preserving the original download time.
+
+        A cached run must be a no-op: if the bytes are unchanged, the file was
+        not re-downloaded and `downloaded_utc` must not move. Otherwise every
+        offline re-run would rewrite the manifest and dirty the working tree.
+        """
+        digest = sha256(path)
+        previous = manifest.get(key, {})
+        if previous.get("sha256") == digest:
+            downloaded = previous["downloaded_utc"]
+        else:
+            downloaded = datetime.now(timezone.utc).isoformat(timespec="seconds")
         manifest[key] = {
             "path": str(path.relative_to(RAW.parent.parent)),
-            "url": URLS.get(key, URLS["ua_codes_json"] if key == "ua_codes" else ""),
+            "url": url,
             "bytes": path.stat().st_size,
-            "sha256": sha256(path),
-            "downloaded_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "sha256": digest,
+            "downloaded_utc": downloaded,
         }
+
+    for key, path in files.items():
+        record(
+            key,
+            path,
+            URLS.get(key, URLS["ua_codes_json"] if key == "ua_codes" else ""),
+        )
     for name in sorted(p.name for p in SIU.glob("*.xlsx")):
-        path = SIU / name
-        manifest[f"siu_{name}"] = {
-            "path": str(path.relative_to(RAW.parent.parent)),
-            "url": URLS["siu_zip"],
-            "bytes": path.stat().st_size,
-            "sha256": sha256(path),
-            "downloaded_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        }
+        record(f"siu_{name}", SIU / name, URLS["siu_zip"])
     MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Manifest written to {MANIFEST}")
     return 0

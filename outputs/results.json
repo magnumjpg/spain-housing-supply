@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-25T00:53:25+00:00",
+    "generated_utc": "2026-10-25T10:20:00+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -2141,7 +2141,7 @@
   },
   "comparative": {
     "meta": {
-      "generated_utc": "2026-10-25T10:17:31+00:00",
+      "generated_utc": "2026-10-25T10:20:01+00:00",
       "role": "Comparative chapter inside the Spanish land project; not a separate project.",
       "note": "All comparisons are descriptive. Cross-country associations do not identify a causal effect of regulation on prices."
     },
