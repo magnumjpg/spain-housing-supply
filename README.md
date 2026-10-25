@@ -2,11 +2,13 @@
 
 [![CI](https://github.com/magnumjpg/spain-housing-supply/actions/workflows/ci.yml/badge.svg)](https://github.com/magnumjpg/spain-housing-supply/actions/workflows/ci.yml) [![tests](https://img.shields.io/badge/tests-41%20passed-brightgreen)](#) [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Data](https://img.shields.io/badge/data-official%20public%20sources-informational)](DATA.md)
 
-[Resumen en español](#resumen-en-español) · [Método](METHOD.md) · [Limitaciones](LIMITATIONS.md) · [Decisiones](DECISIONS.md)
+[Resumen en español](#resumen-en-español) · [Method](METHOD.md) · [Limitations](LIMITATIONS.md) · [Decisions](DECISIONS.md)
 
-**Land classification, unbuilt plan capacity, and rental costs in Spain**
+**Spain plans millions of homes that are never built — and the evidence does not show that classifying land raises rents.**
 
-*The working title was "The Permission Premium". The data did not support a premium. They supported a gap.*
+*MIVAU SIU · INE · SERPAVI · 431 municipalities · 2010–2025 · 41 tests*
+
+> The working title was "The Permission Premium". The data did not support a premium. They supported a gap.
 
 ---
 
@@ -14,11 +16,11 @@
 
 - **Question:** is more land classified for development associated with lower municipal rents and prices in Spain, and how large is the planned-but-unbuilt housing pipeline?
 - **Data:** MIVAU SIU land classification and pipeline for 431 urban municipalities, INE rents, prices and population 2010–2025, SERPAVI tax-record rents, and OECD/Eurostat comparators.
-- **Design:** descriptive municipal cross-section and panel; the comparative chapter is a benchmark, not an identification strategy.
+- **Method:** descriptive municipal cross-section and panel; the comparative chapter is a benchmark, not an identification strategy.
 - **Headline:** 3.49 M pending dwellings in the 431-municipality matched sample; in the 359 with positive 2023–2025 net additions, 3.17 M pending equal 45.7 years at recent net additions (median 48.3, p75 136.3).
 - **Caveat:** 45.7 is a central estimate of a heavily right-skewed distribution, not a bound or a forecast; all 396 stock-observed municipalities give 52.2 years, and the rent and price regressions are associational.
 
-## The finding
+## 1. The finding
 
 Spain's urban planning system gives municipalities the power to decide which land can be built on. The standard critique is that this power restricts the supply of land and pushes up rents. I tested that link with official data.
 
@@ -30,11 +32,11 @@ That is the project. The pipeline is not a rounding error or a handful of stalle
 
 The supply side of the comparison points the same way: Spain permits **2.64 dwellings per 1,000 inhabitants**, against a European median of **4.62** and 28th of 33 countries. The price side is more mixed: Spanish price-to-income rose faster than most peers (7th of 40) but is still 17% below its 2007 peak. Both facts are in the comparative chapter below.
 
-## The rent question, in one paragraph
+## 2. The rent question, in one paragraph
 
 Do municipalities that classify more land have lower rents? **Not in this sample, once province and urbanisation are held constant.** The raw correlation is −0.55, but that is mostly because the non-urbanizable share is a rurality index: rural places have cheap rents for reasons unrelated to planning. With urban controls, the association is a null. The two coefficients that are statistically distinguishable from zero are negative — more unbuilt capacity goes with *lower* rents — which is consistent with planning following demand rather than constraining it. I also repeat the test with SERPAVI, an independent tax-based rent series, and get the same answer. None of this identifies a causal effect; see the rent section below and `LIMITATIONS.md`.
 
-## What I built
+## 3. What I built
 
 A municipal dataset that, as far as I can tell, did not exist as a single reproducible table, plus a cross-country benchmark:
 
@@ -45,7 +47,7 @@ A municipal dataset that, as far as I can tell, did not exist as a single reprod
 
 The Spanish municipal sources are merged on the 5-digit INE municipal code. The SIU match is 431 of 434 urban municipalities; all 431 have a SERPAVI rent. The comparison is built separately on ISO country and Eurostat city codes. Every headline number below is in `outputs/results.json`; the full country and city tables are in `outputs/tables/`.
 
-## The headline numbers
+## 4. The headline numbers
 
 | | |
 |---|---|
@@ -65,6 +67,10 @@ The 45.7-year ratio uses the **3.17 million** pending dwellings in its 359-munic
 The 5.17 million planned dwellings sit in 256,606 hectares of development land. If every pending dwelling were built, the housing stock of these 431 municipalities would grow by about **23%** (pending/stock is 22.6%); planned capacity is equivalent to **33.4%** of the existing stock. Two-thirds of the pipeline has not been materialised.
 
 This is not a rural artefact. Madrid alone has 158,113 pending dwellings; Murcia 111,116; Toledo 88,698. Toledo's plan envisages more than twice the city's existing stock.
+
+![Figure 1 — The unbuilt pipeline](outputs/figures/fig1_pipeline_gap.png)
+
+*Figure 1. Share of planned dwellings not yet materialised, by municipality (median 72%, aggregate 68%), and planned capacity by province, top 15. Source: `outputs/figures/fig1_pipeline_gap.png`.*
 
 ### How long is the pipeline?
 
@@ -86,7 +92,7 @@ MIVAU publishes its own national aggregate for the same source. Across **5,900 r
 
 The 431 municipalities analysed here account for **53.8% of that national planned capacity** and 49.2% of the pending stock. So this is not a niche sample, and it is not a different universe: the national pipeline is, if anything, slightly *more* unbuilt than the urban one. The 5.17 million figure is a subset of the 9.60 million, not a competing estimate.
 
-## Is Spain unusual? A multi-country check
+## 5. Is Spain unusual? A multi-country check
 
 A pipeline measured in decades needs a distribution. The Spanish data cannot tell
 us whether 45.7 years is a lot. The comparative chapter therefore places Spain
@@ -135,6 +141,10 @@ The three disagree because their denominators moved differently. The project
 reports them side by side and does not decompose price-to-income into rents and
 incomes: the OECD rent index is a national deflator, not the municipal market rent
 series used in the rest of this project.
+
+![Figure 8 — Price-to-income, Spain versus peers](outputs/figures/fig8_price_to_income.png)
+
+*Figure 8. Spanish price-to-income against five peers and the country median, plus the cross-country distribution of 2015-to-latest changes. Source: `outputs/figures/fig8_price_to_income.png`.*
 
 ### Supply: low, and far below its own boom
 
@@ -217,17 +227,17 @@ comparison, and it does not try. It says Spain is a high-price-growth,
 low-permitting country; the price outcome is not extreme, the supply flow is near
 the bottom of the European distribution.
 
-## The rent test: what it can and cannot show
+## 6. The rent test: what it can and cannot show
 
 Read this section as a failed identification, not as the project's main result. It is here because the hypothesis was stated first and the null is part of the answer.
 
-### 1. The raw correlation runs the wrong way
+### 6.1 The raw correlation runs the wrong way
 
 Municipalities with a larger share of non-urbanizable land have **lower** rents, not higher: the raw correlation with log rent is **−0.55**. Municipalities with more development land have higher rents (**+0.30**). That is the opposite of the restriction hypothesis.
 
 It is also almost certainly not a treatment effect. Non-urbanizable share is close to a measure of "how rural is the municipality". Rural places have cheap rents for reasons that have nothing to do with planning.
 
-### 2. Once urbanisation is held constant, the association disappears
+### 6.2 Once urbanisation is held constant, the association disappears
 
 Adding province fixed effects and controls for population, housing stock, population growth, density and the share of consolidated urban land:
 
@@ -245,7 +255,11 @@ None of the coefficients has the sign the restriction hypothesis predicts (posit
 
 The same sign pattern holds for prices. All five coefficients (per 1 SD, n = 401–403) are: non-urbanizable **−8.4%** (p = 0.21), development land **+5.1%** (p = 0.15), planned capacity **+6.6%** (p = 0.067), pending share **−2.6%** (p = 0.11) and unstarted development land **−2.2%** (p = 0.17). No price measure is significant at 5%; planned capacity is the only one below 10%, and its sign is positive, not the restriction sign. The gross yield tells a different story — development land is associated with a 3.4% lower rent-to-price ratio (p = 0.04) — which is what you would expect if prices respond more strongly than rents, not if rents alone were being held up. Figure 4 shows the mechanism for rents: the raw slope is steep, and after province and urbanisation controls the binned relationship is flat.
 
-### 2b. A second, independent rent series says the same thing
+![Figure 3 — Rent associations, basic versus urban controls](outputs/figures/fig3_rent_coefficients.png)
+
+*Figure 3. Association between land-classification measures and log municipal rent, with and without province fixed effects and urban controls. Source: `outputs/figures/fig3_rent_coefficients.png`.*
+
+### 6.3 A second, independent rent series says the same thing
 
 INE table 69330 is one measurement of rents. To check that the null is not an artefact of that series, I repeated the cross-section with **SERPAVI**, MIVAU's rent index built from *Modelo 100* income-tax declarations. It is a different operation, a different unit (median monthly rent per m² of collective residential buildings, not mean annual rent per m²), and a different sample frame.
 
@@ -265,7 +279,7 @@ The two variables that are distinguishable from zero remain negative. The restri
 
 SERPAVI has its own limits: it excludes Navarra and the Basque Country (foral tax regimes), it is censored where the number of declarations is too small to publish, and its definition — collective residential buildings — drops part of the rental stock. Those limits are why it is a robustness check next to INE, not a replacement.
 
-### 3. The panel does not rescue the hypothesis
+### 6.4 The panel does not rescue the hypothesis
 
 I also estimated whether population growth passes through into rents more strongly where land is restricted, with municipality fixed effects and either year or province-year fixed effects. The interaction is never positive and significant:
 
@@ -275,11 +289,11 @@ I also estimated whether population growth passes through into rents more strong
 
 A negative interaction is consistent with supply responding where capacity exists, but it is fragile to regional shocks. I do not claim it as a supply-elasticity estimate.
 
-### 4. Demand growth does not close the gap
+### 6.5 Demand growth does not close the gap
 
 Fast-growing municipalities do plan more: the top tercile of population growth has a median of 375 planned dwellings per 1,000 existing, against 309 in declining municipalities. But the pending share barely moves: **71.3%** in fast-growing places versus **75.1%** in declining ones. The pipeline is not a rural curiosity that demand would clear.
 
-### 5. A competing explanation: plan vintage
+### 6.6 A competing explanation: plan vintage
 
 There is a simpler reason why some places show a large pending stock. The SIU records the approval year of each municipality's general plan, and newer plans have had less time to be built out.
 
@@ -289,7 +303,7 @@ This is not a nuisance to be controlled away. It is a direct warning against rea
 
 The counter-argument is that the aggregate is dominated by older plans. It is: **74% of the pending dwellings sit under plans approved more than 15 years ago**, and even the oldest plans still have 58% pending. So plan vintage explains part of the cross-sectional variation — and is reported rather than hidden — but it does not reduce the gap to a story about recent plans that have not had time to build.
 
-## Interpretation
+## 7. Interpretation
 
 The Spanish planning system produces a lot of **paper housing**: land classified, sectors drawn, dwellings counted, and a large share of it never converted into buildings. The observable bottleneck in these data is not the headline stock of classified land. It is the step between permission and construction.
 
@@ -297,7 +311,7 @@ That reframes the policy question. If the debate is about how much land is class
 
 It also explains why the naive cross-section is so misleading. Land classification is not assigned to municipalities; it is chosen by them, in response to demand, geography and politics. A municipality that expects to grow classifies land. A municipality that is rural, protected or shrinking does not. Regressing rents on that choice without a source of exogenous variation mostly recovers the urban–rural gradient.
 
-## What this does not prove
+## 8. What this does not prove
 
 - **No causal effect of land classification on rents.** The design is cross-sectional and the treatment is endogenous. The null is not evidence that classification does not matter; it is evidence that this design cannot detect it.
 - **The 45.7-year ratio is a description, not a forecast.** It divides a stock by a recent net flow. Two sample choices push it in opposite directions: netting demolitions raises it, while excluding shrinking municipalities lowers it, so it is not a bound in either direction. All 396 stock-observed municipalities give 52.2 years; demand can grow, plans can be revised, and part of the pending stock may never be built. It says "decades at recent rates", not "exhausted in 2050".
@@ -311,7 +325,7 @@ It also explains why the naive cross-section is so misleading. Land classificati
 - **There is no cross-country pipeline measure.** The comparative chapter compares price changes and permit flows. It does not compare the 45.7-year pipeline across countries, because no harmonised "planned but unbuilt" series exists.
 - **City price-to-rent is a gross yield, not affordability.** It covers six countries, mixes 2022–2025, and says nothing about incomes or taxes. Spanish cities sit in the lower half of the six-country sample and at the median (3rd of 5) once greater-city units are dropped; both statements are reported, and neither is interpreted as affordability.
 
-## Literature and positioning
+## 9. Literature and positioning
 
 The project sits between two literatures. The regulation-and-supply literature measures permits, regulation indices or terrain constraints; municipal evidence on a planned-but-unbuilt pipeline is much thinner. Seven anchors:
 
@@ -325,7 +339,7 @@ The project sits between two literatures. The regulation-and-supply literature m
 
 Most of this literature studies permits, regulation indices or US metros. This project measures a municipal planned-but-unbuilt pipeline in Spain and is descriptive, not causal: it documents a gap and shows why the available cross-section cannot identify the effect of land classification on rents.
 
-## Reproduce
+## 10. Reproduce
 
 ```bash
 python -m pip install -r requirements.txt
@@ -337,7 +351,7 @@ python -m pytest tests -q
 builds the panel, estimates the models, writes `outputs/results.json`, and
 redraws the figures. The pipeline works offline after the first run.
 
-## Files
+## 11. Files
 
 ```
 src/config.py               paths, indicators, country maps
@@ -365,18 +379,18 @@ Process documentation, in the order a sceptical reader should read it:
 | `RED_TEAM.md` | The objections a hostile referee would raise, answered honestly |
 | `ANALYSIS_LOG.md` | Chronological record of what broke and what changed |
 
-## Figures
+## 12. Figures
 
-1. **The unbuilt pipeline** — distribution of pending share and planned capacity by province.
-2. **Planned capacity vs demand growth** — the weak responsiveness of planning.
-3. **Rent associations** — coefficient plot, basic vs urban controls.
-4. **Raw vs adjusted** — why the naive correlation is an urban–rural artefact.
-5. **Where the paper housing is** — the 15 municipalities with the largest pending stock.
-6. **Growth terciles** — planning responds, the gap does not.
-7. **Plan vintage** — newer plans have more pending capacity, which is why the gap is not automatically obstruction.
-8. **Price-to-income, Spain vs peers** — the Spanish series against five peers and the country median, plus the 16-peer distribution of 2015→latest changes. The footnote records that the median line covers a changing country set (25 in 2000, 36 in 2025).
-9. **Building permits** — peer dumbbell for 2015–2019 vs 2021–2024, and Spain's annual series 2005–2024 with the 2006 peak, the 2021–2024 average and the European median.
-10. **City price-to-rent** — country distributions for the six comparable countries, and Spanish cities plotted as purchase price against annual rent with 10, 16.6 and 25-year iso-lines. The footnote records the per-city years and the municipal-boundary sensitivity (207 cities, 5 countries, Spain 16.06 years).
+1. **[The unbuilt pipeline](outputs/figures/fig1_pipeline_gap.png)** — distribution of pending share and planned capacity by province.
+2. **[Planned capacity vs demand growth](outputs/figures/fig2_capacity_vs_demand.png)** — the weak responsiveness of planning.
+3. **[Rent associations](outputs/figures/fig3_rent_coefficients.png)** — coefficient plot, basic vs urban controls.
+4. **[Raw vs adjusted](outputs/figures/fig4_raw_vs_adjusted.png)** — why the naive correlation is an urban–rural artefact.
+5. **[Where the paper housing is](outputs/figures/fig5_top_pending.png)** — the 15 municipalities with the largest pending stock.
+6. **[Growth terciles](outputs/figures/fig6_growth_terciles.png)** — planning responds, the gap does not.
+7. **[Plan vintage](outputs/figures/fig7_plan_vintage.png)** — newer plans have more pending capacity, which is why the gap is not automatically obstruction.
+8. **[Price-to-income, Spain vs peers](outputs/figures/fig8_price_to_income.png)** — the Spanish series against five peers and the country median, plus the 16-peer distribution of 2015→latest changes. The footnote records that the median line covers a changing country set (25 in 2000, 36 in 2025).
+9. **[Building permits](outputs/figures/fig9_permits.png)** — peer dumbbell for 2015–2019 vs 2021–2024, and Spain's annual series 2005–2024 with the 2006 peak, the 2021–2024 average and the European median.
+10. **[City price-to-rent](outputs/figures/fig10_city_price_to_rent.png)** — country distributions for the six comparable countries, and Spanish cities plotted as purchase price against annual rent with 10, 16.6 and 25-year iso-lines. The footnote records the per-city years and the municipal-boundary sensitivity (207 cities, 5 countries, Spain 16.06 years).
 
 ---
 
