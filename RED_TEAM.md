@@ -179,7 +179,8 @@ hand-picked peer group in the headline. The bar chart shows 16 peers because 40
 bars do not fit, but the rank and the median are computed on all 40.
 
 The result is also not uniformly unflattering: Spain is **7th of 40**, not 1st,
-and its city price-to-rent is **4th of 6** — in the lower half. A cherry-picked
+and its city price-to-rent is **4th of 6** in the six-country sample, which is
+**3rd of 5 — the median — once greater-city units are dropped**. A cherry-picked
 sample designed to make Spain look bad would not report that.
 
 **Unresolved:** the 16-peer bar is a presentational choice. A reader who wants the
@@ -209,8 +210,9 @@ pipeline. The Spanish pipeline is measured separately from SIU planned and pendi
 dwellings.
 
 The permit gap is large enough that the objection does not rescue the comparison:
-Spain is at 2.64 per 1,000 against a median of 4.62, and at 16% of its own 2006
-permit peak. Even a large permits-to-completions wedge would leave Spain low.
+Spain's 2021–2024 average is 2.64 per 1,000 against a median of 4.62, and 16% of
+its own 2006 permit peak. The 2024 single year is 3.69, i.e. 80% of the median and
+22% of the peak. Even a large permits-to-completions wedge would leave Spain low.
 
 **Unresolved:** a harmonised completions series would be better. Eurostat's
 completions data are less complete and less comparable than permits.
@@ -222,8 +224,10 @@ completions data are less complete and less comparable than permits.
 **It does, and the chapter reports it rather than hiding it.** Spain's median city
 price-to-rent is 16.56 years, 4th of 6 on a 1 = highest rank; German cities are at
 29.48. That means Spanish cities are **not** the most expensive in this sample
-relative to rent. It is consistent with a rental-market squeeze (rents high
-relative to prices) rather than a purchase-price bubble.
+relative to rent. The chapter does **not** read the direction: a low price-to-rent
+can mean cheap purchase prices or expensive rents, and the data here cannot tell
+the two apart. The same restraint holds in the municipal-only check, where Spain is
+3rd of 5 at 16.06 years.
 
 The chapter's claims are therefore narrower than "Spain is the most expensive
 country": Spain had **high price growth** and **low permitting**, and its cities
@@ -270,6 +274,38 @@ selection problem.
 
 ---
 
+## "Your 2015→2025 comparison is not 2015→2025 for every country."
+
+**Correct, and the label says "latest", not 2025.** Thirty-six of the 40
+price-to-income series reach 2025; Israel stops in 2016, Iceland and Russia in 2019,
+and Colombia in 2024. The price-to-rent sample has four countries ending in 2024, one
+in 2023 and one in 2021.
+
+**What it costs.** On the 36 countries with a common 2025 endpoint, the median
+price-to-income change is **+10.6%**, against +9.3% on all 40. Spain is 7th in both.
+The benchmark moves by about a point; the ranking does not move. The project stores
+both medians and the per-country endpoint, so the reader can see which countries are
+short rather than having to trust a footnote.
+
+**Unresolved:** dropping the short series would buy a cleaner window at the cost of
+coverage, and the 2000 comparison already has a smaller sample (25 of 40). The
+chapter reports the mixed-endpoint median as the headline and the restricted one as
+the check.
+
+---
+
+## "So the city extract is 255 cities?"
+
+**No: it is 843 city codes, and 255 is what survives the match.** The Urban Audit
+extract has 11,809 city-year rows. 408 codes have at least one apartment price and
+371 have at least one rent, but only **255 have both in the same city-year**. That
+is the binding constraint, not a positive-value filter. Latvia's four cities are then
+removed for inconsistent rent units, leaving 251. France, Italy and the Netherlands
+lack a comparable rent series; Slovakia, Slovenia, Estonia and Hungary report rents
+only for 2001–2004, so the year join drops them.
+
+---
+
 ## "Spain is 17% below its 2007 price-to-income peak, so there is no housing problem."
 
 **That is one of the three peak comparisons, not the whole picture.** Price-to-rent
@@ -313,12 +349,17 @@ from the same geography, but the absolute city medians mix two spatial definitio
 
 **Why not drop them.** Dropping greater-city units would remove every Portuguese
 city, Madrid, Barcelona and Valencia — most of the large Spanish cities and one of
-the six comparison countries. That is a worse sample, not a cleaner one.
+the six comparison countries. That is a worse sample, not a cleaner one. The project
+therefore keeps them and reports the sensitivity instead of choosing silently:
+dropping them leaves **207 cities in five countries**, Spain's median falls from
+16.56 to **16.06 years**, and Spain moves to **3rd of 5** — the median of that
+sample. So "not the most expensive relative to rent" survives; "lower half" is a
+property of the six-country sample only.
 
 **Unresolved:** there is no public crosswalk that would convert the greater-city
 indicators to municipal boundaries. The `city_name` column keeps the suffix, so a
 reader who wants strict municipal comparability can filter to `not contains
-"(greater city)"` and accept a much smaller, smaller-city sample.
+"(greater city)"` and reproduce the 207-city check from `comparative_cities.csv`.
 
 ---
 

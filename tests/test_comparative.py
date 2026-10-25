@@ -162,6 +162,28 @@ def test_city_years_are_mixed(cities: pd.DataFrame) -> None:
     assert {2022, 2023, 2024, 2025} <= years
 
 
+def test_greater_city_units_are_flagged(cities: pd.DataFrame) -> None:
+    # The mix is documented, so it has to be recoverable from the table.
+    comparable = cities[cities["comparable"]]
+    assert comparable["greater_city"].sum() == 44
+    assert comparable[comparable["country"] == "ES"]["greater_city"].sum() == 25
+    assert comparable[comparable["country"] == "PT"]["greater_city"].all()
+
+
+def test_municipal_only_sensitivity(results: dict) -> None:
+    # Dropping greater-city aggregates removes every Portuguese city, so this is
+    # a five-country check, not a better estimate of the same thing.
+    sens = results["comparative"]["city_layer"]["municipal_only_sensitivity"]
+    assert sens["n_cities"] == 207
+    assert sens["n_countries"] == 5
+    assert sens["rank_direction"] == "1 = highest"
+    assert sens["spain_rank"] == 3
+    by_country = {r["country"]: r["price_to_rent"] for r in sens["country_medians"]}
+    assert "PT" not in by_country
+    assert abs(by_country["ES"] - 16.06) < 0.02
+    assert by_country["DE"] > by_country["HR"] > by_country["ES"] > by_country["LT"] > by_country["FI"]
+
+
 def test_summary_has_one_row_per_headline_metric(summary: pd.DataFrame) -> None:
     assert list(summary["key"]) == [
         "price_to_income_2015",
@@ -202,12 +224,25 @@ def test_results_comparative_schema(results: dict) -> None:
     assert comparative["meta"]["role"].startswith("Comparative chapter")
     assert comparative["country_layer"]["price_measures"]["n_countries_price_to_income"] == 40
     assert comparative["country_layer"]["permits"]["n_countries_2021_2024"] == 33
-    assert comparative["city_layer"]["n_cities_raw"] == 255
+    assert comparative["city_layer"]["n_city_codes_raw"] == 843
+    assert comparative["city_layer"]["n_cities_with_matched_price_and_rent"] == 255
     assert comparative["city_layer"]["n_cities_comparable"] == 251
     assert comparative["city_layer"]["n_countries_comparable"] == 6
     assert comparative["city_layer"]["excluded_cities"] == 4
     assert len(comparative["synthesis"]) == 9
     assert comparative["country_layer"]["spain"]["price_to_income_chg_2015_pct"] > 0
+
+
+def test_endpoint_sensitivity_is_reported(results: dict) -> None:
+    # Most series end in 2025, but not all; the benchmark must not depend on it.
+    sens = results["comparative"]["country_layer"]["price_measures"]["endpoint_sensitivity"]
+    pi = sens["price_to_income"]
+    assert pi["full_endpoint"] == 2025
+    assert pi["n_all_endpoints"] == 40
+    assert pi["n_at_full_endpoint"] == 36
+    assert abs(pi["median_pct_all_endpoints"] - 9.28) < 0.05
+    assert abs(pi["median_pct_at_full_endpoint"] - 10.62) < 0.05
+    assert pi["endpoint_counts"]["2025"] == 36
 
 
 def test_comparative_json_has_no_nan(results: dict) -> None:

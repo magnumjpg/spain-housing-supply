@@ -206,9 +206,16 @@ different change from one whose index covers the whole country.
 
 Price-to-income covers 40 countries, price-to-rent 42, real prices 47 (40 inside
 the price-to-income sample). The 2000-to-latest comparison covers only 25, because
-15 post-2000 EU members have no 2000 observation. Every rank is reported with its
-own `n`; a rank of 7 of 40 is not comparable to a rank of 5 of 25 as if the
-denominators were the same.
+11 post-2000 EU members and four non-EU countries (Chile, Iceland, Luxembourg,
+Russia) have no 2000 observation. Every rank is reported with its own `n`; a rank
+of 7 of 40 is not comparable to a rank of 5 of 25 as if the denominators were the
+same.
+
+The endpoint is mixed too: 36 of the 40 price-to-income series reach 2025, while
+Israel ends in 2016, Iceland and Russia in 2019, and Colombia in 2024. The headline
+median (+9.3%) is therefore a mixed-endpoint median. On the 36 countries that do
+reach 2025 it is **+10.6%**, and Spain stays 7th. The mixed endpoint changes the
+benchmark by about a point but not the ranking.
 
 ### 11.3. Permits are not completions, and the denominator is crude
 
@@ -247,6 +254,13 @@ cities, including Madrid, Barcelona, Valencia, 25 of the 87 Spanish cities and a
 16 Portuguese ones. Price and rent come from the same geography, so the ratio is
 internally consistent, but "city median" combines two spatial definitions and the
 absolute values are not directly comparable to a municipal-boundary series.
+
+The sensitivity is computed, not assumed. Dropping greater-city units leaves 207
+cities in five countries (Portugal disappears, because it has no municipal-boundary
+city in the source); Spain's median falls to **16.06 years** and its rank becomes
+**3rd of 5**, which is the median of that sample. The statement "Spanish cities are
+not the most expensive relative to rent" survives; "lower half" does not survive as
+a general claim and is only true of the six-country sample.
 
 ### 11.7. Rent units are harmonised by a heuristic, and Latvia is excluded
 

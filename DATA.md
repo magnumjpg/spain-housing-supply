@@ -236,9 +236,17 @@ to 43 and changes the ranks (see ANALYSIS_LOG Session 13, bug 1). After the drop
 - price-to-rent: **42 countries**;
 - real house prices: **47 countries**, of which **40** also have price-to-income.
 
-The 2000 observation exists for only **25** of the 40 price-to-income countries;
-15 post-2000 EU members have no 2000 value. The chapter reports n = 25 for that
+The 2000 observation exists for only **25** of the 40 price-to-income countries.
+The 15 missing are **11 post-2000 EU members** (Bulgaria, Czechia, Estonia,
+Croatia, Hungary, Lithuania, Latvia, Poland, Romania, Slovakia, Slovenia) plus
+**Chile, Iceland, Luxembourg and Russia**. The chapter reports n = 25 for that
 comparison rather than pretending it is the same sample.
+
+The latest year is also not common. Most series end in 2025, but price-to-income
+stops in 2016 for Israel, 2019 for Iceland and Russia, and 2024 for Colombia, so
+only **36 of 40** reach 2025. The headline median is therefore a mixed-endpoint
+median; `results.json` also stores the median held at 2025 (**+10.6%** on 36
+countries), and Spain remains 7th.
 
 ### 6.2. Eurostat building permits
 
@@ -306,9 +314,17 @@ raw geography list suggests. The denominators are stored in `results.json`.
 | `DE3017V` | Population living in private households | persons |
 
 **City codes are at least six characters** (`ES001C`, `DE001C`). Two-letter codes
-are country aggregates and are dropped. The raw extract has **255 city rows**;
-after requiring a positive price and rent, **251** are comparable across **six
-countries**, of which **87** are Spanish.
+are country aggregates and are dropped. The extract is larger than the comparison
+suggests: **843 city codes and 11,809 city-year rows**. Of these, 408 codes have at
+least one apartment price and 371 have at least one rent, but only **255 codes have
+both in the same city-year**, because the two series rarely overlap outside the
+countries used here. Latvia's four cities are then excluded, leaving **251**
+comparable cities across **six countries**, of which **87** are Spanish.
+
+The countries that drop out do so for different reasons. France, Italy and the
+Netherlands do not publish a comparable rent series. Slovakia, Slovenia, Estonia
+and Hungary publish rents only for 2001–2004, so the city-year join fails even
+though the indicator exists.
 
 **Trap — the rent label says annual, but the values are not.** Eurostat labels
 `SA1049V` "Average annual rent for housing per m²". That label is not reliable
@@ -343,6 +359,11 @@ greater-city units (25 of the 87 Spanish cities, all 16 Portuguese, 2 German, 1
 Croatian). Madrid, Barcelona and Valencia are greater-city aggregates. The ratio
 remains internally consistent because numerator and denominator share the same
 geography, but the city medians mix two spatial definitions.
+
+The project stores the sensitivity rather than choosing one definition silently:
+dropping the greater-city units leaves **207 cities in five countries** (Portugal
+has none on a municipal boundary) and Spain's median falls from 16.56 to **16.06
+years**, which is **3rd of 5** — the median, not the lower half.
 
 **Conceptual mismatch.** The price is for buying an apartment; the rent is an
 average rent for housing, not the rent of the same apartment. The ratio is a gross

@@ -232,12 +232,20 @@ latest_vs_peak_c = (I_c,latest / max_t I_c,t - 1) × 100
 ```
 
 This is not a cross-country benchmark. It exists because a country can be above the
-OECD median and still below its own peak, and the reader needs both facts. The peak
+sample median and still below its own peak, and the reader needs both facts. The peak
 year is stored, so the 2007 anchor can be checked.
 
 Real house prices are ranked inside the 40-country price-to-income sample, not the
 47-country real-price-only set. This keeps the four price rows on one country
 universe; the 47-country set is a superset that includes partner economies.
+
+The latest year is country-specific, so the median is computed over the endpoints
+each country actually has. To show what that costs, the project also computes the
+median restricted to the countries whose series reach the full endpoint (2025):
+that is `endpoint_sensitivity` in `results.json`. For price-to-income it moves the
+median from +9.3% (40 countries) to +10.6% (36 countries) without changing Spain's
+rank. The chapter reports the mixed-endpoint median as the headline because it uses
+every country, and the restricted median as the check.
 
 ### 7.2. Country supply
 
@@ -277,6 +285,11 @@ The city is whatever geography Urban Audit publishes: a municipal boundary or a
 remove Madrid, Barcelona, Valencia and every Portuguese city. Each ratio uses price
 and rent from the same geography, so the ratio is internally consistent; the
 country medians mix the two spatial definitions, which is stated as a limitation.
+
+The same function computes the municipal-boundary-only sensitivity, so the reader
+does not have to take the mix on trust: dropping greater-city units leaves 207
+cities in five countries, Spain's median falls to 16.06 years and its rank is 3rd
+of 5. See `city_layer.municipal_only_sensitivity` in `results.json`.
 
 The city measure is a gross yield in years. It is **not** rent-to-income, and a
 low value can mean cheap housing or expensive rents.

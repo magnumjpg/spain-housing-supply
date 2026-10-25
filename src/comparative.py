@@ -327,6 +327,78 @@ def city_country_table(cities: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def city_sensitivity(cities: pd.DataFrame) -> dict:
+    """City layer without greater-city aggregates: does the conclusion hold?
+
+    Eurostat mixes municipal boundaries and greater-city units. Dropping the
+    greater-city rows removes every Portuguese city, so this is a sensitivity
+    check on five countries, not a better estimate.
+    """
+    comp = cities[cities["comparable"] & ~cities["greater_city"]]
+    medians = (
+        comp.groupby(["country", "country_name"])["price_to_rent"]
+        .median()
+        .reset_index()
+        .sort_values("price_to_rent", ascending=False)
+        .reset_index(drop=True)
+    )
+    medians["rank"] = (
+        medians["price_to_rent"].rank(ascending=False, method="min").astype(int)
+    )
+    return {
+        "description": (
+            "Comparable cities on municipal boundaries only; greater-city aggregates "
+            "dropped. Portugal has no municipal-boundary city in the source and drops out."
+        ),
+        "n_cities": int(len(comp)),
+        "n_countries": int(len(medians)),
+        "spain_rank": int(medians.loc[medians["country"] == "ES", "rank"].iloc[0]),
+        "rank_direction": "1 = highest",
+        "country_medians": medians[
+            ["country", "country_name", "price_to_rent", "rank"]
+        ].to_dict(orient="records"),
+    }
+
+
+def endpoint_sensitivity(countries: pd.DataFrame) -> dict:
+    """Median change with every country held to the same endpoint year.
+
+    Most OECD series end in 2025, but a few stop earlier (Israel 2016, Iceland
+    and Russia 2019, Colombia 2024 for price-to-income). The headline median uses
+    each country's own latest year; this reports the median on the 2025 subset so
+    the reader can see how much of the benchmark comes from the mixed endpoints.
+    """
+    specs = {
+        "price_to_income": (
+            "price_to_income_chg_2015_pct", "price_to_income_latest_year",
+        ),
+        "price_to_rent": (
+            "price_to_rent_chg_2015_pct", "price_to_rent_latest_year",
+        ),
+        "real_house_price": (
+            "real_house_price_chg_2015_pct", "real_house_price_latest_year",
+        ),
+    }
+    out = {}
+    for name, (column, year_column) in specs.items():
+        sample = countries[countries[column].notna() & countries[year_column].notna()].copy()
+        years = sample[year_column].astype(int)
+        full = int(years.max())
+        at_full = sample[years == full]
+        out[name] = {
+            "full_endpoint": full,
+            "n_all_endpoints": int(len(sample)),
+            "median_pct_all_endpoints": float(sample[column].median()),
+            "n_at_full_endpoint": int(len(at_full)),
+            "median_pct_at_full_endpoint": float(at_full[column].median()),
+            "endpoint_counts": {
+                str(int(k)): int(v)
+                for k, v in years.value_counts().sort_index().items()
+            },
+        }
+    return out
+
+
 def summary_table(countries: pd.DataFrame, city_countries: pd.DataFrame) -> pd.DataFrame:
     """The chapter's headline table: Spain against a benchmark and a rank.
 
@@ -497,6 +569,9 @@ def build() -> dict:
     spain_cities = cities[cities["country"] == "ES"]
     comparable_cities = cities[cities["comparable"]]
     excluded_cities = cities[~cities["comparable"]]
+    n_city_codes_raw = int(
+        urban_audit[urban_audit["cities"].str.len() >= 6]["cities"].nunique()
+    )
     bench = summary.set_index("key")["benchmark_value"]
 
     comparative = {
@@ -519,12 +594,16 @@ def build() -> dict:
                 "years": [int(oecd["year"].min()), int(oecd["year"].max())],
                 "n_countries_price_to_income": int(countries["price_to_income_chg_2015_pct"].notna().sum()),
                 "n_countries_price_to_rent": int(countries["price_to_rent_chg_2015_pct"].notna().sum()),
-                "n_countries_real_house_price": int(
+                "n_countries_real_house_price_available": int(
+                    countries["real_house_price_chg_2015_pct"].notna().sum()
+                ),
+                "n_countries_real_house_price_ranked": int(
                     (
                         countries["price_to_income_chg_2015_pct"].notna()
                         & countries["real_house_price_chg_2015_pct"].notna()
                     ).sum()
                 ),
+                "endpoint_sensitivity": endpoint_sensitivity(countries),
             },
             "permits": {
                 "source": "Eurostat sts_cobp_a (BPRM_DW, CPA_F41001_X_410014, THS) and demo_pjan",
@@ -611,7 +690,8 @@ def build() -> dict:
                 "Latest available year per city. The comparison mixes 2022-2025 because a common "
                 "year would drop either Spain or Germany."
             ),
-            "n_cities_raw": int(len(cities)),
+            "n_city_codes_raw": n_city_codes_raw,
+            "n_cities_with_matched_price_and_rent": int(len(cities)),
             "n_cities_comparable": int(len(comparable_cities)),
             "n_countries_comparable": int(comparable_cities["country"].nunique()),
             "excluded_cities": int(len(excluded_cities)),
@@ -623,6 +703,7 @@ def build() -> dict:
                 "median_year": int(spain_cities["year"].median()),
             },
             "country_medians": city_countries.to_dict(orient="records"),
+            "municipal_only_sensitivity": city_sensitivity(cities),
         },
         "synthesis": summary.to_dict(orient="records"),
     }

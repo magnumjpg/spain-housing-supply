@@ -87,11 +87,19 @@ Method in `METHOD.md` §7, units and coverage in `DATA.md` §6, caveats in
 
 ### Prices: high, but not an outlier
 
-| Measure (index, 2015 = 100) | Spain, 2015→2025 | OECD median | Spain's rank |
+| Measure (index, 2015 = 100) | Spain, 2015→latest | Median, same sample | Spain's rank (1 = highest) |
 |---|---:|---:|---:|
 | Price-to-income | **+25.9%** | +9.3% | **7th of 40** |
 | Price-to-rent | **+58.9%** | +30.3% | **10th of 42** |
 | Real house price | **+43.0%** | +38.0% | **15th of 40** |
+
+The endpoint is not the same for every country: 36 of the 40 price-to-income
+series end in 2025, while Israel ends in 2016, Iceland and Russia in 2019 and
+Colombia in 2024. Holding the endpoint at 2025 gives a median of **+10.6%** on 36
+countries rather than +9.3% on 40; Spain stays 7th. The benchmark is not an
+artefact of the mixed endpoints, but it is a mixed-endpoint median and is labelled
+as such. The real-price row is the median of the **40-country price-to-income
+sample**, not of the 47 countries with a real-price series (that median is +37.0%).
 
 Over the longer window, Spain's price-to-income ratio is **+56.3%** since 2000,
 against a median of **+23.7%** (5th of 25 — only 25 of the 40 countries have a 2000
@@ -102,8 +110,8 @@ Canada (+30.7%), Czechia (+28.5%) and the United States (+26.3%) are above it.
 Hungary (+26.1%) is 0.2 points above Spain and Switzerland (+24.8%) is 1.1 points
 below. The rank is reported with its n because it is fragile to revisions.
 
-The comparison also needs its own history, because a ratio can be above the OECD
-median and below its own peak. All three Spanish ratios peaked in **2007**:
+The comparison also needs its own history, because a ratio can be above the
+40-country median and below its own peak. All three Spanish ratios peaked in **2007**:
 
 - price-to-income is **17.4% below** its 2007 peak;
 - price-to-rent is **1.9% below** its 2007 peak;
@@ -116,14 +124,15 @@ series used in the rest of this project.
 
 ### Supply: low, and far below its own boom
 
-| Window | Spain, dwellings per 1,000 | European median | Spain's rank | Countries |
+| Window | Spain, dwellings per 1,000 | European median | Spain's rank (1 = highest) | Countries |
 |---|---:|---:|---:|---:|
 | 2015–2019 | **1.40** | 4.12 | **31st of 34** | 34 |
 | 2021–2024 | **2.64** | 4.62 | **28th of 33** | 33 |
 
-The 2024 single year is **3.69**; the 2006 peak was **16.70**. Spain now permits
-about **57%** of the current European median and about **16%** of its own 2006
-peak.
+The 2021–2024 average, **2.64**, is **57%** of the current European median and
+**16%** of the 2006 peak of 16.70. The 2024 single year is **3.69** — 80% of the
+median and 22% of the peak. The two statements use different numerators and the
+text keeps them apart.
 
 The coverage is 34 and 33 countries, not the 38 that the raw Eurostat geography
 list suggests: Bosnia has no Eurostat population series, the UK permit series ends
@@ -152,9 +161,9 @@ annual rent per m²: years of gross rent, not affordability.
 | Germany | 127 | 29.48 |
 
 Spain's median city is **16.56 years** (p25 14.84, p75 18.59), **4th of 6** on a
-rank where 1 is the highest price-to-rent. That is the lower half. Madrid is 22.13,
-Barcelona 23.15, Valencia 17.81, Sevilla 17.44, Málaga 19.27, Palma 24.80 and
-Eivissa 28.83.
+rank where 1 is the highest price-to-rent. That is the lower half of the
+six-country sample. Madrid is 22.13, Barcelona 23.15, Valencia 17.81, Sevilla
+17.44, Málaga 19.27, Palma 24.80 and Eivissa 28.83.
 
 This is a genuine counterweight to the Spanish story: on this measure, Spanish
 cities are **not** the most expensive in the sample. German cities are far more
@@ -171,12 +180,21 @@ cities and all 16 Portuguese ones. Each ratio uses price and rent from the same
 geography, so the ratio is internally consistent, but a "city" median here mixes two
 spatial definitions.
 
+The conclusion is sample-dependent, and the sensitivity is reported rather than
+buried. Dropping greater-city units leaves **207 cities in five countries**
+(Portugal has no municipal-boundary city in the source), lowers Spain's median to
+**16.06 years** and moves it to **3rd of 5** — the median of the smaller sample, not
+its lower half. Germany (29.35) and Croatia (21.31) remain above Spain; Lithuania
+(15.34) and Finland (13.41) below. The robust statement is therefore "not the most
+expensive relative to rent", not "cheap".
+
 ### What the comparison changes
 
 It narrows the claim. Spain is **not** an extreme on price growth (7th of 40, and
 below its own 2007 peak on price-to-income) and **not** an extreme at city level on
-price-to-rent (4th of 6, lower half). It is **near the bottom on the supply flow**:
-2.64 dwellings per 1,000, 28th of 33, about 16% of its 2006 peak.
+price-to-rent (4th of 6; 3rd of 5, i.e. at the median, on municipal boundaries only).
+It is **near the bottom on the supply flow**: 2.64 dwellings per 1,000, 28th of 33,
+and 16% of its 2006 peak on the 2021–2024 average.
 
 Low building permits and a large stock of planned-but-unbuilt dwellings are
 different measurements, but they point to the same margin: converting planned
@@ -275,7 +293,7 @@ It also explains why the naive cross-section is so misleading. Land classificati
 - **Rent is not affordability.** I do not observe municipal household income, so I cannot compute rent-to-income. The outcome is rent per square metre.
 - **The international comparison is a benchmark, not an identification.** It reports distributions and ranks across 33–42 countries; it does not estimate a causal effect of regulation, permits or prices. The ranks are fragile to revisions, and the 2000 comparison covers only 25 countries.
 - **There is no cross-country pipeline measure.** The comparative chapter compares price changes and permit flows. It does not compare the 45.7-year pipeline across countries, because no harmonised "planned but unbuilt" series exists.
-- **City price-to-rent is a gross yield, not affordability.** It covers six countries, mixes 2022–2025, and says nothing about incomes or taxes. Spanish cities sit in the lower half of that sample; that is a real result, not a defect to be explained away.
+- **City price-to-rent is a gross yield, not affordability.** It covers six countries, mixes 2022–2025, and says nothing about incomes or taxes. Spanish cities sit in the lower half of the six-country sample and at the median (3rd of 5) once greater-city units are dropped; both statements are reported, and neither is interpreted as affordability.
 
 ## Reproduce
 
@@ -326,9 +344,9 @@ Process documentation, in the order a sceptical reader should read it:
 5. **Where the paper housing is** — the 15 municipalities with the largest pending stock.
 6. **Growth terciles** — planning responds, the gap does not.
 7. **Plan vintage** — newer plans have more pending capacity, which is why the gap is not automatically obstruction.
-8. **Price-to-income, Spain vs peers** — the Spanish series against five peers and the OECD median, plus the 16-peer distribution of 2015→latest changes. The footnote records that the median line covers a changing country set (25 in 2000, 40 in 2025).
+8. **Price-to-income, Spain vs peers** — the Spanish series against five peers and the country median, plus the 16-peer distribution of 2015→latest changes. The footnote records that the median line covers a changing country set (25 in 2000, 36 in 2025).
 9. **Building permits** — peer dumbbell for 2015–2019 vs 2021–2024, and Spain's annual series 2005–2024 with the 2006 peak, the 2021–2024 average and the European median.
-10. **City price-to-rent** — country distributions for the six comparable countries, and Spanish cities plotted as purchase price against annual rent with 10, 16.6 and 25-year iso-lines.
+10. **City price-to-rent** — country distributions for the six comparable countries, and Spanish cities plotted as purchase price against annual rent with 10, 16.6 and 25-year iso-lines. The footnote records the per-city years and the municipal-boundary sensitivity (207 cities, 5 countries, Spain 16.06 years).
 
 ---
 
@@ -338,6 +356,6 @@ El sistema urbanístico español permite a los municipios decidir qué suelo se 
 
 Lo que sí aparece —y es el hallazgo principal— es un problema distinto, grande y medible: **5,17 millones de viviendas están planificadas en áreas de desarrollo y 3,49 millones (67,5%) no se han materializado**. Al ritmo de construcción neta de 2023–2025, ese stock pendiente equivale a **45,7 años de obra** en los 359 municipios con stock catastral observado; el municipio mediano tiene **48,3 años** de vivienda pendiente y el 76% supera los 20 años. El 48,8% del suelo de desarrollo ni siquiera ha iniciado la urbanización. En los municipios que más crecen, el 71,3% de la vivienda planificada sigue pendiente, frente al 75,1% en los que decrecen. El cuello de botella observable no es la cantidad de suelo clasificado, sino el paso entre el permiso y la construcción.
 
-Para saber si España es excepcional, el proyecto añade un capítulo comparado: 40 países de la OCDE en precios, 34 y 33 países europeos en licencias, y 251 ciudades de seis países en precio sobre alquiler. España sube un **25,9%** en la relación entre precio de la vivienda y renta de los hogares entre 2015 y 2025 (puesto 7 de 40; mediana 9,3%), pero está un **17,4% por debajo** de su máximo de 2007. La relación precio/alquiler sube un **58,9%** (puesto 10 de 42) y está solo un **1,9% por debajo** del máximo. En licencias, España concede **2,64 viviendas por 1.000 habitantes** frente a una mediana europea de 4,62 (puesto 28 de 33) y un **16% de su máximo de 2006**. En ciudades, la mediana española es de **16,6 años de alquiler bruto** (puesto 4 de 6; Alemania 29,5): no es la más cara en relación con el alquiler dentro del grupo. La comparación es descriptiva: mide flujos y precios, no el stock de vivienda pendiente, para el que no existe una serie internacional homogénea.
+Para saber si España es excepcional, el proyecto añade un capítulo comparado: 40 países del estudio de precios de la OCDE, 34 y 33 países europeos en licencias, y 251 ciudades de seis países en precio sobre alquiler. España sube un **25,9%** en la relación entre precio de la vivienda y renta de los hogares entre 2015 y el último dato (2025 en 36 de los 40 países; con un corte común en 2025 la mediana es 10,6%, y España sigue 7ª), pero está un **17,4% por debajo** de su máximo de 2007. La relación precio/alquiler sube un **58,9%** (puesto 10 de 42) y está solo un **1,9% por debajo** del máximo. En licencias, la media de 2021–2024 es de **2,64 viviendas por 1.000 habitantes** frente a una mediana europea de 4,62 (puesto 28 de 33) y un **16% de su máximo de 2006**; 2024 aislado son 3,69. En ciudades, la mediana española es de **16,6 años de alquiler bruto** (puesto 4 de 6; Alemania 29,5): no es la más cara en relación con el alquiler dentro del grupo, y si se excluyen las «greater cities» queda en 16,06 años y en el puesto 3 de 5, es decir, en la mediana. La comparación es descriptiva: mide flujos y precios, no el stock de vivienda pendiente, para el que no existe una serie internacional homogénea.
 
 El proyecto no afirma causalidad, no mide corrupción y no dice que la clasificación del suelo sea irrelevante. Dice que un corte transversal municipal no permite identificarlo, y que el debate público está mirando el margen equivocado. El resultado se repite con una fuente de alquileres independiente, el SERPAVI de MIVAU construido a partir de declaraciones fiscales (correlación 0,991 con el INE; pendiente −2,4%, p=0,003).

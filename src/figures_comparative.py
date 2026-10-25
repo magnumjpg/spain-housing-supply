@@ -85,7 +85,7 @@ def fig_price_to_income(oecd: pd.DataFrame, countries: pd.DataFrame) -> None:
         color=NAVY,
         lw=1.5,
         ls="--",
-        label="OECD median",
+        label="Country median",
         zorder=3,
     )
     ax.axhline(100, color=GRAY, lw=0.8, ls=":")
@@ -128,7 +128,7 @@ def fig_price_to_income(oecd: pd.DataFrame, countries: pd.DataFrame) -> None:
         (
             f"Spain {spain['price_to_income_chg_2015_pct']:+.1f}% "
             f"(rank {int(spain['price_to_income_rank_2015'])} of {n_all})\n"
-            f"OECD median {median_all:+.1f}%"
+            f"Median, {n_all}-country sample {median_all:+.1f}%"
         ),
         transform=ax.transAxes,
         ha="right",
@@ -141,7 +141,7 @@ def fig_price_to_income(oecd: pd.DataFrame, countries: pd.DataFrame) -> None:
     fig.tight_layout()
     fig.text(
         0.01, -0.01,
-        "Panel A median: countries with data each year (25 in 2000, 40 in 2025).",
+        "Panel A median: countries with data each year (25 in 2000, 36 in 2025).",
         fontsize=7, color=GRAY, ha="left", va="top",
     )
     fig.savefig(FIGURES / "fig8_price_to_income.png", bbox_inches="tight")
@@ -294,7 +294,7 @@ def fig_city_price_to_rent(cities: pd.DataFrame) -> None:
     )
     ax.set_ylabel("Price-to-rent (years of gross rent)")
     ax.set_ylim(8, 55)
-    ax.set_title("A. Spanish cities sit in the lower half")
+    ax.set_title("A. Spanish cities are not the priciest relative to rent")
     ax.grid(axis="x", visible=False)
     ax.text(
         0.02, 0.97,
@@ -353,6 +353,12 @@ def fig_city_price_to_rent(cities: pd.DataFrame) -> None:
         transform=ax.transAxes, fontsize=7, color=GRAY, va="top",
     )
     fig.tight_layout()
+    fig.text(
+        0.01, -0.01,
+        "Latest year per city: Spain 2023, Germany 2022, Portugal 2024, Lithuania 2025. "
+        "Municipal boundaries only: 207 cities, 5 countries, Spain 16.06 years (3rd of 5).",
+        fontsize=7, color=GRAY, ha="left", va="top",
+    )
     fig.savefig(FIGURES / "fig10_city_price_to_rent.png", bbox_inches="tight")
     plt.close(fig)
 

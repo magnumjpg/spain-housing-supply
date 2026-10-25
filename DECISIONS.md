@@ -462,3 +462,40 @@ being entirely greater-city units.
 **Cost.** A reader who wants strict municipal comparability cannot get it from this
 source. The `city_name` column preserves the "(greater city)" suffix, so the subset
 can be filtered.
+
+**What the sensitivity shows.** It is not cosmetic. Dropping greater-city units
+leaves 207 cities in five countries (Portugal has none on a municipal boundary),
+Spain's median falls from 16.56 to **16.06 years**, and Spain moves from 4th of 6 to
+**3rd of 5** — the median of the smaller sample. Germany (29.35) and Croatia (21.31)
+stay above Spain; Lithuania (15.34) and Finland (13.41) stay below. So the robust
+claim is "Spain is not the most expensive relative to rent"; "lower half" is a
+property of the six-country sample, not of the measure. Both are now stated.
+
+---
+
+## D25. Report the mixed endpoint, and check the 2025-only median
+
+**Context.** The OECD series end in 2025 for most countries but not all: Israel
+stops in 2016, Iceland and Russia in 2019, Colombia in 2024. A "2015→2025" label
+would silently misdescribe four countries.
+
+**Decision.** Call the window **2015→latest**, store the endpoint of every country,
+and report the median restricted to the 2025 endpoint as a sensitivity
+(`endpoint_sensitivity` in `results.json`).
+
+**Why.** Using every country maximises coverage, but the benchmark then mixes
+endpoints. Restricting to 2025 is cleaner but drops four countries. Reporting both
+costs one paragraph and removes the ambiguity: the price-to-income median is +9.3%
+on 40 countries and **+10.6% on the 36 that reach 2025**; Spain is 7th in both.
+
+**Alternatives rejected.**
+
+- *Relabel the window 2015→2025 and ignore the four short series.* It would be
+  false for Israel, Iceland, Russia and Colombia.
+- *Use only the 36 countries with a 2025 endpoint.* It is defensible, but it throws
+  away coverage for a benchmark that barely moves, and the 2000 window already has
+  a smaller sample.
+
+**Consequence.** The README table header says "2015→latest", the per-country
+endpoint is in `comparative_countries.csv`, and the 2025-only median is a stored
+number, not a footnote computed by hand.

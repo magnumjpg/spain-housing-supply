@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_utc": "2026-10-25T10:20:00+00:00",
+    "generated_utc": "2026-10-25T10:43:57+00:00",
     "cross_section_year": 2024,
     "panel_years": [
       2010,
@@ -2141,7 +2141,7 @@
   },
   "comparative": {
     "meta": {
-      "generated_utc": "2026-10-25T10:20:01+00:00",
+      "generated_utc": "2026-10-25T10:43:58+00:00",
       "role": "Comparative chapter inside the Spanish land project; not a separate project.",
       "note": "All comparisons are descriptive. Cross-country associations do not identify a causal effect of regulation on prices."
     },
@@ -2156,7 +2156,47 @@
         ],
         "n_countries_price_to_income": 40,
         "n_countries_price_to_rent": 42,
-        "n_countries_real_house_price": 40
+        "n_countries_real_house_price_available": 47,
+        "n_countries_real_house_price_ranked": 40,
+        "endpoint_sensitivity": {
+          "price_to_income": {
+            "full_endpoint": 2025,
+            "n_all_endpoints": 40,
+            "median_pct_all_endpoints": 9.278757705574991,
+            "n_at_full_endpoint": 36,
+            "median_pct_at_full_endpoint": 10.6170967606135,
+            "endpoint_counts": {
+              "2016": 1,
+              "2019": 2,
+              "2024": 1,
+              "2025": 36
+            }
+          },
+          "price_to_rent": {
+            "full_endpoint": 2025,
+            "n_all_endpoints": 42,
+            "median_pct_all_endpoints": 30.287765709993508,
+            "n_at_full_endpoint": 36,
+            "median_pct_at_full_endpoint": 29.824609554566493,
+            "endpoint_counts": {
+              "2021": 1,
+              "2023": 1,
+              "2024": 4,
+              "2025": 36
+            }
+          },
+          "real_house_price": {
+            "full_endpoint": 2025,
+            "n_all_endpoints": 47,
+            "median_pct_all_endpoints": 37.01356083112501,
+            "n_at_full_endpoint": 46,
+            "median_pct_at_full_endpoint": 37.230752296607506,
+            "endpoint_counts": {
+              "2023": 1,
+              "2025": 46
+            }
+          }
+        }
       },
       "permits": {
         "source": "Eurostat sts_cobp_a (BPRM_DW, CPA_F41001_X_410014, THS) and demo_pjan",
@@ -2231,7 +2271,8 @@
         "LV": "Four cities imply gross yields from 2.3% to 17.8% under a single unit; the series is internally inconsistent, not merely mislabelled."
       },
       "year_note": "Latest available year per city. The comparison mixes 2022-2025 because a common year would drop either Spain or Germany.",
-      "n_cities_raw": 255,
+      "n_city_codes_raw": 843,
+      "n_cities_with_matched_price_and_rent": 255,
       "n_cities_comparable": 251,
       "n_countries_comparable": 6,
       "excluded_cities": 4,
@@ -2303,7 +2344,46 @@
           "first_year": 2022,
           "last_year": 2022
         }
-      ]
+      ],
+      "municipal_only_sensitivity": {
+        "description": "Comparable cities on municipal boundaries only; greater-city aggregates dropped. Portugal has no municipal-boundary city in the source and drops out.",
+        "n_cities": 207,
+        "n_countries": 5,
+        "spain_rank": 3,
+        "rank_direction": "1 = highest",
+        "country_medians": [
+          {
+            "country": "DE",
+            "country_name": "Germany",
+            "price_to_rent": 29.348039215686274,
+            "rank": 1
+          },
+          {
+            "country": "HR",
+            "country_name": "Croatia",
+            "price_to_rent": 21.31350045303534,
+            "rank": 2
+          },
+          {
+            "country": "ES",
+            "country_name": "Spain",
+            "price_to_rent": 16.05501750415958,
+            "rank": 3
+          },
+          {
+            "country": "LT",
+            "country_name": "Lithuania",
+            "price_to_rent": 15.343204653622422,
+            "rank": 4
+          },
+          {
+            "country": "FI",
+            "country_name": "Finland",
+            "price_to_rent": 13.41412947088383,
+            "rank": 5
+          }
+        ]
+      }
     },
     "synthesis": [
       {

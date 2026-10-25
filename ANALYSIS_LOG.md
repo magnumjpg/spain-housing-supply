@@ -349,8 +349,9 @@ other "3" would have meant third-highest. The city rank was also printed against
 `n = 87` (Spanish cities) when it was computed across **six country medians**.
 Fixed by making every rank descending, adding `rank_direction` and `rank_n`, and
 ranking the city row among the six countries. Spain is **4th of 6** (1 = highest
-price-to-rent), which is the third-lowest. The prose says "lower half", which is
-true under either reading.
+price-to-rent), which is the third-lowest. The prose originally said "lower half,
+true under either reading"; the municipal-only sensitivity later showed that is not
+robust, and the text now gives both the six-country rank and the five-country one.
 
 **Other traps.**
 
@@ -375,27 +376,38 @@ true under either reading.
   of them Spanish and all 16 Portuguese. The ratio is internally consistent (price
   and rent from the same geography), so the values stand, but the mix is now stated
   in `DATA.md` §6.4, `METHOD.md` §7.3 and `LIMITATIONS.md` §11.6, and recorded as
-  D24.
+  D24. Dropping them (207 cities, five countries) lowers Spain to 16.06 years and
+  3rd of 5, so the "lower half" wording was replaced by "not the most expensive"
+  plus the explicit sensitivity.
+- **The endpoint is not common.** Only 36 of the 40 price-to-income series reach
+  2025 (Israel ends in 2016, Iceland and Russia in 2019, Colombia in 2024). The
+  headline is labelled 2015→latest, and the 2025-only median (+10.6% vs +9.3%) is
+  stored as `endpoint_sensitivity`.
+- **"255 city rows" was wrong.** The extract has 843 city codes and 11,809 rows;
+  255 have a price and a rent in the same city-year. The 588-code gap is the story:
+  most cities do not have both indicators, not that the raw file has 255 rows.
 
 **What the chapter found.**
 
-- Spain's price-to-income rose **25.9%** 2015→2025 (7th of 40; OECD median 9.3%)
-  and **56.3%** 2000→2025 (5th of 25; median 23.7%). Price-to-rent rose **58.9%**
+- Spain's price-to-income rose **25.9%** 2015→latest (7th of 40; median 9.3%; on
+  the 36 countries ending in 2025 the median is 10.6% and Spain stays 7th) and
+  **56.3%** 2000→latest (5th of 25; median 23.7%). Price-to-rent rose **58.9%**
   (10th of 42; median 30.3%); real prices **43.0%** (15th of 40; median 38.0%).
 - Against its own history, Spain is **17.4% below** its 2007 price-to-income peak,
   **1.9% below** its price-to-rent peak and **12.8% below** its real-price peak.
-  The ratios disagree, which is itself the finding: the income denominator has
-  improved more than the rent denominator. The two indices are not decomposed into
-  each other because the rent index is a national deflator, not the municipal rent
-  series.
+  The ratios disagree. The project reports all three and does not decompose
+  price-to-income into rents and incomes, because the OECD rent index is a national
+  deflator, not the municipal rent series.
 - Permits: **1.40** per 1,000 in 2015–2019 (31st of 34; median 4.12) and **2.64**
-  in 2021–2024 (28th of 33; median 4.62). 2024 is 3.69; the 2006 peak was 16.70.
-  Spain now permits about 57% of the European median and 16% of its own 2006 peak.
+  in 2021–2024 (28th of 33; median 4.62). 2024 alone is 3.69; the 2006 peak was
+  16.70. The 2021–2024 average is 57% of the European median and 16% of the peak;
+  the 2024 single year is 80% and 22%.
 - Cities: **251** comparable across six countries, **87** Spanish. Spain's median
   price-to-rent is **16.56 years** (p25 14.84, p75 18.59), **4th of 6** on a
   1 = highest rank. Finland 13.41, Lithuania 15.34, Spain 16.56, Portugal 20.81,
   Croatia 21.32, Germany 29.48. Madrid 22.13, Barcelona 23.15, Palma 24.80,
-  Eivissa 28.83.
+  Eivissa 28.83. On municipal boundaries only: 207 cities, five countries, Spain
+  **16.06** and **3rd of 5** (Portugal absent).
 
 **Figure review.** `fig8` needed a note because the OECD median line is computed
 over a changing country set (25 in 2000, 40 in 2025); the note is in the figure
@@ -403,17 +415,18 @@ footer. `fig9` needed integer year ticks; `fig10` had overlapping Barcelona and
 Palma labels and a country-name axis that was being truncated to two-letter codes.
 Three review rounds.
 
-**Tests.** 18 comparative tests, **34 total**. They assert the 40/42/40 price
-samples, the 34/33 permit coverage, the 25-country 2000 sample, the 2007 peak
-anchors, the 255/251/87/4 city counts, the country-level rent-unit rule, Latvia's
-exclusion, the nine-row summary, the bridge to the Spanish pipeline, and that no
-NaN leaks into the JSON.
+**Tests.** 21 comparative tests, **37 total**. They assert the 40/42/40 price
+samples, the 36-of-40 endpoint of the price-to-income series, the 34/33 permit
+coverage, the 25-country 2000 sample, the 2007 peak anchors, the 843/255/251/87/4
+city counts, the 44/25/16 greater-city flags, the municipal-only sensitivity, the
+country-level rent-unit rule, Latvia's exclusion, the nine-row summary, the bridge
+to the Spanish pipeline, and that no NaN leaks into the JSON.
 
 **Honest note.** The comparative chapter does not make the Spanish pipeline look
 more exceptional; it makes the *flow* look low and the *price* look high but not
-extreme, and it shows Spanish city price-to-rent is in the lower half of the six
-comparable countries. That is a more useful result than a Spain-vs-US story that
-would have been guaranteed by construction.
+extreme, and it shows Spanish city price-to-rent is mid-to-low in the comparable
+countries. That is a more useful result than a Spain-vs-US story that would have
+been guaranteed by construction.
 
 ---
 
