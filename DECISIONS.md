@@ -1,4 +1,4 @@
-# DECISIONS.md — the choices, including the ones that cost me the original story
+# DECISIONS.md - the choices, including the ones that cost me the original story
 
 Chronological. Each entry says what was decided, what the alternative was, and
 why.
@@ -31,7 +31,7 @@ a price outcome coexist.
 ## D3. The hypothesis was stated before looking, and then reported as failed
 
 The original framing was *"more classified development land → lower rents"*. That
-was written down in the project charter before estimation.
+was written down in the research specification before estimation.
 
 The first run produced:
 
@@ -44,8 +44,8 @@ the controls that the confound obviously requires (density, consolidated urban
 share, province FE) and report what happens. What happened is that the
 coefficients collapsed to −0.05 and +0.01, insignificant.
 
-**This is the most important decision in the project.** The alternative — trying
-log specifications, dropping outliers, adding controls until the sign flipped —
+**This is the most important decision in the project.** The alternative - trying
+log specifications, dropping outliers, adding controls until the sign flipped  - 
 would have produced a publishable-looking result and a dishonest one.
 
 ---
@@ -136,7 +136,7 @@ different calculation.
 
 Two municipality names did not match the Padrón token key. They were mapped by
 hand and the mapping is in `config.py` with a comment. If any name fails to map,
-`build_panel.py` raises. The alternative — `how="left"` and a silent NaN — is how
+`build_panel.py` raises. The alternative - `how="left"` and a silent NaN - is how
 municipal datasets lose 20% of their rows without anyone noticing.
 
 ---
@@ -316,11 +316,11 @@ institutions. Only one of those is defensible with these data.
 
 **Decision.** Three layers:
 
-1. **Country prices** — OECD indices, 2015 = 100. Compare 2015→latest and
+1. **Country prices** - OECD indices, 2015 = 100. Compare 2015→latest and
    2000→latest changes only.
-2. **Country supply** — Eurostat building permits per 1,000 inhabitants, window
+2. **Country supply** - Eurostat building permits per 1,000 inhabitants, window
    means for 2015–2019 and 2021–2024.
-3. **City price-to-rent** — Urban Audit purchase price divided by annual rent per
+3. **City price-to-rent** - Urban Audit purchase price divided by annual rent per
    m², in years of gross rent.
 
 **Why not levels.** The OECD publishes indices, not price-to-income levels. Even
@@ -342,7 +342,7 @@ is listed as a limitation.
 **Context.** The natural city measure is price-to-income. Eurostat Urban Audit has
 city income, but the series stops in 2019/2020. Using it would compare 2023
 Spanish house prices with 2019 Spanish incomes, and 2022 German prices with 2020
-German incomes — a different vintage problem in every country.
+German incomes - a different vintage problem in every country.
 
 **Decision.** Use **price-to-rent**: average apartment purchase price divided by
 average annual rent per m², both from the same city and year. Report it as years
@@ -450,7 +450,7 @@ state the mix in `DATA.md` §6.4 and `LIMITATIONS.md` §11.6.
 **Alternatives rejected.**
 
 - *Keep only municipal-boundary cities.* It would drop **every Portuguese city**,
-  Madrid, Barcelona and Valencia — that is, most of the sample's large Spanish
+  Madrid, Barcelona and Valencia - that is, most of the sample's large Spanish
   cities and one of the six comparison countries. The resulting "Spanish cities"
   would be a set of small and medium municipalities.
 - *Force greater-city units onto municipal boundaries.* The underlying indicators
@@ -471,7 +471,7 @@ can be filtered.
 **What the sensitivity shows.** It is not cosmetic. Dropping greater-city units
 leaves 207 cities in five countries (Portugal has none on a municipal boundary),
 Spain's median falls from 16.56 to **16.06 years**, and Spain moves from 4th of 6 to
-**3rd of 5** — the median of the smaller sample. Germany (29.35) and Croatia (21.31)
+**3rd of 5** - the median of the smaller sample. Germany (29.35) and Croatia (21.31)
 stay above Spain; Lithuania (15.34) and Finland (13.41) stay below. So the robust
 claim is "Spain is not the most expensive relative to rent"; "lower half" is a
 property of the six-country sample, not of the measure. Both are now stated.

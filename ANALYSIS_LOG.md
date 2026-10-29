@@ -1,4 +1,4 @@
-# ANALYSIS_LOG.md — how the work actually went
+# ANALYSIS_LOG.md - how the work actually went
 
 Not a polished narrative. A record of what was tried, what broke, and what was
 changed as a result. Written so a reader can see the process rather than only the
@@ -6,7 +6,7 @@ output.
 
 ---
 
-## Session 1 — feasibility
+## Session 1 - feasibility
 
 **Goal:** find out whether a municipal land-classification dataset could be
 built from public sources at all.
@@ -28,7 +28,7 @@ SIU semantics. The doubts turned out to be the most valuable part.
 
 ---
 
-## Session 2 — semantics, or: the seven columns that do not add up
+## Session 2 - semantics, or: the seven columns that do not add up
 
 First attempt: sum all seven `MunPr*` columns. Result: row sums between 100 and
 151, with a long right tail.
@@ -45,7 +45,7 @@ MunPrADes = MunPrSuNoC + MunPrSuzDe
 
 `MunPrADes` ("development areas") is an **aggregate of two other columns**, not a
 seventh class. Summing it double counts. Maximum discrepancy across 5,898 rows:
-0.001 percentage points — so the identity is exact, not approximate.
+0.001 percentage points - so the identity is exact, not approximate.
 
 `MunTotSue` is municipal area in km², not hectares and not "total land
 classified". Checked against known municipal areas.
@@ -58,7 +58,7 @@ Two tests now assert both identities.
 
 ---
 
-## Session 3 — the encoding trap
+## Session 3 - the encoding trap
 
 Merging INE Urban Indicators to the Padrón by name failed for exactly 118
 municipalities. Not random: all of them had accented characters.
@@ -72,13 +72,13 @@ Fix: read as UTF-8. Matching went from 316/434 to 434/434.
 **Second trap in the same file:** numbers are Spanish-formatted
 (`1.234.567,8`). `pd.read_csv` with default settings parses `1.234` as `1.234`.
 Rents would have been off by three orders of magnitude in some rows and plausible
-in others — the worst kind of corruption, because the output still looks like
+in others - the worst kind of corruption, because the output still looks like
 data. Fixed with an explicit parser, and a test asserts rents fall in a plausible
 range.
 
 ---
 
-## Session 4 — the code crosswalk
+## Session 4 - the code crosswalk
 
 The Urban Indicators CSV has municipality **names but no codes**. The Tempus
 JSON API has codes but 87 of them are non-numeric (`ES069C`, `ES503C1`, …).
@@ -95,7 +95,7 @@ The function raises if anything is unmapped. No silent `NaN` merge.
 
 ---
 
-## Session 5 — the first regression, and the bad news
+## Session 5 - the first regression, and the bad news
 
 Estimated the naive cross-section: log rent on the non-urbanizable share, with
 province FE.
@@ -106,7 +106,7 @@ development share:     +0.051  (p = 0.007)
 ```
 
 Both signs are the **opposite** of the hypothesis. The temptation at this point
-is to look for a specification that flips them — log the land measure, drop
+is to look for a specification that flips them - log the land measure, drop
 Madrid, trim outliers, use price instead of rent.
 
 Instead: what confound would produce this? Answer: rurality. Non-urbanizable
@@ -128,7 +128,7 @@ or to restructure the project. Chose the latter (DECISIONS.md D3–D4).
 
 ---
 
-## Session 6 — reframing
+## Session 6 - reframing
 
 Went back to the SIU descriptive variables that had been downloaded but not yet
 used: `munnumviv` (planned dwellings), `munnvivpnd` (pending), `munpradsnu`
@@ -152,7 +152,7 @@ misleading.
 
 ---
 
-## Session 7 — panel, and a result that did not survive
+## Session 7 - panel, and a result that did not survive
 
 Built the 2013–2024 panel with municipality FE and interacted the land measures
 with population growth.
@@ -179,7 +179,7 @@ Did not chase either. The README says the panel is a check, not an elasticity.
 
 ---
 
-## Session 8 — figures
+## Session 8 - figures
 
 Seven figures. Two rounds of review:
 
@@ -198,7 +198,7 @@ the pipeline finding.
 
 ---
 
-## Session 9 — external validation and the plan-vintage check
+## Session 9 - external validation and the plan-vintage check
 
 Two additions after the first full draft.
 
@@ -220,7 +220,7 @@ README, adjacent, instead of one being used to defeat the other.
 
 ---
 
-## Session 10 — documentation and tests
+## Session 10 - documentation and tests
 
 Wrote `DATA.md`, `METHOD.md`, `LIMITATIONS.md`, `DECISIONS.md`, `RED_TEAM.md`
 and this log. Rationale: the analysis is only as credible as the record of the
@@ -244,7 +244,7 @@ Tests (13, all passing):
 
 ---
 
-## Session 11 — the rent null gets a second source, and income does not
+## Session 11 - the rent null gets a second source, and income does not
 
 **SERPAVI.** Before publishing, the weakest point was that the rent null rested on
 one series. Downloaded MIVAU's SERPAVI workbook (71 MB, six sheets), parsed only
@@ -275,7 +275,7 @@ reproduction of the negative coefficients) plus the previous 13.
 
 ---
 
-## Session 12 — the project was reading as "unsolvable", so the framing changed
+## Session 12 - the project was reading as "unsolvable", so the framing changed
 
 The first published draft led with the rent null. That was defensible as honesty
 but wrong as a presentation of the work: it made the project sound like a failed
@@ -313,7 +313,7 @@ rather than quietly overwritten.
 
 ---
 
-## Session 13 — the comparative chapter, and three bugs that only appeared when writing it down
+## Session 13 - the comparative chapter, and three bugs that only appeared when writing it down
 
 **Why.** The Spanish core had a large number (45.7 years) and no external scale.
 A reader could not tell whether that was a lot. The obvious fix was a cross-country
@@ -339,21 +339,21 @@ widen it beyond Spain–US.
    income was feasible. It was, but it would have made the chapter a US project
    and required a different tenure/rent definition. Dropped from the chapter.
 
-**Bug 1 — OECD aggregates inflated the sample and changed the ranks.** The first
+**Bug 1 - OECD aggregates inflated the sample and changed the ranks.** The first
 pass kept every `REF_AREA`, including `EA`, `EA17`, `EA19`, `EA20`, `EU27_2020`
 and `OECD`. That gave "7th of 43" on price-to-income and "5th of 28" on
 price-to-income since 2000. Dropping the aggregates gives **7th of 40** and
 **5th of 25**. The medians moved too (9.3% and 23.7%). This is the kind of error
 that makes a rank look more impressive and less true.
 
-**Bug 2 — the permit sample was 33, not 38.** The raw Eurostat permit file has 42
+**Bug 2 - the permit sample was 33, not 38.** The raw Eurostat permit file has 42
 geographies, of which four are aggregates. Several countries then lose a window:
 Bosnia has permits but no Eurostat population series; the UK permit series ends in
 2019; Kosovo's population ends in 2022. Requiring at least three annual
 observations with a matching population gives **34 countries for 2015–2019** and
 **33 for 2021–2024**. The README reports those denominators, not the raw 38.
 
-**Bug 3 — rank direction and the city denominator.** Found while drafting the
+**Bug 3 - rank direction and the city denominator.** Found while drafting the
 summary table, not while coding the analysis. Country ranks were "1 = highest",
 but the city rank was ascending, so Spain's "3" meant third-lowest while every
 other "3" would have meant third-highest. The city rank was also printed against

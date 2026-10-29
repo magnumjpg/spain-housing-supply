@@ -1,4 +1,4 @@
-# METHOD.md — what is estimated, and why
+# METHOD.md - what is estimated, and why
 
 The project has four layers: a descriptive inventory, a stock-over-flow absorption
 ratio, a cross-section, and a short panel. They answer different questions and are

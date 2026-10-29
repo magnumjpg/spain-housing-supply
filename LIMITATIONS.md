@@ -29,7 +29,7 @@ therefore partly the *result* of the housing market being measured.
 
 This is a genuine problem, not a stylistic caveat. It would bias the
 cross-section towards finding that places with more development land have higher
-rents — which is exactly the positive sign observed. That is one reason the
+rents - which is exactly the positive sign observed. That is one reason the
 positive coefficients are not interpreted as evidence against the restriction
 hypothesis.
 
@@ -245,7 +245,7 @@ reports the coverage it has, not the coverage the source list implies.
 ### 11.5. 2025 permits are excluded
 
 Eurostat's 2025 values are preliminary. Spain's 2025 value is exactly 200.0
-thousand, against 179.4 thousand in 2024 — a round flash number, not a completed
+thousand, against 179.4 thousand in 2024 - a round flash number, not a completed
 year. Including it would mix a preliminary estimate with four final years. The
 latest complete year is 2024, and 2024 is reported separately as a single year.
 
@@ -259,7 +259,7 @@ from the same city and year, so the mismatch is across countries, not within a
 ratio.
 
 The geography is also mixed: Eurostat reports some cities as **greater-city**
-aggregates instead of strict municipal boundaries — 44 of the 251 comparable
+aggregates instead of strict municipal boundaries - 44 of the 251 comparable
 cities, including Madrid, Barcelona, Valencia, 25 of the 87 Spanish cities and all
 16 Portuguese ones. Price and rent come from the same geography, so the ratio is
 internally consistent, but "city median" combines two spatial definitions and the

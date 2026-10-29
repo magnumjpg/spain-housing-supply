@@ -1,11 +1,11 @@
-# RED_TEAM.md — attacking the project before someone else does
+# Robustness Analysis and Boundary Conditions
 
-Written as if I were a referee hostile to the result. Each objection, then what
+Technical assessment of identification strategies, measurement validity, model specifications, and cross-country comparability.
 the project does about it, then what remains unresolved.
 
 ---
 
-## "Your null is just a bad measure."
+## 1. Land Classification Measurement Granularity
 
 **Fair.** `share_nonurbanizable` is a share of municipal area and correlates with
 rurality. The project says so and shows the raw-vs-adjusted figure precisely to
@@ -22,12 +22,12 @@ available in a reproducible public form.
 
 ---
 
-## "Your null is just one rent series."
+## 2. Cross-Source Rent Series Consistency (INE vs SERPAVI)
 
 **It was, and now it is two.** The first version used only INE table 69330. The
 project now repeats the same five specifications with SERPAVI, a tax-based rent
 series built from *Modelo 100* declarations. The two correlate at 0.991 in levels,
-and annualised the median ratio is 0.959 — different statistics, same places.
+and annualised the median ratio is 0.959 - different statistics, same places.
 
 The tax-based coefficients are essentially the INE ones: pending share −2.4%
 (p=0.003), unstarted share −2.2% (p=0.031), non-urbanizable −4.0% (p=0.27),
@@ -44,7 +44,7 @@ new-tenancy index. Neither is available here.
 
 ---
 
-## "You added controls until the result disappeared."
+## 3. Specification Sensitivity & Conditioning on Urbanization
 
 **Partially fair, and worth confronting directly.**
 
@@ -61,7 +61,7 @@ real defence.
 
 ---
 
-## "With about 400 municipalities and 52 clusters you cannot distinguish 0 from −0.05."
+## 4. Clustered Standard Errors & Statistical Power
 
 **Correct.** The confidence interval on non-urbanizable share is roughly
 [−0.12, +0.03]. The project does not claim the coefficient is zero. It claims the
@@ -75,7 +75,7 @@ would not survive a Bonferroni correction.
 
 ---
 
-## "The pipeline gap could just be the 2008 crash."
+## 5. Temporal Confounders & Historical Shock Persistence
 
 **Plausible and not excluded.** Much of the planned stock was drawn up before
 2007; the crash stopped construction; the SIU snapshot in the 2020s still counts
@@ -83,7 +83,7 @@ it as pending.
 
 **What the project can say:** the gap is not cleared by demand. Fast-growing
 municipalities still have 71% pending. That weakens, but does not eliminate, the
-"it is all legacy 2007 stock" explanation — a fast-growing municipality could
+"it is all legacy 2007 stock" explanation - a fast-growing municipality could
 still be sitting on 2007 paper.
 
 **What would settle it:** plan dates per sector, which the SIU does not provide
@@ -91,7 +91,7 @@ in a comparable form.
 
 ---
 
-## "You are implying hoarding without evidence."
+## 6. Strategic Behavior vs Market Absorption Mechanics
 
 The README explicitly separates "not built" from "retained strategically". The
 word "hoarding" does not appear as a finding. The interpretation section lists
@@ -104,7 +104,7 @@ accusatory.
 
 ---
 
-## "Municipal average rent is the wrong outcome."
+## 7. Municipal Average Rents vs Marginal Rental Units
 
 **Correct, and stated.** The hypothesis is about the marginal new unit; the data
 measure the average of the stock. This attenuates any true effect towards zero.
@@ -112,7 +112,7 @@ It is one of the reasons the null is not strong evidence against the hypothesis.
 
 ---
 
-## "You dropped the 2025 observations to make the sample look complete."
+## 8. Sample Completeness & Reporting Horizon Criteria
 
 The panel keeps 2025. Rent regressions drop those rows because rent is missing,
 not by an explicit filter. `coverage.json` reports both the panel span and the
@@ -121,7 +121,7 @@ model used via `n` in `results.json`.
 
 ---
 
-## "The 5.17 million figure is a national total presented as if it were the universe."
+## 9. National Aggregate Coverage vs Matched Municipal Sample
 
 It is not presented that way. Every mention is scoped to the 431 municipalities.
 The SIU has 5,898 municipalities and its national aggregate would be larger;
@@ -129,7 +129,7 @@ the README calls the figure a lower bound on plan capacity in the sample.
 
 ---
 
-## "Why no instrumental variable? Saiz (2010) did it with terrain."
+## 10. Instrumental Variables & Causal Identification Constraints
 
 Because a credible instrument needs terrain data at municipal level, and Spanish
 municipal boundaries make the Saiz approach harder: many municipalities are
@@ -143,7 +143,7 @@ only through land supply) is strong and probably violated by amenities.
 
 ---
 
-## "The panel interaction is fragile."
+## 11. Panel Specification & Interaction Term Dynamics
 
 **Yes.** Non-urbanizable × growth is −0.09 with year FE and −0.165 with
 province-year FE; planned capacity × growth is −0.10 with year FE but −0.03
@@ -155,7 +155,7 @@ cross-section, not because it identifies a supply elasticity.
 
 ---
 
-## "This is a null result dressed up as a project."
+## 12. Interpretation of Null Findings & Economic Significance
 
 **The strongest objection, and the one the project tries hardest to answer.**
 
@@ -171,7 +171,7 @@ feature.
 
 ---
 
-## "You chose the countries to make Spain look bad."
+## 13. Cross-Country Comparator Country Selection
 
 **No: the country sample is the full OECD price-to-income set (40 countries), the
 full European permit set that passes a coverage rule (34 and 33), and every
@@ -181,7 +181,7 @@ bars do not fit, but the rank and the median are computed on all 40.
 
 The result is also not uniformly unflattering: Spain is **7th of 40**, not 1st,
 and its city price-to-rent is **4th of 6** in the six-country sample, which is
-**3rd of 5 — the median — once greater-city units are dropped**. A cherry-picked
+**3rd of 5 - the median - once greater-city units are dropped**. A cherry-picked
 sample designed to make Spain look bad would not report that.
 
 **Unresolved:** the 16-peer bar is a presentational choice. A reader who wants the
@@ -189,7 +189,7 @@ full distribution should use `comparative_countries.csv`.
 
 ---
 
-## "House price indices are not comparable across countries."
+## 14. International House Price Index Harmonization
 
 **Correct, and the chapter only compares changes.** The OECD series are indices
 with different national sources and quality adjustment. Comparing 2015→latest
@@ -202,7 +202,7 @@ quality controls. That does not exist for this country set.
 
 ---
 
-## "Permits are not completions. You are measuring paperwork again."
+## 15. Building Permits vs Actual Housing Completions
 
 **Fair.** Permits lead construction and can be delayed or abandoned. The chapter
 uses them because they are the only annual, country-comparable flow measure. It
@@ -220,7 +220,7 @@ completions data are less complete and less comparable than permits.
 
 ---
 
-## "Your city result contradicts your story. Spanish cities are cheap relative to rent."
+## 16. City Price-to-Rent Ratios & Valuation Multiples
 
 **It does, and the chapter reports it rather than hiding it.** Spain's median city
 price-to-rent is 16.56 years, 4th of 6 on a 1 = highest rank; German cities are at
@@ -240,11 +240,11 @@ measure is an average for the city, not a new-tenancy rent.
 
 ---
 
-## "The rent-unit rule is a hack."
+## 17. Rent Unit Normalization Methodology
 
 **It is a heuristic, and it is documented.** Eurostat labels the rent indicator
 "average annual rent per m²", but the German and Portuguese values are about 8.5
-EUR/m² — plainly monthly — while the Spanish, Finnish, Croatian and Lithuanian
+EUR/m² - plainly monthly - while the Spanish, Finnish, Croatian and Lithuanian
 values are above 82. The label cannot be trusted, so the rule uses the magnitude:
 country median raw rents separate into a monthly group around 8.5 EUR/m² and an
 annual group at 41 EUR/m² or more, and the 20 threshold is not near any country's
@@ -261,7 +261,7 @@ EUR/m². None does in this sample.
 
 ---
 
-## "You compare Spanish cities in 2023 with German cities in 2022."
+## 18. Cross-Sectional Reporting Years in City Panel
 
 **Yes, and a common year is impossible without dropping Spain or Germany.** The
 Urban Audit rent and price series do not share a common latest year across the six
@@ -295,7 +295,7 @@ the check.
 
 ---
 
-## "So the city extract is 255 cities?"
+## 20. Urban Audit Sample Definition & Coverage
 
 **No: it is 843 city codes, and 255 is what survives the match.** The Urban Audit
 extract has 11,809 city-year rows. 408 codes have at least one apartment price and
@@ -307,7 +307,7 @@ only for 2001–2004, so the year join drops them.
 
 ---
 
-## "Spain is 17% below its 2007 price-to-income peak, so there is no housing problem."
+## 21. Real Estate Valuation Multiples vs Historical Peaks
 
 **That is one of the three peak comparisons, not the whole picture.** Price-to-rent
 is **1.9% below** its 2007 peak and real prices are **12.8% below**. The ratios
@@ -322,7 +322,7 @@ series used in the Spanish core.
 
 ---
 
-## "You still have not dimensioned the 45.7-year pipeline."
+## 22. Pipeline Duration & Absorption Sensitivity
 
 **Correct, and no cross-country measure exists.** The chapter dimensions the flow
 (permits) and the price outcome, not the stock of planned-but-unbuilt dwellings.
@@ -340,7 +340,7 @@ No public source does that across countries.
 
 ---
 
-## "Your city layer mixes cities with greater-city areas."
+## 23. Administrative Boundary Sensitivity (Cities vs Metropolitan Areas)
 
 **Yes, and it is stated rather than hidden.** Eurostat publishes some units on
 municipal boundaries and some as "greater city" aggregates: 44 of 251 comparable
@@ -349,11 +349,11 @@ Portuguese ones. The ratio is internally consistent because price and rent come
 from the same geography, but the absolute city medians mix two spatial definitions.
 
 **Why not drop them.** Dropping greater-city units would remove every Portuguese
-city, Madrid, Barcelona and Valencia — most of the large Spanish cities and one of
+city, Madrid, Barcelona and Valencia - most of the large Spanish cities and one of
 the six comparison countries. That is a worse sample, not a cleaner one. The project
 therefore keeps them and reports the sensitivity instead of choosing silently:
 dropping them leaves **207 cities in five countries**, Spain's median falls from
-16.56 to **16.06 years**, and Spain moves to **3rd of 5** — the median of that
+16.56 to **16.06 years**, and Spain moves to **3rd of 5** - the median of that
 sample. So "not the most expensive relative to rent" survives; "lower half" is a
 property of the six-country sample only.
 
@@ -364,7 +364,7 @@ reader who wants strict municipal comparability can filter to `not contains
 
 ---
 
-## "Why not regress prices on permits across countries?"
+## 24. Cross-Country Regression Feasibility Constraints
 
 Because it would be a spurious correlation generator. Permits, prices, credit,
 migration and construction capacity are jointly determined; countries differ in

@@ -1,4 +1,4 @@
-# DATA.md — sources, semantics and merge
+# DATA.md - sources, semantics and merge
 
 The Spanish core (§1–§5) documents five official public sources; four are used in
 the model (IPVA is cached but unused). The comparative chapter (§6) adds four more.
@@ -7,7 +7,7 @@ All are free and downloaded by `src/download_data.py`; sha256 hashes are in
 
 ---
 
-## 1. MIVAU — Sistema de Información Urbana (SIU)
+## 1. MIVAU - Sistema de Información Urbana (SIU)
 
 **URL (alphanumeric workbook):**
 `https://cdn.mivau.gob.es/portal-web-mivau/urbanismo-suelo/Datos%20alfanumericos%20SIU%20-%20Excel%20-%2020260619.zip`
@@ -18,7 +18,7 @@ All are free and downloaded by `src/download_data.py`; sha256 hashes are in
 **Metadata files (read, not parsed):** `Metadadatos clases de suelo.xlsx`,
 `Metadatos areas desarrollo.xlsx`.
 
-### `clases_suelo_mun.xlsx` — 5,898 municipalities
+### `clases_suelo_mun.xlsx` - 5,898 municipalities
 
 One row per municipality. Key: `ProvINE` (4-digit province+municipality code;
 zero-padded to 5 digits to match INE).
@@ -51,7 +51,7 @@ development classes, repeated as an aggregate. Including it in a sum double
 counts. This is the single most important semantic trap in the SIU and the
 reason the project never adds the seven `MunPr*` columns together.
 
-### `areas_desarrollo_mun.xlsx` — 5,898 municipalities
+### `areas_desarrollo_mun.xlsx` - 5,898 municipalities
 
 | Column | Meaning | Unit |
 |---|---|---|
@@ -83,10 +83,10 @@ yet due".
 
 ---
 
-## 2. INE — Indicadores Urbanos, table 69330
+## 2. INE - Indicadores Urbanos, table 69330
 
 **URL:** `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/69330.csv`
-**Format:** semicolon-separated CSV, UTF-8 (not Latin-1 — see below).
+**Format:** semicolon-separated CSV, UTF-8 (not Latin-1 - see below).
 **Coverage:** 434 municipalities, 2010–2025, 23 indicators.
 
 **Critical parsing detail:** numbers use Spanish formatting (`1.234.567,8`).
@@ -131,7 +131,7 @@ sample change.
 
 ---
 
-## 3. INE — Padrón municipal, table 29005
+## 3. INE - Padrón municipal, table 29005
 
 **URL:** `https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/29005.csv`
 **Coverage:** 8,138 municipalities, 1996–2025, by sex.
@@ -143,7 +143,7 @@ five characters; the name starts at character 7.
 
 ---
 
-## 4. INE — Índice de Precios de Vivienda en Alquiler (IPVA), table 59060
+## 4. INE - Índice de Precios de Vivienda en Alquiler (IPVA), table 59060
 
 Downloaded and cached but **not used in the baseline**. It is an index for
 municipalities above 10,000 inhabitants, with a different base and coverage from
@@ -153,7 +153,7 @@ within-municipality rent-trend robustness check.
 
 ---
 
-## 5. MIVAU — SERPAVI, 2011–2024
+## 5. MIVAU - SERPAVI, 2011–2024
 
 **URL:**
 `https://cdn.mivau.gob.es/portal-web-mivau/vivienda/serpavi/2026-03_09_bd_SERPAVI_2011-2024%20-%20DEFINITIVO%20WEB_v2.xlsx`
@@ -165,7 +165,7 @@ within-municipality rent-trend robustness check.
 of tax sources (*Modelo 100*) linked to cadastral data. It is **not** an INE
 operation and is independent of table 69330.
 
-### `Municipios` sheet — 8,099 municipality rows, 284 columns
+### `Municipios` sheet - 8,099 municipality rows, 284 columns
 
 One column block per year (2011–2024) and per concept. The 2024 block used here:
 
@@ -190,7 +190,7 @@ One column block per year (2011–2024) and per concept. The 2024 block used her
 - **Navarra and the Basque Country are excluded** from the tax-source tables
   because their foral tax regimes do not report to the common source. No
   municipality from those communities is in the analysis sample, so this does
-  not bias the merge — but it does limit the national frame.
+  not bias the merge - but it does limit the national frame.
 - Blue cells in the published workbook are censored cells, not zeros. They are
   read as missing.
 
@@ -199,7 +199,7 @@ The project uses SERPAVI as an **independent outcome series** for the rent null
 
 ---
 
-## 6. Comparative chapter — OECD and Eurostat
+## 6. Comparative chapter - OECD and Eurostat
 
 These sources are not part of the Spanish municipal analysis. They answer a
 different question ("is Spain unusual?") and are documented separately so the two
@@ -271,7 +271,7 @@ dimension position; a plain `pd.read_json` would lose the labels.
 analysis keeps only ISO2 codes in `ISO2_TO_ISO3` (which also handles `EL` for
 Greece and `UK` for the United Kingdom).
 
-**Trap — 2025 is preliminary.** Spain's 2025 value is exactly 200.0 thousand,
+**Trap - 2025 is preliminary.** Spain's 2025 value is exactly 200.0 thousand,
 against 179.4 thousand in 2024. That is a flash round number, not a completed
 year. `PERMITS_LAST_COMPLETE_YEAR = 2024`, and 2025 is excluded from every window.
 
@@ -302,7 +302,7 @@ with a matching population. This is not cosmetic:
 Result: **34 countries** in 2015–2019 and **33** in 2021–2024, not the 38 that the
 raw geography list suggests. The denominators are stored in `results.json`.
 
-### 6.4. Eurostat Urban Audit — city price-to-rent
+### 6.4. Eurostat Urban Audit - city price-to-rent
 
 **URL:**
 `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/urb_clivcon?format=JSON&lang=EN&indic_ur=SA1053V&indic_ur=SA1049V&indic_ur=DE3017V`
@@ -328,7 +328,7 @@ Netherlands do not publish a comparable rent series. Slovakia, Slovenia, Estonia
 and Hungary publish rents only for 2001–2004, so the city-year join fails even
 though the indicator exists.
 
-**Trap — the rent label says annual, but the values are not.** Eurostat labels
+**Trap - the rent label says annual, but the values are not.** Eurostat labels
 `SA1049V` "Average annual rent for housing per m²". That label is not reliable
 across countries: Germany and Portugal report about 8.5 EUR/m², which can only be a
 monthly rent; Spain reports 82.5, Finland 187.9, Croatia 129.0 and Lithuania 113.5,
@@ -365,7 +365,7 @@ geography, but the city medians mix two spatial definitions.
 The project stores the sensitivity rather than choosing one definition silently:
 dropping the greater-city units leaves **207 cities in five countries** (Portugal
 has none on a municipal boundary) and Spain's median falls from 16.56 to **16.06
-years**, which is **3rd of 5** — the median, not the lower half.
+years**, which is **3rd of 5** - the median, not the lower half.
 
 **Conceptual mismatch.** The price is for buying an apartment; the rent is an
 average rent for housing, not the rent of the same apartment. The ratio is a gross
