@@ -399,6 +399,8 @@ Process documentation, in the order a skeptical reader should read it:
 
 ## 12. Figures
 
+The text embeds Figures 1, 4 and 8. The full set is listed below in numerical order.
+
 1. **[The unbuilt pipeline](outputs/figures/fig1_pipeline_gap.png)**, distribution of pending share and planned capacity by province.
 2. **[Planned capacity vs demand growth](outputs/figures/fig2_capacity_vs_demand.png)**, the weak responsiveness of planning.
 3. **[Rent associations](outputs/figures/fig3_rent_coefficients.png)**, coefficient plot, basic vs urban controls.
