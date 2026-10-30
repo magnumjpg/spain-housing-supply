@@ -26,8 +26,8 @@
 - [2. The rent question, in one paragraph](#2-the-rent-question-in-one-paragraph)
 - [3. Municipal panel construction and benchmark architecture](#3-municipal-panel-construction-and-benchmark-architecture)
 - [4. The headline numbers](#4-the-headline-numbers)
-- [5. Is Spain unusual? A multi-country check](#5-is-spain-unusual-a-multi-country-check)
-- [6. The rent test: what it can and cannot show](#6-the-rent-test-what-it-can-and-cannot-show)
+- [5. The rent test: what it can and cannot show](#5-the-rent-test-what-it-can-and-cannot-show)
+- [6. Is Spain unusual? A multi-country check](#6-is-spain-unusual-a-multi-country-check)
 - [7. Interpretation](#7-interpretation)
 - [8. What this does not prove](#8-what-this-does-not-prove)
 - [9. Literature and positioning](#9-literature-and-positioning)
@@ -110,7 +110,83 @@ MIVAU publishes its own national aggregate for the same source. Across **5,900 r
 
 The 431 municipalities analyzed here account for **53.8% of that national planned capacity** and 49.2% of the pending stock. So this is not a niche sample, and it is not a different universe: the national pipeline is, if anything, slightly *more* unbuilt than the urban one. The 5.17 million figure is a subset of the 9.60 million, not a competing estimate.
 
-## 5. Is Spain unusual? A multi-country check
+## 5. The rent test: what it can and cannot show
+
+Read this section as a failed identification, not as the project's main result. It is here because the hypothesis was stated first and the null is part of the answer.
+
+### 5.1 The raw correlation runs the wrong way
+
+Municipalities with a larger share of non-urbanizable land have **lower** rents, not higher: the raw correlation with log rent is **−0.55**. Municipalities with more development land have higher rents (**+0.30**). That is the opposite of the restriction hypothesis.
+
+It is also almost certainly not a treatment effect. Non-urbanizable share is close to a measure of "how rural is the municipality". Rural places have cheap rents for reasons that have nothing to do with planning.
+
+### 5.2 Once urbanization is held constant, the association disappears
+
+Adding province fixed effects and controls for population, housing stock, population growth, density and the share of consolidated urban land:
+
+| Measure (per 1 SD) | Association with log rent | p-value | n |
+|---|---:|---:|---:|
+| Share of non-urbanizable land | −4.6% | 0.21 | 402 |
+| Share of development land | +1.5% | 0.45 | 402 |
+| Planned dwellings per 1,000 existing | +3.9% | 0.09 | 401 |
+| Share of planned dwellings pending | −2.3% | 0.008 | 400 |
+| Share of development land not started | −2.3% | 0.026 | 402 |
+
+The merged cross-section has 431 municipalities; the regressions use **400-403** because controls and outcomes are missing for some municipalities, mostly the rent outcome and the Catastro housing stock. The `n` column is the exact estimation sample, so not every regression uses 431.
+
+None of the coefficients has the sign the restriction hypothesis predicts (positive for restricted land, negative for development capacity). The two that are statistically distinguishable from zero are negative: **more unbuilt capacity is associated with lower rents**, which is what you would expect if planning follows demand rather than constraining it.
+
+The same sign pattern holds for prices. All five coefficients (per 1 SD, n = 401-403) are: non-urbanizable **−8.4%** (p = 0.21), development land **+5.1%** (p = 0.15), planned capacity **+6.6%** (p = 0.067), pending share **−2.6%** (p = 0.11) and unstarted development land **−2.2%** (p = 0.17). No price measure is significant at 5%; planned capacity is the only one below 10%, and its sign is positive, not the restriction sign. The gross yield tells a different story: development land is associated with a 3.4% lower rent-to-price ratio (p = 0.04), which is what you would expect if prices respond more strongly than rents, not if rents alone were being held up. Figure 4 shows the mechanism for rents: the raw slope is steep, and after province and urbanization controls the binned relationship is flat.
+
+![Figure 4. Raw versus adjusted rent relationship](outputs/figures/fig4_raw_vs_adjusted.png)
+
+*Figure 4. Raw versus adjusted relationship between land classification and municipal rent. Source: `src/figures.py`; data: `outputs/results.json`.*
+
+### 5.3 A second, independent rent series says the same thing
+
+INE table 69330 is one measurement of rents. To check that the null is not an artifact of that series, I repeated the cross-section with **SERPAVI**, MIVAU's rent index built from *Modelo 100* income-tax declarations. It is a different operation, a different unit (median monthly rent per m² of collective residential buildings, not mean annual rent per m²), and a different sample frame.
+
+All **431** municipalities have a SERPAVI rent. **406** also have an INE rent. The two agree closely in levels: Pearson **0.991** (0.992 in logs), and annualized, the median SERPAVI/INE ratio is **0.959** (p10-p90: 0.916-0.997), which is what a median-versus-mean comparison should look like. Agreement is a cross-source check, not a restatement: the series are not the same measurement.
+
+With the same urbanization controls and province fixed effects, the tax-based series reproduces the INE result almost coefficient for coefficient:
+
+| Measure (per 1 SD) | SERPAVI rent | p-value | n | INE rent (for comparison) |
+|---|---:|---:|---:|---:|
+| Share of non-urbanizable land | −4.0% | 0.27 | 403 | −4.6% |
+| Share of development land | +1.1% | 0.57 | 403 | +1.5% |
+| Planned dwellings per 1,000 existing | +3.5% | 0.15 | 402 | +3.9% |
+| Share of planned dwellings pending | −2.4% | 0.003 | 401 | −2.3% |
+| Share of development land not started | −2.2% | 0.031 | 403 | −2.3% |
+
+The two variables that are distinguishable from zero remain negative. The restriction hypothesis does not reappear when rents are measured from tax records.
+
+SERPAVI has its own limits: it excludes Navarra and the Basque Country (foral tax regimes), it is censored where the number of declarations is too small to publish, and its definition (collective residential buildings) drops part of the rental stock. Those limits are why it is a robustness check next to INE, not a replacement.
+
+### 5.4 The panel does not rescue the hypothesis
+
+I also estimated whether population growth passes through into rents more strongly where land is restricted, with municipality fixed effects and either year or province-year fixed effects. The interaction is never positive and significant:
+
+- Non-urbanizable share × population growth: **−0.165** with province-year FE (p = 0.0036).
+- Planned capacity × population growth: **−0.10** with year FE (p = 0.003), but **−0.03** (p = 0.24) once province-year shocks are absorbed.
+- Pending share × population growth: indistinguishable from zero.
+
+A negative interaction is consistent with supply responding where capacity exists, but it is fragile to regional shocks. I do not claim it as a supply-elasticity estimate.
+
+### 5.5 Demand growth does not close the gap
+
+Fast-growing municipalities do plan more: the top tercile of population growth has a median of 375 planned dwellings per 1,000 existing, against 309 in declining municipalities. But the pending share barely moves: **71.3%** in fast-growing places versus **75.1%** in declining ones. The pipeline is not a rural curiosity that demand would clear.
+
+### 5.6 A competing explanation: plan vintage
+
+There is a simpler reason why some places show a large pending stock. The SIU records the approval year of each municipality's general plan, and newer plans have had less time to be built out.
+
+Median pending share falls monotonically with plan age: **85%** where the plan is five years old or less, **66%** where it is 21-30 years old, **58%** where it is more than 30 years old. The correlation between plan age and pending share is **−0.36**.
+
+This is not a nuisance to be controlled away. It is a direct warning against reading the 3.49 million pending dwellings as obstruction: a municipality that approved a large expansion in 2022 *should* have almost all of it pending.
+
+The counter-argument is that the aggregate is dominated by older plans. It is: **74% of the pending dwellings sit under plans approved more than 15 years ago**, and even the oldest plans still have 58% pending. So plan vintage explains part of the cross-sectional variation (and is reported rather than hidden), but it does not reduce the gap to a story about recent plans that have not had time to build.
+
+## 6. Is Spain unusual? A multi-country check
 
 A pipeline measured in decades needs a distribution. The Spanish data cannot tell
 us whether 45.7 years is a lot. The comparative chapter therefore places Spain
@@ -244,82 +320,6 @@ capacity into construction. The chapter cannot prove that with a cross-country
 comparison, and it does not try. It says Spain is a high-price-growth,
 low-permitting country; the price outcome is not extreme, the supply flow is near
 the bottom of the European distribution.
-
-## 6. The rent test: what it can and cannot show
-
-Read this section as a failed identification, not as the project's main result. It is here because the hypothesis was stated first and the null is part of the answer.
-
-### 6.1 The raw correlation runs the wrong way
-
-Municipalities with a larger share of non-urbanizable land have **lower** rents, not higher: the raw correlation with log rent is **−0.55**. Municipalities with more development land have higher rents (**+0.30**). That is the opposite of the restriction hypothesis.
-
-It is also almost certainly not a treatment effect. Non-urbanizable share is close to a measure of "how rural is the municipality". Rural places have cheap rents for reasons that have nothing to do with planning.
-
-### 6.2 Once urbanization is held constant, the association disappears
-
-Adding province fixed effects and controls for population, housing stock, population growth, density and the share of consolidated urban land:
-
-| Measure (per 1 SD) | Association with log rent | p-value | n |
-|---|---:|---:|---:|
-| Share of non-urbanizable land | −4.6% | 0.21 | 402 |
-| Share of development land | +1.5% | 0.45 | 402 |
-| Planned dwellings per 1,000 existing | +3.9% | 0.09 | 401 |
-| Share of planned dwellings pending | −2.3% | 0.008 | 400 |
-| Share of development land not started | −2.3% | 0.026 | 402 |
-
-The merged cross-section has 431 municipalities; the regressions use **400-403** because controls and outcomes are missing for some municipalities, mostly the rent outcome and the Catastro housing stock. The `n` column is the exact estimation sample, so not every regression uses 431.
-
-None of the coefficients has the sign the restriction hypothesis predicts (positive for restricted land, negative for development capacity). The two that are statistically distinguishable from zero are negative: **more unbuilt capacity is associated with lower rents**, which is what you would expect if planning follows demand rather than constraining it.
-
-The same sign pattern holds for prices. All five coefficients (per 1 SD, n = 401-403) are: non-urbanizable **−8.4%** (p = 0.21), development land **+5.1%** (p = 0.15), planned capacity **+6.6%** (p = 0.067), pending share **−2.6%** (p = 0.11) and unstarted development land **−2.2%** (p = 0.17). No price measure is significant at 5%; planned capacity is the only one below 10%, and its sign is positive, not the restriction sign. The gross yield tells a different story: development land is associated with a 3.4% lower rent-to-price ratio (p = 0.04), which is what you would expect if prices respond more strongly than rents, not if rents alone were being held up. Figure 4 shows the mechanism for rents: the raw slope is steep, and after province and urbanization controls the binned relationship is flat.
-
-![Figure 4. Raw versus adjusted rent relationship](outputs/figures/fig4_raw_vs_adjusted.png)
-
-*Figure 4. Raw versus adjusted relationship between land classification and municipal rent. Source: `src/figures.py`; data: `outputs/results.json`.*
-
-### 6.3 A second, independent rent series says the same thing
-
-INE table 69330 is one measurement of rents. To check that the null is not an artifact of that series, I repeated the cross-section with **SERPAVI**, MIVAU's rent index built from *Modelo 100* income-tax declarations. It is a different operation, a different unit (median monthly rent per m² of collective residential buildings, not mean annual rent per m²), and a different sample frame.
-
-All **431** municipalities have a SERPAVI rent. **406** also have an INE rent. The two agree closely in levels: Pearson **0.991** (0.992 in logs), and annualized, the median SERPAVI/INE ratio is **0.959** (p10-p90: 0.916-0.997), which is what a median-versus-mean comparison should look like. Agreement is a cross-source check, not a restatement: the series are not the same measurement.
-
-With the same urbanization controls and province fixed effects, the tax-based series reproduces the INE result almost coefficient for coefficient:
-
-| Measure (per 1 SD) | SERPAVI rent | p-value | n | INE rent (for comparison) |
-|---|---:|---:|---:|---:|
-| Share of non-urbanizable land | −4.0% | 0.27 | 403 | −4.6% |
-| Share of development land | +1.1% | 0.57 | 403 | +1.5% |
-| Planned dwellings per 1,000 existing | +3.5% | 0.15 | 402 | +3.9% |
-| Share of planned dwellings pending | −2.4% | 0.003 | 401 | −2.3% |
-| Share of development land not started | −2.2% | 0.031 | 403 | −2.3% |
-
-The two variables that are distinguishable from zero remain negative. The restriction hypothesis does not reappear when rents are measured from tax records.
-
-SERPAVI has its own limits: it excludes Navarra and the Basque Country (foral tax regimes), it is censored where the number of declarations is too small to publish, and its definition (collective residential buildings) drops part of the rental stock. Those limits are why it is a robustness check next to INE, not a replacement.
-
-### 6.4 The panel does not rescue the hypothesis
-
-I also estimated whether population growth passes through into rents more strongly where land is restricted, with municipality fixed effects and either year or province-year fixed effects. The interaction is never positive and significant:
-
-- Non-urbanizable share × population growth: **−0.165** with province-year FE (p = 0.0036).
-- Planned capacity × population growth: **−0.10** with year FE (p = 0.003), but **−0.03** (p = 0.24) once province-year shocks are absorbed.
-- Pending share × population growth: indistinguishable from zero.
-
-A negative interaction is consistent with supply responding where capacity exists, but it is fragile to regional shocks. I do not claim it as a supply-elasticity estimate.
-
-### 6.5 Demand growth does not close the gap
-
-Fast-growing municipalities do plan more: the top tercile of population growth has a median of 375 planned dwellings per 1,000 existing, against 309 in declining municipalities. But the pending share barely moves: **71.3%** in fast-growing places versus **75.1%** in declining ones. The pipeline is not a rural curiosity that demand would clear.
-
-### 6.6 A competing explanation: plan vintage
-
-There is a simpler reason why some places show a large pending stock. The SIU records the approval year of each municipality's general plan, and newer plans have had less time to be built out.
-
-Median pending share falls monotonically with plan age: **85%** where the plan is five years old or less, **66%** where it is 21-30 years old, **58%** where it is more than 30 years old. The correlation between plan age and pending share is **−0.36**.
-
-This is not a nuisance to be controlled away. It is a direct warning against reading the 3.49 million pending dwellings as obstruction: a municipality that approved a large expansion in 2022 *should* have almost all of it pending.
-
-The counter-argument is that the aggregate is dominated by older plans. It is: **74% of the pending dwellings sit under plans approved more than 15 years ago**, and even the oldest plans still have 58% pending. So plan vintage explains part of the cross-sectional variation (and is reported rather than hidden), but it does not reduce the gap to a story about recent plans that have not had time to build.
 
 ## 7. Interpretation
 
